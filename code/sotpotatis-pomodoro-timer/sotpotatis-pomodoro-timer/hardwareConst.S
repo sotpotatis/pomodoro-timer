@@ -35,10 +35,10 @@ Contains hardware-related constants. This is the place to look if you want to ch
 	// ====== LED pins ======
 	// Note that we use LED Charlieplexing, so that one
 	// pin controls 3 LEDs
-	.equ LED_CHARLIEPLEXING_PIN_1, (1<<PB0)
-	.equ LED_CHARLIEPLEXING_PIN_2, (1<<PB1)
-	.equ LED_CHARLIEPLEXING_PIN_3, (1<<PB2)
-	.equ LED_CHARLIEPLEXING_PIN_4, (1<<PB3)
+	.equ LED_CHARLIEPLEXING_PIN_1, (1<<PA0<<8)
+	.equ LED_CHARLIEPLEXING_PIN_2, (1<<PA1<<8)
+	.equ LED_CHARLIEPLEXING_PIN_3, (1<<PA2<<8)
+	.equ LED_CHARLIEPLEXING_PIN_4, (1<<PA3<<8)
 	// ====== Helper constants ======
 	// All input and output pins
 	.equ INPUT_PINS, INCREMENT_BUTTON_PIN | DECREMENT_BUTTON_PIN | PRESET_1_BUTTON_PIN | PRESET_2_BUTTON_PIN | PRESET_3_BUTTON_PIN | TIMER_INTERRUPT_PIN

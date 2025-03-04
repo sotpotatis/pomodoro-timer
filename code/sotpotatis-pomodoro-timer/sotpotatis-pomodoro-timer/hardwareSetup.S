@@ -5,16 +5,16 @@ That is, correctly masking pin interrupts and correctly enabling the correct
 pins to be inputs.
 */
 #include <avr/io.h>
-#define __SFR_OFFSET        0 // Need to redefine this for proper I/O address referencing
-.global enableInputPinInterrupts, setPinStates, setInitialPinStates
+#define __SFR_OFFSET        0 // Need to redefine this for proper I/O address referencing.global enableInputPinInterrupts, setPinStates, setInitialPinStates
+.global setPinStates, setInitialPinStates, enableInputPinInterrupts
 .data
 	.align 2
 .text
 	/* This function handles two main tasks:
 	1. Setting a pin to an input or output
 	2. Setting the value of an output pin.
-	The reason is that the register operations for these are basically the same, just with different register
-	r25-r24: The mask of pins to set to outputs/inputs. Upper 8 LSBits in r25, lower in LSBits in r24. 
+	The reason is that the register operations for these are basically the same, just with different registers
+	r25-r24: The mask of pins to set to outputs/inputs. Upper 8 LSBits in r25, lower 4 LSBits in r24. 
 	The format is as follows
 	0bPA7|PA6....PA0|constant 0000 PB3|...PB0(for example: 0b0000 0011 0000 0000 would set PAO and PA1 to outputs.)
 	Note that we assume that pins fill
