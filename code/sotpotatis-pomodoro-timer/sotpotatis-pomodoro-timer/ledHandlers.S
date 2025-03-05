@@ -122,7 +122,7 @@ Handles the updating of the LED display to show a certain
                 ldi r22, 1 // See comment above, setPinStates with r22 = 1 sets pin to output high
                 rjmp callFunctionsToSetPins
             pinIsOutputLow:
-                ldi r22, 0 // See comment above, setPinStates with r22 = 1 sets pin to output low
+                ldi r22, 0 // See comment above, setPinStates with r22 = 0 sets pin to output low
             callFunctionsToSetPins:
                 // Save states of: pin number to set to low, pin number to set to high, index counter.
                 PUSH r19
@@ -140,7 +140,9 @@ Handles the updating of the LED display to show a certain
 				POP r22
                 POP r24
                 POP r18
-                POP r19    
+                POP r19
+				cp r24, r19
+				breq next    
                 // loadPinMask uses r24 between 0-3 to load the appropriate pin mask to use for the
                 // Charlieplexing pins. Thankfully r24 is our index counter
                 // Call setPinStates again (it was already called above) with the exact same arguments as before, just a difference in r20.
