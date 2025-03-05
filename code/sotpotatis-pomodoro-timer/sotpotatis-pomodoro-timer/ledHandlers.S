@@ -106,29 +106,26 @@ Handles the updating of the LED display to show a certain
         mov r18, r23
         andi r18, 0x0f
         // Set the desired state for each of the 4 Charliplexing pins
-        ldi r24, 3
+        // (2) Call setPinStates(<output pin mask>, 1, 0) for each of the output pins,
+        // to set them to outputs
+        // This is done by setting: r25-r24=requested pin mask, r22=1, r20=0
+		ldi r24, 3
         for_setCharlieplexingState: // For all pins 0 - 3
             cp r24, r19
-            breq pinIsOutputLow
+            breq setPinsToOutput
             cp r24, r18
-            breq pinIsOutputHigh
+            breq setPinsToOutput
             rjmp next // If pin is not an output pin
             // Perform register operations to load arguments
             // according to the calling conventions of setPinStates: 
             // r25-r24: pin masks from LED_CHARLIEPLEXING_STATE_1, LED_CHARLIEPLEXING_STATE_2 etc.
             // r20: =1, which means set pin state
             // r22: =1/0, the value to set the pin to
-            pinIsOutputHigh:
-                ldi r22, 1 // See comment above, setPinStates with r22 = 1 sets pin to output high
-                rjmp callFunctionsToSetPins
-            pinIsOutputLow:
-                ldi r22, 0 // See comment above, setPinStates with r22 = 0 sets pin to output low
-            callFunctionsToSetPins:
+            setPinsToOutput:
                 // Save states of: pin number to set to low, pin number to set to high, index counter.
                 PUSH r19
                 PUSH r18
                 PUSH r24
-                PUSH r22 // r22 needs to be temporarily overriden since we are calling setPinStates to get the pin mode first
                 // Call functions needed to alter pin state
                 // First change the pin mode (set pin to output).
                 // This is done by calling setPinStates(r25-24=pin mask, r20=0 (set pin mode), r22=1 (set pins to output))
@@ -137,31 +134,17 @@ Handles the updating of the LED display to show a certain
                 rcall loadPinMask // Loads the pin mask of the Charlieplexing pin into r25-24
                 rcall setPinStates // Sets pin to have the pin mode output
                 // Recover registers previsiouly pushed
-				POP r22
                 POP r24
                 POP r18
                 POP r19
-				cp r24, r19
-				breq next    
-                // loadPinMask uses r24 between 0-3 to load the appropriate pin mask to use for the
-                // Charlieplexing pins. Thankfully r24 is our index counter
-                // Call setPinStates again (it was already called above) with the exact same arguments as before, just a difference in r20.
-				// This time, we want to set the actual pin values, as the pin mode was changed to output above.
-                // All other arguments when you're changing the pin mode vs. the pin value are the same.
-                ldi r20, 1 // See comment above, setPinStates with r20 = 1 says that we should change pin state
-				// Save registers before calling function
-				PUSH r19
-                PUSH r18
-                PUSH r24
-                rcall loadPinMask // Loads the pin mask of the Charlieplexing pin into r25-24
-                rcall setPinStates  // Sets pin to have the correct output value
-				// Recover previopus pushed registers
-				POP r24
-                POP r18
-                POP r19    
-
-                
             next: // Proceed to next iteration
                 dec r24
                 brge for_setCharlieplexingState
+        // Set the Charlieplexing output high pin to high
+        // by calling setPinStates(r25-24=pin mask, r20=1 (set pin value), r22=1 (set pins to output))
+        cp r24, r18
+        rcall loadPinMask // Loads the pin mask of the Charlieplexing pin into r25-24
+        ldi r20, 1
+        ldi r22, 1
+        rcall setPinStates // Sets pin to have the pin mode output
         ret
