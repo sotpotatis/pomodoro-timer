@@ -19,7 +19,7 @@ pins to be inputs.
 	0bPA7|PA6....PA0|constant 0000 PB3|...PB0(for example: 0b0000 0011 0000 0000 would set PAO and PA1 to outputs.)
 	Note that we assume that pins fill
 	r22: If r20=0: 1 if setting to outputs, 0 if setting to inputs. If r20=1: The pin value to set the pins to. Either 1 for pin on or 0 for pin off.
-	r20: 1 if you are changing the pin value (the PINA/B register), 0 if you are changing the pin type (the DDRA/B register)
+	r20: 1 if you are changing the pin value (the PORTA/B register), 0 if you are changing the pin type (the DDRA/B register)
 	*/
 	setPinStates:
 		// Ensure masking of input arguments
@@ -37,8 +37,8 @@ pins to be inputs.
 			rjmp update_registers
 		pinregisters_load:
 			// Load current PIN values
-			in r19, PINA
-			in r18, PINB
+			in r19, PORTA
+			in r18, PORTB
 		update_registers:
 		// General procedure of setting pins to inputs/outputs:
 		// Set the pins corresponding bit in DDRA or DDRB to:
@@ -46,9 +46,9 @@ pins to be inputs.
 		// General procedure for setting output pin values:
 		// Set the pins corresponding bit in PINA or PINB to the corresponding & wanted value (1 or 0)
 		// If we are setting the pins to inputs or setting output values to 0, we want to clear the bits that
-		// the mask specifies. For instance, to set PB0 to input, the function
+		// the mask specifies. Example: For instance, to set PB0 to input, the function
 		// will be called with r24=0b0...1, r22=0, r20=0.
-		// At this point of the function we will have r24 = 1 and r22=0.
+		// Following the mentioned example: At this point of the function we will have r24 = 1 and r22=0.
 		// But what we want is that we want to do DDRB & 0. So we invert r24 if needed
 		cpi r22, 1
 		breq or_with_register
@@ -74,9 +74,9 @@ pins to be inputs.
 				rjmp return
 			pinregisters_write:
 				// First, handle PA pins.
-				out PINA, r19
+				out PORTA, r19
 				// Then, handle PB pins.
-				out PINB, r18
+				out PORTB, r18
 		return:
 			ret
 

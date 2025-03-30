@@ -10,8 +10,8 @@ Handles the updating of the LED display to show a certain
     // The states of the Charlieplexing pins. The first index in this sequence of bytes represent the pin state
     // if you want to address LED0, the second index LED1, and so on and so forth.
     // Each state is represented as 8 bits packed as: <4 unused bits>L1L0|H1H0 where H1H0 represents a binary number 0-3 of the pin
-    // to set as input. Similarly, L1L0 represents the pin to set as output. As an example: 1101 means: pin 3 (11 base 2)
-    // should be set to high output and pin 1 (01 base 2) should be set to output.
+    // to set as output high. Similarly, L1L0 represents the pin to set as output low. As an example: 1101 means: pin 3 (11 base 2)
+    // should be set to low output and pin 1 (01 base 2) should be set to high output.
     // The remaining pin for each states are set as outputs.
     CHARLIEPLEXING_PIN_STATES: .byte 0x10, 0x01, 0x20, 0x02, 0x30, 0x03, 0x21, 0x12, 0x31, 0x13, 0x32, 0x23
 
@@ -48,10 +48,10 @@ Handles the updating of the LED display to show a certain
         return:
             ret
     /**
-    Sets all Charlieplexing pins to inputs.
+    Sets all Charlieplexing pins to inputs and resets their output state.
     Takes no input arguments.
     */
-    setAllCharlieplexingPinsToInputs:
+    resetAllCharlieplexingPins:
         // Our main strategy:
         // call setPinStates
         // according to the calling conventions of setPinStates: 
@@ -61,20 +61,35 @@ Handles the updating of the LED display to show a certain
         //
         // for each pin number
         ldi r24, 3
-        for_setAllCharlieplexingPinsToInputs:
+        for_resetAllCharlieplexingPins:
             // Load different values (pin masks) into r24 and r25 depending on pin number
             PUSH r24 // push index counter to stack
             rcall loadPinMask // loadPinMask will fill out r24 and r25 with our wanted pin mask;
+			// Save the pin mask on the stack
+			PUSH r24
+			PUSH r25
 			// see the "Our main strategy comment above"
             // Load constant values that are needed to call the function
             // See the comment above
             ldi r22, 0
             ldi r20, 0
             rcall setPinStates
+			// After setting the pins to inputs, ensure that their output value is reset to output low
+			// This is to eliminate any flickering if the input pins are later turned to output pins
+			// according to the calling conventions of setPinStates: 
+			// r25-r24: pin masks from LED_CHARLIEPLEXING_STATE_1, LED_CHARLIEPLEXING_STATE_2 etc.
+			// (pushed to stack earlier)
+			POP r25
+			POP r24
+			// r20: =1, which means set pins logic level
+			// r22: =0, signalling setting pins to logic level low
+			ldi r22, 0
+            ldi r20, 1
+			rcall setPinStates
             POP r24 // pop index counter from stack
             // until this loop has been run 4 times
             dec r24
-            brge for_setAllCharlieplexingPinsToInputs
+            brge for_resetAllCharlieplexingPins
         ret
     /**
     Sets the microcontroller pins to appropriately address a certain output pin via the method Charlieplexing.
@@ -95,7 +110,7 @@ Handles the updating of the LED display to show a certain
         lpm r23, Z // Load desired pin state into r23
         // (1) set all pins to inputs
         PUSH r23
-        rcall setAllCharlieplexingPinsToInputs
+        rcall resetAllCharlieplexingPins
         POP r23
         // r19 = <pin number to set to output low>
         mov r19, r23
@@ -106,26 +121,29 @@ Handles the updating of the LED display to show a certain
         mov r18, r23
         andi r18, 0x0f
         // Set the desired state for each of the 4 Charliplexing pins
-        // (2) Call setPinStates(<output pin mask>, 1, 0) for each of the output pins,
-        // to set them to outputs
-        // This is done by setting: r25-r24=requested pin mask, r22=1, r20=0
-		ldi r24, 3
+        ldi r24, 3
         for_setCharlieplexingState: // For all pins 0 - 3
             cp r24, r19
-            breq setPinsToOutput
+            breq pinIsOutputLow
             cp r24, r18
-            breq setPinsToOutput
+            breq pinIsOutputHigh
             rjmp next // If pin is not an output pin
             // Perform register operations to load arguments
             // according to the calling conventions of setPinStates: 
             // r25-r24: pin masks from LED_CHARLIEPLEXING_STATE_1, LED_CHARLIEPLEXING_STATE_2 etc.
             // r20: =1, which means set pin state
             // r22: =1/0, the value to set the pin to
-            setPinsToOutput:
+            pinIsOutputHigh:
+                ldi r22, 1 // See comment above, setPinStates with r22 = 1 sets pin to output high
+                rjmp callFunctionsToSetPins
+            pinIsOutputLow:
+                ldi r22, 0 // See comment above, setPinStates with r22 = 0 sets pin to output low
+            callFunctionsToSetPins:
                 // Save states of: pin number to set to low, pin number to set to high, index counter.
                 PUSH r19
                 PUSH r18
                 PUSH r24
+                PUSH r22 // r22 needs to be temporarily overriden since we are calling setPinStates to get the pin mode first
                 // Call functions needed to alter pin state
                 // First change the pin mode (set pin to output).
                 // This is done by calling setPinStates(r25-24=pin mask, r20=0 (set pin mode), r22=1 (set pins to output))
@@ -134,17 +152,29 @@ Handles the updating of the LED display to show a certain
                 rcall loadPinMask // Loads the pin mask of the Charlieplexing pin into r25-24
                 rcall setPinStates // Sets pin to have the pin mode output
                 // Recover registers previsiouly pushed
+				POP r22
                 POP r24
                 POP r18
                 POP r19
+                // loadPinMask uses r24 between 0-3 to load the appropriate pin mask to use for the
+                // Charlieplexing pins. Thankfully r24 is our index counter
+                // Call setPinStates again (it was already called above) with the exact same arguments as before, just a difference in r20.
+				// This time, we want to set the actual pin values, as the pin mode was changed to output above.
+                // All other arguments when you're changing the pin mode vs. the pin value are the same.
+                ldi r20, 1 // See comment above, setPinStates with r20 = 1 says that we should change pin state
+				// Save registers before calling function
+				PUSH r19
+                PUSH r18
+                PUSH r24
+                rcall loadPinMask // Loads the pin mask of the Charlieplexing pin into r25-24
+                rcall setPinStates  // Sets pin to have the correct output value
+				// Recover previopus pushed registers
+				POP r24
+                POP r18
+                POP r19    
+
+                
             next: // Proceed to next iteration
                 dec r24
                 brge for_setCharlieplexingState
-        // Set the Charlieplexing output high pin to high
-        // by calling setPinStates(r25-24=pin mask, r20=1 (set pin value), r22=1 (set pins to output))
-        cp r24, r18
-        rcall loadPinMask // Loads the pin mask of the Charlieplexing pin into r25-24
-        ldi r20, 1
-        ldi r22, 1
-        rcall setPinStates // Sets pin to have the pin mode output
         ret
