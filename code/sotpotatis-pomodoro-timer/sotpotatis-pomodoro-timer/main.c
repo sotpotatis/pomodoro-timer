@@ -11,30 +11,36 @@
 #include "ledHandlers.h"
 #define F_CPU 8000000UL
 #include <util/delay.h>
+#include "adcUtilities.h"
+#include <stdio.h>
+#include <avr/interrupt.h>
+#include <avr/sleep.h>
+
+/*
+Defines a custom ISR for ADC readings.
+*/
+ISR(ADC_vect){
+	// Clear ADC interrupt flag
+	clearADCInterrupts();
+}
 /* 
 Function to initialize the hardware.
 Supposed to be called at bootup.
 */
 void init(){
+	// Set up ADC for the button multiplexing.
 }
 void ledTest(){
 	
 }
 int main(void)
 {
-    // Perform hardware initialization
-
-	init();
-	// Provide a heartbeat signal on one of the pins
-	// setPinStates(0x4000, 1, 0);
-	// setPinStates(0x4000, 1, 1);
-	// setPinStates(1<<PA0<<8, 1, 0);
-	// setPinStates(1<<PA0<<8, 0, 1);
+	setUpADC(1, 0, 1, 1, 0b111);
+	sei();
 	while(1){
-	for (int i=0;i<12;	i++){
-		setCharlieplexingState(i);
-		_delay_ms(500);
+		waitForInterrupts();
 	}
-	}
+	
+	
 }
 

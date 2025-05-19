@@ -138,6 +138,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="adcUtilities.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="adcUtilities.S">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="hardwareConst.S">
       <SubType>compile</SubType>
     </Compile>

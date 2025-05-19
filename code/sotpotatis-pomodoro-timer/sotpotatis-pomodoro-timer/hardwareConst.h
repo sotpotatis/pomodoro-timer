@@ -7,4 +7,5 @@ That is, defines C templates for what we access from C from hardwareConst.S.
 #define HARDWARECONST_H_
 extern unsigned short I2C_SDA_PIN;
 extern unsigned short I2C_SCL_PIN;
+extern unsigned char BUTTON_ADC_PIN;
 #endif 

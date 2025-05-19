@@ -105,5 +105,3 @@ pins to be inputs.
 	in the INPUT_PINS constant (in hardwareConst.S) */
 	enableInputPinInterrupts:
 		ret
-
-		
