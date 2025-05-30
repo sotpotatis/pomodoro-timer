@@ -3,7 +3,7 @@
 #include <avr/io.h>
 #define __SFR_OFFSET        0 // Need to redefine this for proper I/O address referencing
 
-.global setUpADC, ADC_TRIGGER_SOURCE_FREE_RUNNING_MODE, clearADCInterrupts, waitForInterrupts
+.global setUpADC, ADC_TRIGGER_SOURCE_FREE_RUNNING_MODE, clearADCInterrupts, waitForInterrupts, readCurrentADCValue
 .data   
     .align 2
     // Helper constants for setUpADC trigger source argument
@@ -90,15 +90,26 @@
 			in r19, ADCSRA
 			andi r19, 0xF8
 			or r19, r16
-			// Finally, we want to write the ADATE bit to 1 to actually enable ADC interrupts
+			// Finally, we want to write the ADATE bit to 1 to actually enable ADC auto triggering
 			// ...aaaand set the ADSC bit to start the ADC conversion (ADSC=ADCStartConversion)
 			// These are bits 5 and 6 in the ADSCRA register respectively.
 			ori r19, 0x60
 			out ADCSRA, r19
 			ret
+
 	/* Clears any ADC interrupt, i.e. acknowledges the interrupt flag for ADC interrupts. */
 	clearADCInterrupts:
 		sbi ADCSRA, 4
 		ret
+
+	/* Reads the ADC ADCH data register and returns the read value in r24. 
+	NOTE: This function only works if ADLAR = 1, i.e. if the ADC result is set to be left adjusted.
+	If you have ADLAR = 0, then you need another function which reads ADCL before ADCH.*/
+	readCurrentADCValue:
+		in r24, ADCH
+		ret
+
+  /* Waits for interrupts from the processor. */
    waitForInterrupts:
 		sleep
+		ret

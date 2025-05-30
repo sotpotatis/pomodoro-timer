@@ -15,13 +15,21 @@
 #include <stdio.h>
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
-
+char value;
 /*
 Defines a custom ISR for ADC readings.
 */
-ISR(ADC_vect){
+ ISR(ADC_vect){
 	// Clear ADC interrupt flag
 	clearADCInterrupts();
+	value = readCurrentADCValue();
+	for (int i=1;i<=8;i++){
+		if (value <= 32*i && (i == 1 || (i != 1 && value > 32*(i-1)))){
+			setCharlieplexingState(i);
+			break;
+		}
+	}
+	
 }
 /* 
 Function to initialize the hardware.
@@ -35,12 +43,10 @@ void ledTest(){
 }
 int main(void)
 {
-	setUpADC(1, 0, 1, 1, 0b111);
+	// Set up ADC on PA6
+	setUpADC(6, 0, 1, 1, 0b111);
 	sei();
 	while(1){
-		waitForInterrupts();
-	}
-	
-	
+	}	
 }
 
