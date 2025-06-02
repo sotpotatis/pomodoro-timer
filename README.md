@@ -28,6 +28,9 @@ Under the `code` folder you will find a solution which you can import into Micro
 
 You also need to add the files `i2cmaster.h` and `i2cmaster.S` which are from Peter Fleury's I2CMaster library (can be found [here](http://www.peterfleury.epizy.com/avr-software.html?i=1))
 
+
+Inside `tests` you will find various tests carried out during the project - please see the `README` inside that directory.
+
 ## Documentation
 
 See the `docs` folder for Project documentation.

@@ -79,6 +79,34 @@
 				setADCAutoTriggerSource:
 					out ADCSRB, r18
 			// --- Done setting ADC auto trigger source --
+			// Ensure the requested ADC pin is set to an input pin
+			PUSH r24
+			PUSH r19
+			PUSH r16
+			// Call setPinStates with according to its arguments (see its docstring):
+			/* r25=<mask of PA pins to set to inputs>
+			r24=0 (as we do not want to modify any B pin)
+			r22=0 to mark setting as inputs.
+			r20=0 to mark that we want to change the pin direction (the DDRA/B register)
+			*/
+			ldi r25, 1
+			// left shift the 1 as many times as its pin number. This is because this function accepts
+			// a pin number (0-7) while the setPinStates function use a pin mask.
+			// This is not very clean, however, it has to be done, as the ADMUX has one way of providing the
+			// pin number to use (this is what this function tries to mimic), and the DDRX/PORTX registers have another.
+			untilFullyShifted:
+				lsl r25
+				dec r24
+				brne untilFullyShifted
+
+			// See comment above for these three settings
+			ldi r22, 0
+			ldi r20, 0
+			rcall setPinStates
+			POP r16
+			POP r19
+			POP r24
+			// --- Done ensuring ADC pin is input --
 			// Set the ADC channel that is to be used by clearing
 			// the MUX0-5 bits in ADMUX, then OR:ing with the wanted pin to read ADC values from.
 			andi r19, 0xC0 // Clear bits 5-0 (MUX5-MUX0)

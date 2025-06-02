@@ -6,10 +6,10 @@ I wanted to use this in my project.
 // All GPIO pins in use.
 const char TOTAL_PINS = 4;
  const char gpioPins[TOTAL_PINS] = {
-   13,
-   12,
-   11,
-   10
+   0,
+   1,
+   2,
+   3
  };
 // Contains the pins to set to output HIGH and output LOW to lit each of the 12 LEDs
 // Led i is represented by index i in this map, and is in the format {pin to set to low, pin to set to high}
@@ -70,7 +70,7 @@ unsigned long startMillis = 0;
      setPinState(allPinStates[i]);
      delayMicroseconds(1000);
      microsecondsElapsed += 1000;
-    setAllPinsToInputs();
+     setAllPinsToInputs();
   }
   // Update blinkState every second
   if (microsecondsElapsed >= 1e6){
