@@ -17,24 +17,24 @@
 
 #include "adcUtilities.h"
 
-#include <stdio.h>
 
+#include <stdint.h>
 #include <avr/interrupt.h>
 
 
 // Global variables
-volatile unsigned long timestamp = 0;
-volatile unsigned char latestADCSample = 0; // The latest read sample
-volatile char latestADCSampleChecked = 1; // Whether the latest ADC sample was acknowledged by main or not.
+volatile uint32_t timestamp = 0;
+volatile uint8_t latestADCSample = 0; // The latest read sample
+volatile uint8_t latestADCSampleChecked = 1; // Whether the latest ADC sample was acknowledged by main or not.
 
 
 // Constants
-unsigned char ADC_SAMPLE_RATE = 5; // The millisecond delay between each ADC sample
+uint8_t ADC_SAMPLE_RATE = 5; // The millisecond delay between each ADC sample
 // How many consecutive ADC samples that needs to be read before detecting a button as clicked.
-unsigned char CLICK_SAMPLE_LIMIT = 10;
+uint8_t CLICK_SAMPLE_LIMIT = 10;
 // How many consecutive reads that a button must be declared debounced = true for it to be detected as 
 // long pressed
-unsigned char HOLD_SAMPLE_LIMIT = 190;
+uint8_t HOLD_SAMPLE_LIMIT = 100;
 
 
 /*
@@ -52,7 +52,7 @@ ISR(TIM0_COMPA_vect) {
 
 // Defines, for each button/circuit state, an ADC reading that if exceeded (or exactly achieved) (>=) results in that
 // state being detected (instantaneously).
-int ADC_STATES[6] = {
+uint8_t ADC_STATES[6] = {
   232, // No button pressed
   185, // Button 1 pressed
   129, // Button 2 pressed
@@ -63,7 +63,7 @@ int ADC_STATES[6] = {
 
 // Store a numeric counter for each button that, for each reading: counts up (+1) if the ADC detects a voltage reading mapped to that button.
 // It counts down (-1) for all buttons that the ADC are not mapped to.
-unsigned char btn_counts[5] = { 
+uint8_t btn_counts[5] = { 
   0,
   0,
   0,
@@ -71,7 +71,7 @@ unsigned char btn_counts[5] = {
   0
 };
 // Same as btn_counts but for hold detection
-unsigned char btn_hold_count[5] = { 
+uint8_t btn_hold_count[5] = { 
   0,
   0,
   0,
@@ -79,23 +79,25 @@ unsigned char btn_hold_count[5] = {
   0
 };
 // Store whether buttons were debounced or not. See below for usage.
-unsigned char btn_debounced[5] = { 
+uint8_t btn_debounced[5] = { 
   0,
   0,
   0,
   0,
   0
 };
-// Store whether buttons were detected as held or not
-unsigned char btn_held[5] = { 
+// Store whether buttons were detected as held or not.
+// These flags are cleared by main.
+uint8_t btn_held[5] = { 
   0,
   0,
   0,
   0,
   0
 };
-// Store whether buttons were detected as tapped or not
-unsigned char btn_tapped[5] = {
+// Store whether buttons were detected as tapped or not.
+// These flags are cleared by main.
+uint8_t btn_tapped[5] = {
 	0,
 	0,
 	0,
@@ -105,16 +107,16 @@ unsigned char btn_tapped[5] = {
 // Get the current button that is pressed ACCORDING TO THE ADC at an INSTANTENOUS MOMENT.
 // The returns from this function is further parsed inside getCurrentPressedUserButton
 // Returns 0 if no button is pressed, else a number 1-5 corresponding to the pressed button.
-char getCurrentADCButton() {
+uint8_t getCurrentADCButton() {
   for (int i = 0; i < 6; i++) {
-    int mappedButtonValue = ADC_STATES[i];
+    uint8_t mappedButtonValue = ADC_STATES[i];
     if (latestADCSample >= mappedButtonValue) {
       return i;
     }
   }
 }
-// Handles button debounce.
-void debounceButtons(char currentADCButton) {
+// Updates the detected state (pressed, tapped, or nothing) for currentADCButton.
+void updateButtonStates(uint8_t currentADCButton) {
   for (int i = 0; i < 5; i++) {
     // Logic: increase the "btn_count" for each button by 1 every time
     // it is detected by the ADC as pressed. Decrease the btn_count for all other
@@ -129,7 +131,7 @@ void debounceButtons(char currentADCButton) {
 			}
 		}
     }
-    // Decrement state of undetected buttons
+    // Decrement btn_counts for undetected buttons
     else {
 		if (btn_counts[i] > 0){
 			btn_counts[i]--;
@@ -163,11 +165,11 @@ int main(void) {
   // every 1ms. Disable output compare pins.
   setUpTimerInCTCMode(124, 1, 0b011, 1);
   sei();
-  char currentADCButton = 0;
+  uint8_t currentADCButton = 0;
   while (1) {
     if (!latestADCSampleChecked) {
       currentADCButton = getCurrentADCButton();
-      debounceButtons(currentADCButton);
+      updateButtonStates(currentADCButton);
       // Visually show on my LEDs what button that was detected as pressed
       // & 7 is since I only show the button number for now by lighting up its corresponding LED,
       // and bit 4 indicates hold / not hold. See getCurrentPressedUserButton docstring.
