@@ -1,8 +1,7 @@
 /* ledHandlers.h
-Defines the interface between C and ASM for ledHandlers.S.
-That is, defines C templates for everything in ledHandlers.S.
+Header declaring functions that can be found in the ASM file
+ledHandlers.S.
 */
-
 #ifndef LEDHANDLERS_H_
     #define LEDHANDLERS_H_
     extern void setCharlieplexingState(unsigned char ledNumber);

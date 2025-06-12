@@ -1,14 +1,11 @@
 /*
 hardwareSetup.S
-Contains for setting up hardware (I2C excluded).
-That is, correctly masking pin interrupts and correctly enabling the correct
-pins to be inputs.
+Contains code for setting up and controlling hardware, currently
+limited to I/0 pin operations.
 */
 #include <avr/io.h>
-#define __SFR_OFFSET        0 // Need to redefine this for proper I/O address referencing.global enableInputPinInterrupts, setPinStates, setInitialPinStates
-.global setPinStates, setInitialPinStates, enableInputPinInterrupts
-.data
-	.align 2
+#include "hardwareConst.h"
+.global setPinStates, setInitialPinStates
 .text
 	/* This function handles two main tasks:
 	1. Setting a pin to an input or output
@@ -81,27 +78,7 @@ pins to be inputs.
 			ret
 
 	/* Initial hardware setup. 
-	Sets up input pins 
-	Performed by the relevant input pins to be inputs
-	using the inputs pin constants (in hardwareConst.S) */
+	TODO implement this function.
+	Sets up input and output pins to their desired initial states.  */
 	setInitialPinStates:
-		// Goal: call setPinStates(INPUT_PINS, 0)
-		ldi r25, lo8(INPUT_PINS)
-		ldi r24, hi8(INPUT_PINS)
-		ldi r23, 0
-		ldi r22, 0
-		ldi r20, 0
-		rcall setPinStates
-		// Goal: call setPinStates(OUTPUT_PINS, 1)
-		ldi r25, lo8(OUTPUT_PINS)
-		ldi r24, hi8(OUTPUT_PINS)
-		ldi r23, 0
-		ldi r22, 1
-		ldi r20, 0
-		rcall setPinStates
-		ret
-
-	/* Enables interrupts on the input pins specified
-	in the INPUT_PINS constant (in hardwareConst.S) */
-	enableInputPinInterrupts:
 		ret

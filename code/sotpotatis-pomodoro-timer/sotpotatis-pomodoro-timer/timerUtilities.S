@@ -3,8 +3,8 @@
  * timerUtilities.S
 Contains utilitiyy functions to interface with the Attiny84A timer as used with this project.
  */
+ #include "hardwareConst.h"
  #include <avr/io.h>
-#define __SFR_OFFSET        0 // Need to redefine this for proper I/O address referencing.global enableInputPinInterrupts, setPinStates, setInitialPinStates
 
  .global setUpTimerInCTCMode
 

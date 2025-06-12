@@ -144,22 +144,10 @@
     <Compile Include="adcUtilities.S">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hardwareConst.S">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="displayUpdaters.S">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="hardwareSetup.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hardwareSetup.S">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="i2cmaster.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="i2cmaster.S">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hardwareConst.h">
@@ -175,9 +163,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="softwareConst.S">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timerUtilities.h">

@@ -2,10 +2,8 @@
 Handles the updating of the LED display to show a certain
 */
 #include <avr/io.h>
-#define __SFR_OFFSET        0 // Need to redefine this for proper I/O address referencing
+#include "hardwareConst.h"
 .global setCharlieplexingState
-.data
-	.align 2
 .text
     // The states of the Charlieplexing pins. The first index in this sequence of bytes represent the pin state
     // if you want to address LED0, the second index LED1, and so on and so forth.
@@ -14,8 +12,7 @@ Handles the updating of the LED display to show a certain
     // should be set to low output and pin 1 (01 base 2) should be set to high output.
     // The remaining pin for each states are set as outputs.
     CHARLIEPLEXING_PIN_STATES: .byte 0x10, 0x01, 0x20, 0x02, 0x30, 0x03, 0x21, 0x12, 0x31, 0x13, 0x32, 0x23
-
-    /**
+    /*
     Given Charlieplexing pin i (0-3), returns the pin mask of i.
     (the constant that needs to be loaded and provided to the setPinStates function to manipulate the status
     of Charlieplexing pin i)
@@ -91,7 +88,7 @@ Handles the updating of the LED display to show a certain
             dec r24
             brge for_resetAllCharlieplexingPins
         ret
-    /**
+    /*
     Sets the microcontroller pins to appropriately address a certain output pin via the method Charlieplexing.
     r25-r24: The pin to set to output as a number 0-11. For example, to controll LED0, input 0 to the function. To control LED3, input
     3 (base 10). Lower 4 bits in r24, rest unused.

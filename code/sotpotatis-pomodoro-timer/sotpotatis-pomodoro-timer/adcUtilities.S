@@ -1,8 +1,7 @@
 /* adcUtilities.S
  Contains code to use the analog inputs on the device. */
 #include <avr/io.h>
-#define __SFR_OFFSET        0 // Need to redefine this for proper I/O address referencing
-
+#include "hardwareConst.h"
 .global setUpADC, ADC_TRIGGER_SOURCE_FREE_RUNNING_MODE, clearADCInterrupts, waitForInterrupts, readCurrentADCValue
 .data   
     .align 2

@@ -1,41 +1,21 @@
 /*
- *  main.c
+*  main.c
 * Main code of the project
- */
+*/
 
-#include <avr/io.h>
-
-#include "hardwareSetup.h"
 
 #include "hardwareConst.h"
-
+#include "softwareConst.h"
 #include "ledHandlers.h"
-
-#define F_CPU 8000000UL
-
-#include <util/delay.h>
-
 #include "adcUtilities.h"
-
-
+#include "timerUtilities.h"
 #include <stdint.h>
 #include <avr/interrupt.h>
-
 
 // Global variables
 volatile uint32_t timestamp = 0;
 volatile uint8_t latestADCSample = 0; // The latest read sample
 volatile uint8_t latestADCSampleChecked = 1; // Whether the latest ADC sample was acknowledged by main or not.
-
-
-// Constants
-uint8_t ADC_SAMPLE_RATE = 5; // The millisecond delay between each ADC sample
-// How many consecutive ADC samples that needs to be read before detecting a button as clicked.
-uint8_t CLICK_SAMPLE_LIMIT = 10;
-// How many consecutive reads that a button must be declared debounced = true for it to be detected as 
-// long pressed
-uint8_t HOLD_SAMPLE_LIMIT = 100;
-
 
 /*
 Defines a custom ISR for ADC readings.
@@ -123,10 +103,10 @@ void updateButtonStates(uint8_t currentADCButton) {
     // buttons.
     if (i+1 == currentADCButton) {
 		if (!btn_debounced[i]){
-			if (btn_counts[i] < CLICK_SAMPLE_LIMIT){
+			if (btn_counts[i] < DEBOUNCE_SAMPLE_LIMIT){
 				btn_counts[i]++;
 			}
-			if (btn_counts[i] == CLICK_SAMPLE_LIMIT) {
+			if (btn_counts[i] == DEBOUNCE_SAMPLE_LIMIT) {
 				btn_debounced[i] = 1;
 			}
 		}
@@ -158,12 +138,12 @@ void updateButtonStates(uint8_t currentADCButton) {
   }
 }
 int main(void) {
-  // Set up ADC on PA6, in Free Running Mode, with no Interrupts
-  // and a prescaler of 1/128
-  setUpADC(6, 0, 1, 0, 0b111);
+  // Set up ADC on chosen pin, in Free Running Mode, with no Interrupts
+  // and the chosen prescaler
+  setUpADC(BUTTON_ADC_PIN, 0, 1, 0, ADC_PRESCALER_VALUE);
   // Set up a timer in CTC mode, and generate interrupts
   // every 1ms. Disable output compare pins.
-  setUpTimerInCTCMode(124, 1, 0b011, 1);
+  setUpTimerInCTCMode(TICKS_PER_MS, 1, TIMER_PRESCALER_VALUE, 1);
   sei();
   uint8_t currentADCButton = 0;
   while (1) {
