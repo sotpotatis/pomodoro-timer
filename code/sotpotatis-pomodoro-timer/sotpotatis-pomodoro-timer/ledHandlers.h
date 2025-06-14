@@ -4,6 +4,6 @@ ledHandlers.S.
 */
 #ifndef LEDHANDLERS_H_
     #define LEDHANDLERS_H_
-    extern void setCharlieplexingState(uint8_t ledNumber);
-	extern void resetAllCharlieplexingPins();
+		extern void setCharlieplexingState(uint8_t ledNumber);
+		extern void resetAllCharlieplexingPins();
 #endif
