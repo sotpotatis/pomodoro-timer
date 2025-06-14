@@ -17,16 +17,19 @@
 
 #include <avr/interrupt.h>
 
+#include "eepromUtilities.h"
+
 // Global variables
 volatile uint32_t timestamp = 0;
 volatile uint8_t latestADCSample = 0; // The latest read sample
 volatile uint8_t latestADCSampleChecked = 1; // Whether the latest ADC sample was acknowledged by main or not.
-
+volatile uint8_t latestTimerTickAcknowledged = 1; // Flag that main can use to ack timer ticks
 /*
 Defines a custom ISR for ADC readings.
 */
 ISR(TIM0_COMPA_vect) {
   timestamp++;
+  latestTimerTickAcknowledged = 0;
   if (timestamp % ADC_SAMPLE_RATE == 0 && latestADCSampleChecked) {
     clearADCInterrupts();
     latestADCSample = readCurrentADCValue();
@@ -139,6 +142,13 @@ void updateButtonStates(uint8_t currentADCButton) {
   }
 }
 int main(void) {
+  // EEPROM proof of concept.
+  // This should light up LED2 onm the device.
+  writeEEPROM(0, 2);
+  writeEEPROM(1, 11);
+  uint8_t ledToBeLit = readEEPROM(0);
+  setCharlieplexingState(ledToBeLit);
+  return 0;
   // Set up ADC on chosen pin, in Free Running Mode, with no Interrupts
   // and the chosen prescaler
   setUpADC(BUTTON_ADC_PIN, 0, 1, 0, ADC_PRESCALER_VALUE);
@@ -149,7 +159,22 @@ int main(void) {
   resetAllCharlieplexingPins();
   sei();
   uint8_t currentADCButton = 0;
+  uint8_t currentCharlieplexingLED = 0;
+  int8_t currentTurnedOffLED = -1;
   while (1) {
+	// Set Charlieplexing LEDs to their current state.
+    if (!latestTimerTickAcknowledged) {
+		if (currentTurnedOffLED != currentCharlieplexingLED){
+			setCharlieplexingState(currentCharlieplexingLED);
+		}
+		if (currentCharlieplexingLED < 12){
+			currentCharlieplexingLED++;
+		}
+		else {
+			currentCharlieplexingLED = 0;
+		}
+		latestTimerTickAcknowledged = 1;
+	}
     if (!latestADCSampleChecked) {
       currentADCButton = getCurrentADCButton();
       updateButtonStates(currentADCButton);
@@ -158,12 +183,12 @@ int main(void) {
       // and bit 4 indicates hold / not hold. See getCurrentPressedUserButton docstring.
       for (int i = 0; i < 5; i++) {
         if (btn_held[i]) {
-          setCharlieplexingState(i);
           btn_held[i] = 0;
+		  currentTurnedOffLED = i;
         }
         if (btn_tapped[i]) {
-          setCharlieplexingState(i);
           btn_tapped[i] = 0;
+			currentTurnedOffLED = i;
         }
       }
       latestADCSampleChecked = 1;
