@@ -144,10 +144,10 @@
     <Compile Include="adcUtilities.S">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hardwareSetup.h">
+    <Compile Include="pinUtilities.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hardwareSetup.S">
+    <Compile Include="pinUtilities.S">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hardwareConst.h">

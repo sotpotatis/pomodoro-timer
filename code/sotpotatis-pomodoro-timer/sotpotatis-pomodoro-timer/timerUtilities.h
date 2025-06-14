@@ -5,5 +5,5 @@ timerUtilities.S.
 
 #ifndef TIMERUTILITIES_H_
 #define TIMERUTILITIES_H_
-extern void setUpTimerInCTCMode(unsigned char valueToCountTo, unsigned char disableComparePins, unsigned char clockSource, unsigned char enableInterrupts);
+extern void setUpTimerInCTCMode(uint8_t valueToCountTo, uint8_t disableComparePins, uint8_t clockSource, uint8_t enableInterrupts);
 #endif

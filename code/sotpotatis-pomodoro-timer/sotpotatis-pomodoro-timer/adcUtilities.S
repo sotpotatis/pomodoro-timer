@@ -78,7 +78,7 @@
 				setADCAutoTriggerSource:
 					out ADCSRB, r18
 			// --- Done setting ADC auto trigger source --
-			// Ensure the requested ADC pin is set to an input pin
+			// --- Ensure the requested ADC pin is set to an input pin ---
 			PUSH r24
 			PUSH r19
 			PUSH r16

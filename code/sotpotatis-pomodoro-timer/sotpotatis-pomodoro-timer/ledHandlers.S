@@ -3,7 +3,7 @@ Handles the updating of the LED display to show a certain
 */
 #include <avr/io.h>
 #include "hardwareConst.h"
-.global setCharlieplexingState
+.global setCharlieplexingState, resetAllCharlieplexingPins
 .text
     // The states of the Charlieplexing pins. The first index in this sequence of bytes represent the pin state
     // if you want to address LED0, the second index LED1, and so on and so forth.
@@ -44,7 +44,7 @@ Handles the updating of the LED display to show a certain
             ldi r24, lo8(LED_CHARLIEPLEXING_PIN_4)
         return:
             ret
-    /**
+    /*
     Sets all Charlieplexing pins to inputs and resets their output state.
     Takes no input arguments.
     */

@@ -1,11 +1,11 @@
 /*
-hardwareSetup.S
+pinUtilities.S
 Contains code for setting up and controlling hardware, currently
-limited to I/0 pin operations.
+limited to I/O pin operations.
 */
 #include <avr/io.h>
 #include "hardwareConst.h"
-.global setPinStates, setInitialPinStates
+.global setPinStates
 .text
 	/* This function handles two main tasks:
 	1. Setting a pin to an input or output
@@ -76,9 +76,3 @@ limited to I/0 pin operations.
 				out PORTB, r18
 		return:
 			ret
-
-	/* Initial hardware setup. 
-	TODO implement this function.
-	Sets up input and output pins to their desired initial states.  */
-	setInitialPinStates:
-		ret

@@ -22,9 +22,12 @@
 	// (2) HELD - When the user holds down the button
 	// The thresholds for these detections can be found below
 	// Button n is declared debounced after the ADC matched the buttons voltage level
-	// for at least DEBOUNCE_SAMPLE_LIMIT ADC samples.
+	// for DEBOUNCE_SAMPLE_LIMIT ADC samples.
 	#define DEBOUNCE_SAMPLE_LIMIT 10
-	// How many consecutive reads that a button must be declared debounced = true for it to be detected as 
-	// held.
-	#define HOLD_SAMPLE_LIMIT 100
+	// A button is declared held if it has been declared debounced = true for HOLD_SAMPLE_LIMIT number of
+	// ADC samples.
+	#define HOLD_SAMPLE_LIMIT 150
+	// A button is declared tapped if it has been declared debounced = true for **maximum** TAP_SAMPLE_LIMIT number of
+	// ADC samples.
+	#define TAP_SAMPLE_LIMIT 80
 #endif
