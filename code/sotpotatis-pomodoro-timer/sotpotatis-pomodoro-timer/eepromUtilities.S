@@ -60,7 +60,7 @@ writeEEPROM:
 	andi r25, 0x0F
 	ori r25, 4 // Set bit 2, the EEMPE bit, to 1.
 	out EECR, r25
-	sbi EECR, 1
+	sbi EECR, 1 // Set the EEPE bit to 1
 	sei // Re-enable interupts
 	ret
 
@@ -74,7 +74,7 @@ readEEPROM:
 	rcall waitUntilEEPROMReadyAndCopyAddress
 	// Write the EERE bit (bit 0 in EECR) to 1 to start the read.
 	sbi EECR, 0
-	// Load the read data into r24. (it should now be available in the EEDR register)
+	// Load the read data from r24. (it should now be available in the EEDR register)
 	in r24, EEDR
 	ldi r25, 0 // To follow ASM-C-calling conventions, ensure r25 (upper 8 bits
 	// of return argument is 0)
