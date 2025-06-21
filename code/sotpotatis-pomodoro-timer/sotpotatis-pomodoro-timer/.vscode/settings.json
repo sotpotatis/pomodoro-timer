@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "hardwaresetup.h": "c"
+        "hardwaresetup.h": "c",
+        "softwareconst.h": "c"
     }
 }

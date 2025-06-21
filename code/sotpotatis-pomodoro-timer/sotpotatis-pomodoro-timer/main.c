@@ -19,11 +19,14 @@
 
 #include "eepromUtilities.h"
 
+#include "buttonMultiplexing.h"
+
 // Global variables
 volatile uint32_t timestamp = 0;
 volatile uint8_t latestADCSample = 0; // The latest read sample
 volatile uint8_t latestADCSampleChecked = 1; // Whether the latest ADC sample was acknowledged by main or not.
 volatile uint8_t latestTimerTickAcknowledged = 1; // Flag that main can use to ack timer ticks
+
 /*
 Defines a custom ISR for ADC readings.
 */
@@ -50,15 +53,15 @@ uint8_t ADC_STATES[6] = {
 
 // Store a numeric counter for each button that, for each reading: counts up (+1) if the ADC detects a voltage reading mapped to that button.
 // It counts down (-1) for all buttons that the ADC are not mapped to.
-uint8_t btn_counts[5] = {
+uint8_t buttonCounts[5] = {
   0,
   0,
   0,
   0,
   0
 };
-// Same as btn_counts but for hold detection
-uint8_t how_long[5] = {
+// Same as buttonCounts but for hold detection
+uint8_t debouncedCounts[5] = {
   0,
   0,
   0,
@@ -66,7 +69,7 @@ uint8_t how_long[5] = {
   0
 };
 // Store whether buttons were debounced or not. See below for usage.
-uint8_t btn_debounced[5] = {
+uint8_t buttonDebounced[5] = {
   0,
   0,
   0,
@@ -75,7 +78,7 @@ uint8_t btn_debounced[5] = {
 };
 // Store whether buttons were detected as held or not.
 // These flags are cleared by main.
-uint8_t btn_held[5] = {
+uint8_t buttonHeld[5] = {
   0,
   0,
   0,
@@ -84,64 +87,14 @@ uint8_t btn_held[5] = {
 };
 // Store whether buttons were detected as tapped or not.
 // These flags are cleared by main.
-uint8_t btn_tapped[5] = {
+uint8_t buttonTapped[5] = {
   0,
   0,
   0,
   0,
   0
 };
-// Get the current button that is pressed ACCORDING TO THE ADC at an INSTANTENOUS MOMENT.
-// The returns from this function is further parsed inside getCurrentPressedUserButton
-// Returns 0 if no button is pressed, else a number 1-5 corresponding to the pressed button.
-uint8_t getCurrentADCButton() {
-  volatile uint8_t sampleCopy = latestADCSample;
-  for (int i = 0; i < 6; i++) {
-    uint8_t mappedButtonValue = ADC_STATES[i];
-    if (sampleCopy >= mappedButtonValue) {
-      return i;
-    }
-  }
-}
-// Updates the detected state (pressed, tapped, or nothing) for currentADCButton.
-void updateButtonStates(uint8_t currentADCButton) {
-  for (int i = 0; i < 5; i++) {
-    // Logic: increase the "btn_count" for each button by 1 every time
-    // it is detected by the ADC as pressed. Decrease the btn_count for all other
-    // buttons.
-    if (i + 1 == currentADCButton) {
-      if (btn_counts[i] < DEBOUNCE_SAMPLE_LIMIT) {
-        btn_counts[i]++;
-      } else {
-        btn_debounced[i] = 1;
-      }
-    }
-    // Decrement btn_counts for undetected buttons
-    else {
-      if (btn_counts[i] > 0) {
-        btn_counts[i]--;
-      }
-      // Reset state if ticked over to 0
-      else {
-        btn_debounced[i] = 0;
-      }
-    }
-    // Perform hold detection for any debounced button
-    if (btn_debounced[i]) {
-      if (how_long[i] < HOLD_SAMPLE_LIMIT) {
-        how_long[i]++;
-      } else {
-        btn_held[i] = 1;
-      }
-    } else {
-      // Detect tapped (not held)
-      if (how_long[i] >= 1 && how_long[i] < TAP_SAMPLE_LIMIT) {
-        btn_tapped[i] = 1;
-      }
-      how_long[i] = 0;
-    }
-  }
-}
+
 int main(void) {
   // Set up ADC on chosen pin, in Free Running Mode, with no Interrupts
   // and the chosen prescaler
@@ -154,7 +107,10 @@ int main(void) {
   sei();
   uint8_t currentCharlieplexingLED = 0;
   int8_t currentTurnedOffLED = -1;
-  uint8_t currentADCButton = 0;
+  // Proof of concept code:
+  // lights up all 12 LEDs. If the user clicks the 5 button-panel,
+  // they should see the LED which corresponds to the button index that they just clicked
+  // turn off.
   while (1) {
 	// Set Charlieplexing LEDs to their current state.
     if (!latestTimerTickAcknowledged) {
@@ -169,17 +125,18 @@ int main(void) {
 		}
 		latestTimerTickAcknowledged = 1;
 	}
+	// Process any new ADC samples to detect button preses
     if (!latestADCSampleChecked) {
-      currentADCButton = getCurrentADCButton();
-      updateButtonStates(currentADCButton);
-      // Visually show on my LEDs what button that was detected as pressed
-      // & 7 is since I only show the button number for now by lighting up its corresponding LED,
-      // and bit 4 indicates hold / not hold. See getCurrentPressedUserButton docstring.
+		// No need to use a local copy of latestADCSample here as the ISR only updates it
+		// when latestADCSampleChecked=1.
+     uint8_t currentADCButton = getCurrentADCButton(latestADCSample);
+	updateButtonStates(buttonCounts,debouncedCounts, buttonDebounced,buttonTapped,buttonHeld, currentADCButton);
+	  // Visually show on my LEDs what button that was detected as pressed
       for (int i = 0; i < 5; i++) {
-        if (btn_held[i] || btn_tapped[i]) {
-          btn_held[i] = 0;
-		      currentTurnedOffLED = i;
-          btn_tapped[i] = 0;
+        if (buttonHeld[i] || buttonTapped[i]) {
+          buttonHeld[i] = 0;
+          buttonTapped[i] = 0;
+		  currentTurnedOffLED = i;
         }
       }
       latestADCSampleChecked = 1;

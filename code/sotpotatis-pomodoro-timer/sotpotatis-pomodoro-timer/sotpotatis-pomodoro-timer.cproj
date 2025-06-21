@@ -144,6 +144,12 @@
     <Compile Include="adcUtilities.S">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="buttonMultiplexing.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="buttonMultiplexing.S">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="eepromUtilities.h">
       <SubType>compile</SubType>
     </Compile>

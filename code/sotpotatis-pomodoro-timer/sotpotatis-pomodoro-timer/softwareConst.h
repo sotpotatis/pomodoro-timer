@@ -3,7 +3,6 @@
  * Includes software-related constants used throughout the project.
  */ 
 
-#include <stdint.h>
 #ifndef SOFTWARECONST_H_
 	#define SOFTWARECONST_H_
 		// ===== Timer constants =====
@@ -23,7 +22,7 @@
 		// The thresholds for these detections can be found below
 		// Button n is declared debounced after the ADC matched the buttons voltage level
 		// for DEBOUNCE_SAMPLE_LIMIT ADC samples.
-		#define DEBOUNCE_SAMPLE_LIMIT 10
+		#define DEBOUNCE_SAMPLE_LIMIT 13
 		// A button is declared held if it has been declared debounced = true for HOLD_SAMPLE_LIMIT number of
 		// ADC samples.
 		#define HOLD_SAMPLE_LIMIT 150
