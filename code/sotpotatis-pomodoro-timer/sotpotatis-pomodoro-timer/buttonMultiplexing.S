@@ -1,6 +1,8 @@
 /* buttonMultiplexing.S
 Utilties for connecting multiple buttons to one ADC pin, and
 identifying which button that has been pressed.
+NOTE: The main algorithm for ADC multiplexing was taught to me by patient AVRFreaks forums user avrcandies. I thank you very very much for the help!
+This is the topic that they helped me in: www.avrfreaks.net/s/topic/a5CV40000003RbZMAU/t400824?page=2.
  */
 #include "softwareConst.h"
 .global updateButtonStates, getCurrentADCButton
