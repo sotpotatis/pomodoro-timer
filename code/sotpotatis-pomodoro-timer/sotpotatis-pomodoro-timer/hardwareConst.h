@@ -27,6 +27,9 @@ Defines hardware-related constants.
 		#define LED_CHARLIEPLEXING_PIN_2 0x200 // PA1
 		#define LED_CHARLIEPLEXING_PIN_3 0x400 // PA2
 		#define LED_CHARLIEPLEXING_PIN_4 0x800 // PA3
+		#define LED_CHARLIEPLEXING_PIN_5 0x1000// PA4
+		// ====== Buzzer pin ======
+		#define BUZZER_PIN 0x2000 // PA5
 		// Masks to use to separate PA/B pins corresponding to how they are defined in the format above.
 		// Operates only on 8 bit registers
 		#define PA_PIN_MASK 0xFF

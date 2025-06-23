@@ -95,8 +95,13 @@ int main(void) {
   setUpTimerInCTCMode(TICKS_PER_MS, 1, TIMER_PRESCALER_VALUE, 1);
   // Ensure all pins used for LED Charlieplexing are inputs.
   resetAllCharlieplexingPins();
+  // Ensure buzzer pin does not buzz at the beginning of the code
+  setPinStates(BUZZER_PIN, 1, 0);
+  setPinStates(BUZZER_PIN, 0, 1);
   sei();
-  uint8_t currentCharlieplexingLED = 0;
+  uint8_t currentIndex = 0;
+  uint8_t blink = 0;
+  uint8_t currentState = 0; // 0 = work, 1 = rest, 2 = repetitions
   int8_t currentTurnedOffLED = -1;
   // Proof of concept code:
   // lights up all 12 LEDs. If the user clicks the 5 button-panel,
@@ -105,15 +110,22 @@ int main(void) {
   while (1) {
 	// Set Charlieplexing LEDs to their current state.
     if (!latestTimerTickAcknowledged) {
-		if (currentTurnedOffLED != currentCharlieplexingLED){
-			setCharlieplexingState(currentCharlieplexingLED);
+		if (timestamp % 1000 == 0){
+			// Blink the last LED on the panel every second
+			blink = !blink;
 		}
-		if (currentCharlieplexingLED < 12){
-			currentCharlieplexingLED++;
+		// Turn on LEDs. Lower 12 are used for the ADC multiplexing demo. Upper 3 are used for the work / rest / repetition set
+		// screen
+		if (currentIndex < 12){
+			if (currentTurnedOffLED != currentIndex && (currentIndex != 11 || !blink)){setCharlieplexingState(currentIndex);}
+			currentIndex++;
 		}
-		else {
-			currentCharlieplexingLED = 0;
+		else  {
+			setCharlieplexingState(12+currentState);
+			currentIndex = 0;
 		}
+		// Update the buzzer.
+		setPinStates(BUZZER_PIN, blink, 1);
 		latestTimerTickAcknowledged = 1;
 	}
 	// Process any new ADC samples to detect button preses
@@ -128,6 +140,11 @@ int main(void) {
           buttonHeld[i] = 0;
           buttonTapped[i] = 0;
 		  currentTurnedOffLED = i;
+		  // Update the current state, for illustrative purposes
+			currentState++;
+			if (currentState == 3){
+				currentState = 0;
+			}
         }
       }
       latestADCSampleChecked = 1;

@@ -1,6 +1,7 @@
 /* buttonMultiplexing.S
 Utilties for connecting multiple buttons to one ADC pin, and
-identifying which button that has been pressed. */
+identifying which button that has been pressed.
+ */
 #include "softwareConst.h"
 .global updateButtonStates, getCurrentADCButton
 .text

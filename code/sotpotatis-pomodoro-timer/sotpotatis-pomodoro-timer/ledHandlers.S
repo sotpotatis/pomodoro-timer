@@ -11,13 +11,15 @@ Handles the updating of the LED display to show a certain
     // to set as output high. Similarly, L1L0 represents the pin to set as output low. As an example: 1101 means: pin 3 (11 base 2)
     // should be set to low output and pin 1 (01 base 2) should be set to high output.
     // The remaining pin for each states are set as outputs.
-    CHARLIEPLEXING_PIN_STATES: .byte 0x10, 0x01, 0x20, 0x02, 0x30, 0x03, 0x21, 0x12, 0x31, 0x13, 0x32, 0x23
+	// Note that with 5 pins we can control 5*4=20 pins, but only states for 16 of them is defined here. That is because the project only
+	// uses 15 pins. The 16th one had to be added to avoid an out of range error when compiling.
+    CHARLIEPLEXING_PIN_STATES: .byte 0x10, 0x01, 0x20, 0x02, 0x30, 0x03, 0x21, 0x12, 0x31, 0x13, 0x32, 0x23, 0x43, 0x34, 0x42, 0x24
     /*
-    Given Charlieplexing pin i (0-3), returns the pin mask of i.
+    Given Charlieplexing pin i (0-4), returns the pin mask of i.
     (the constant that needs to be loaded and provided to the setPinStates function to manipulate the status
     of Charlieplexing pin i)
     r25: Unused.
-    r24: The pin number of the Charliplexing pin. 0-3.
+    r24: The pin number of the Charliplexing pin. 0-4.
     Returned pin mask is stored in r25-r24. (MSb's in r25, LSb's in r24)
     */
     loadPinMask:
@@ -27,6 +29,8 @@ Handles the updating of the LED display to show a certain
         breq pin2
         cpi r24, 3
         breq pin3
+		cpi r24, 4
+        breq pin4
         pin0:
             ldi r25, hi8(LED_CHARLIEPLEXING_PIN_1)
             ldi r24, lo8(LED_CHARLIEPLEXING_PIN_1)
@@ -42,6 +46,10 @@ Handles the updating of the LED display to show a certain
         pin3:
             ldi r25, hi8(LED_CHARLIEPLEXING_PIN_4)
             ldi r24, lo8(LED_CHARLIEPLEXING_PIN_4)
+			rjmp return
+		pin4:
+			ldi r25, hi8(LED_CHARLIEPLEXING_PIN_5)
+            ldi r24, lo8(LED_CHARLIEPLEXING_PIN_5)
         return:
             ret
     /*
@@ -57,7 +65,7 @@ Handles the updating of the LED display to show a certain
         // r22: =0, signalling setting pins to inputs
         //
         // for each pin number
-        ldi r24, 3
+        ldi r24, 4
         for_resetAllCharlieplexingPins:
             // Load different values (pin masks) into r24 and r25 depending on pin number
             PUSH r24 // push index counter to stack
@@ -90,7 +98,7 @@ Handles the updating of the LED display to show a certain
         ret
     /*
     Sets the microcontroller pins to appropriately address a certain output pin via the method Charlieplexing.
-    r25-r24: The pin to set to output as a number 0-11. For example, to controll LED0, input 0 to the function. To control LED3, input
+    r25-r24: The pin to set to output as a number 0-14. For example, to controll LED0, input 0 to the function. To control LED3, input
     3 (base 10). Lower 4 bits in r24, rest unused.
     */
     setCharlieplexingState:
@@ -117,9 +125,9 @@ Handles the updating of the LED display to show a certain
         // r18 = <pin number to set to output high>
         mov r18, r23
         andi r18, 0x0f
-        // Set the desired state for each of the 4 Charliplexing pins
-        ldi r24, 3
-        for_setCharlieplexingState: // For all pins 0 - 3
+        // Set the desired state for each of the 5 Charliplexing pins
+        ldi r24, 4
+        for_setCharlieplexingState: // For all pins 0 - 4
             cp r24, r19
             breq pinIsOutputLow
             cp r24, r18
