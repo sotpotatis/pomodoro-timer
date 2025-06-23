@@ -40,16 +40,7 @@ ISR(TIM0_COMPA_vect) {
   }
 }
 
-// Defines, for each button/circuit state, an ADC reading that if exceeded (or exactly achieved) (>=) results in that
-// state being detected (instantaneously).
-uint8_t ADC_STATES[6] = {
-  232, // No button pressed
-  185, // Button 1 pressed
-  129, // Button 2 pressed
-  75, // Button 3 pressed
-  27, // Button 4 pressed
-  0 // Button 5 pressed
-};
+
 
 // Store a numeric counter for each button that, for each reading: counts up (+1) if the ADC detects a voltage reading mapped to that button.
 // It counts down (-1) for all buttons that the ADC are not mapped to.

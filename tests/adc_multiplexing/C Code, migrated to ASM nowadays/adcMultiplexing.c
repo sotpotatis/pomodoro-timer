@@ -2,6 +2,16 @@
 Source code of getCurrentADCButton and updateButtonStates functions before they were translated to Assembly. 
 Their Assembly translations have made it into the final source code, see adcMultiplexing.S.
 */
+// Defines, for each button/circuit state, an ADC reading that if exceeded (or exactly achieved) (>=) results in that
+// state being detected (instantaneously).
+uint8_t ADC_STATES[6] = {
+  232, // No button pressed
+  185, // Button 1 pressed
+  129, // Button 2 pressed
+  75, // Button 3 pressed
+  27, // Button 4 pressed
+  0 // Button 5 pressed
+};
 // Get the current button that is pressed ACCORDING TO THE ADC at an INSTANTENOUS MOMENT.
 // The returns from this function is further parsed inside getCurrentPressedUserButton
 // Returns 0 if no button is pressed, else a number 1-5 corresponding to the pressed button.
