@@ -13,7 +13,8 @@
 
 #align(horizon+center, [
   #text(25pt)[*Pomodoro Timer Documentation*] \
-  #text(18pt)[sotpotatis]
+  #text(18pt)[sotpotatis] \
+  #text(15pt)[https://github.com/sotpotatis/pomodoro-timer]
 ])
 #pagebreak()
 #outline()
@@ -40,7 +41,7 @@ The project relies on the built-in Attiny84A timer, which is known to be rather 
   fill: color.hsv(187deg, 82%, 79%, 61%),
   radius: 2pt,
   outset: 4pt,
-  [*Note:* The idea of how to calibrate the timer should be credited to user `avrcandies` on AVRFreaks, who mentioned it in https://www.avrfreaks.net/s/topic/a5CV40000002wfpMAA/t399784 (post 11). Thanks to the people on Pluggakuten who filled in some details I was unsure about: https://www.pluggakuten.se/trad/korrigeringsmetod-for-att-fa-battre-noggrannhet-varfor-fungerar-den/]
+  [*Note:* The idea of how to calibrate the timer should be credited to user `avrcandies` on AVRFreaks, who mentioned it in https://www.avrfreaks.net/s/topic/a5CV40000002wfpMAA/t399784 (post 11).]
 )
 === Uploading the timer calibration code
 
