@@ -1,4 +1,4 @@
-/* charlieplexing_16_leds.ino
+/* charlieplexing_15_leds.ino
 Test Arduino sketch (to run on an Arduino UNO, not Attinys)
 for testing 5 pin Charlieplexing, which I added in the middle of my project.
 Lights up each Charlieplexing LED at a time with a short delay in between

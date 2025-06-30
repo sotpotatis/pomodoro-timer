@@ -27,7 +27,7 @@
 	volatile uint8_t timerRunning = 0;
 	volatile uint32_t timestamp = 0;
 	volatile uint16_t elapsedSeconds = 0;
-	uint8_t MINUTES_TO_COUNT_TO = 60; // No. of minutes to count to for this test
+	uint8_t MINUTES_TO_COUNT_TO = 90; // No. of minutes to count to for this test
     // ADC multiplexing variables
 	volatile uint8_t latestADCSampleChecked = 1;
 	volatile uint8_t latestADCSample = 0;
@@ -102,8 +102,7 @@
 			uint16_t calibrationValueH = readEEPROM(TIMER_CALIBRATION_EEPROM_ADDRESS_H);
 			uint8_t calibrationValueL = readEEPROM(TIMER_CALIBRATION_EEPROM_ADDRESS_L);
 			uint32_t calibrationValue = (calibrationValueH<<8) | (calibrationValueL);
-			float secondsToCountTo = MINUTES_TO_COUNT_TO * calibrationValue;
-			secondsToCountTo = round(secondsToCountTo / 64);
+			uint16_t secondsToCountTo = (MINUTES_TO_COUNT_TO * calibrationValue) >> 6;
 			while (1){
 				// Allow the user to start the timer by clicking on any button
 				if (!latestADCSampleChecked && !timerRunning){
