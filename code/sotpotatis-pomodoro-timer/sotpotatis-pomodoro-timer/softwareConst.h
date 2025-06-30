@@ -12,6 +12,11 @@
 		// Defines how many times the timer needs to tick up before 1 (one) ms has been reached.
 		// This depends on your timer prescaler value and the clock frequency (see constants just above this)
 		#define TICKS_PER_MS 124
+		// Where to store the timer calibration value (in which EEPROM address). A low and a high bit is stored.
+		#define TIMER_CALIBRATION_EEPROM_ADDRESS_H  3
+		#define TIMER_CALIBRATION_EEPROM_ADDRESS_L  4
+		#define RUN_TIMER_CALIBRATION 0
+		#define RUN_TIMER_TEST 1
 		// ===== ADC Button press detection constants =====
 		// Button press detection is done via ADC, by sampling the ADC every n ms.
 		#define ADC_SAMPLE_RATE 5 // The millisecond delay between each ADC sample. Must be >= 1ms due to how the code currently works

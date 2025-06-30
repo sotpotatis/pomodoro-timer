@@ -150,6 +150,9 @@
     <Compile Include="buttonMultiplexing.S">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="timerCalibration.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="eepromUtilities.h">
       <SubType>compile</SubType>
     </Compile>
@@ -175,6 +178,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timerTest.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timerUtilities.h">
