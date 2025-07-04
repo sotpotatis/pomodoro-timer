@@ -27,7 +27,7 @@
 	volatile uint8_t timerRunning = 0;
 	volatile uint32_t timestamp = 0;
 	volatile uint16_t elapsedSeconds = 0;
-	uint8_t MINUTES_TO_COUNT_TO = 90; // No. of minutes to count to for this test
+	uint8_t MINUTES_TO_COUNT_TO = 63; // No. of minutes to count to for this test
     // ADC multiplexing variables
 	volatile uint8_t latestADCSampleChecked = 1;
 	volatile uint8_t latestADCSample = 0;
