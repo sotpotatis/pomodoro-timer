@@ -16,7 +16,7 @@
 		#define TIMER_CALIBRATION_EEPROM_ADDRESS_H  3
 		#define TIMER_CALIBRATION_EEPROM_ADDRESS_L  4
 		#define RUN_TIMER_CALIBRATION 0
-		#define RUN_TIMER_TEST 1
+		#define RUN_TIMER_TEST 0
 		// ===== ADC Button press detection constants =====
 		// Button press detection is done via ADC, by sampling the ADC every n ms.
 		#define ADC_SAMPLE_RATE 5 // The millisecond delay between each ADC sample. Must be >= 1ms due to how the code currently works

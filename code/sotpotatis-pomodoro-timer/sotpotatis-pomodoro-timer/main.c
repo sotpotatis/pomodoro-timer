@@ -103,6 +103,9 @@
 	  uint8_t blink = 0;
 	  uint8_t currentState = 0; // 0 = work, 1 = rest, 2 = repetitions
 	  int8_t currentTurnedOffLED = -1;
+	  uint16_t melodyTimeIndex = 0;
+	  uint8_t melodyPauseIndex = 0;
+	  uint8_t melodyPlaying = 1;
 	  // Proof of concept code:
 	  // lights up all 12 LEDs. If the user clicks the 5 button-panel,
 	  // they should see the LED which corresponds to the button index that they just clicked
@@ -125,7 +128,30 @@
 				currentIndex = 0;
 			}
 			// Update the buzzer.
-			setPinStates(BUZZER_PIN, blink, 1);
+			// The buzzer plays a melody which is tracked using "melodyIndex". Just temporarily for testing.
+			if (melodyPlaying){
+				setPinStates(BUZZER_PIN, (melodyTimeIndex % 2) == 0, 1);
+				melodyTimeIndex = !melodyTimeIndex;
+				if (melodyTimeIndex == 200){
+					melodyTimeIndex = 0;
+					melodyPlaying = 0;
+				}
+			}
+			else {
+				if ((melodyPauseIndex  == 3 && melodyTimeIndex < 999) || (melodyPauseIndex < 3 && melodyTimeIndex < 199)){
+					melodyTimeIndex++;
+				}
+				else {
+					melodyTimeIndex = 0;
+					melodyPlaying = 1;
+					if (melodyPauseIndex < 3){
+						melodyPauseIndex++;
+					}
+					else {
+						melodyPauseIndex = 0;
+					}
+				}
+			}
 			latestTimerTickAcknowledged = 1;
 		}
 		// Process any new ADC samples to detect button preses
