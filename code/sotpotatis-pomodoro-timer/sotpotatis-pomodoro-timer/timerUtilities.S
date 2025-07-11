@@ -15,10 +15,8 @@ Contains utilitiyy functions to interface with the Attiny84A timer as used with 
  r25: Unused.
  r24: The value to count to, i.e. the value to set Output Compare Match A to. The timer will roll back to 0 after this value.
  r23: Unused.
- r22: Whether to disable the compare pins or not. If you need to use the compare pins for some reason, set them beforehand and then use this argument
- to avoid over-writing.
- If r22=0, it doesn't mess with the compare pins, leaving whatever bits were set there previously. If r22=1, both the compare match A and B pins are
- disabled.
+ r22: The settings to use for the output compare pins, i.e. COM0A[1:0] AND COM0B[1:0]. Hint: to disable the output compare pins,
+ set this value to 0. NOTE: The pins must be set as´outputs in another part of the code in order to work.
  r21: Unused.
  r20: The clock source to use as determined by the CS0[2:0]: Clock Select bits.
  r19: Unused.
@@ -26,7 +24,7 @@ Contains utilitiyy functions to interface with the Attiny84A timer as used with 
  */
  setUpTimerInCTCMode:
 	// Mask inputs
-	andi r22, 0x01
+	andi r22, 0xF
 	andi r20, 0x07
 	andi r18, 0x01
 	// Define value to count to in OCR0A.
@@ -34,14 +32,12 @@ Contains utilitiyy functions to interface with the Attiny84A timer as used with 
 	// Start manipulating the TCCR0A values
 	in r24, TCCR0A
 	// Set WGM0[1:0] (bit 1:0 in TCCR0A) to 0b10 to enable CTC mode
-	andi r24, 0xFC // Clear WGM0[1:0]
-	ori r24, 0x02
-	// IF the user has not set r22=0
-	// Set COM0A[1:0] AND COM0B[1:0] (bit 7,6,5,4 in TCCR0A) to disable the output compare pins.
-	// (i.e. clear all of these bits)
-	cpi r22, 1
-	brne writeNewTCCR0AValues
-	andi r24, 0x0F // Clear bit 7-4 of TCCR0A, see above for more information :)
+	andi r24, 0x0C // Clear WGM0[1:0] and the output compare pin (COM0A, COM0B) bits
+	ori r24, 0x02 // Set WGM[1:0]
+	// Set the output compare pin values. The thing is that these values are bit 7-4 of TCCR0A.
+	// So we swap the low and high nibble of the user input in r22 to get our desired result
+	swap r22
+	or r24, r22
 	writeNewTCCR0AValues:
 		out TCCR0A, r24
 	// Set the clock source and prescaler 

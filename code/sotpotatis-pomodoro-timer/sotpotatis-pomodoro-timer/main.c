@@ -91,13 +91,11 @@
 	  // and the chosen prescaler
 	  setUpADC(BUTTON_ADC_PIN, 0, 1, 0, ADC_PRESCALER_VALUE);
 	  // Set up a timer in CTC mode, and generate interrupts
-	  // every 1ms. Disable output compare pins.
-	  setUpTimerInCTCMode(TICKS_PER_MS, 1, TIMER_PRESCALER_VALUE, 1);
+	  // every 1ms. Enable output compare pin on OC0A pin (PB2)
+	  setPinStates(4, 1, 0);
+	  setUpTimerInCTCMode(TICKS_PER_MS, 4, TIMER_PRESCALER_VALUE, 1);
 	  // Ensure all pins used for LED Charlieplexing are inputs.
 	  resetAllCharlieplexingPins();
-	  // Ensure buzzer pin does not buzz at the beginning of the code
-	  setPinStates(BUZZER_PIN, 1, 0);
-	  setPinStates(BUZZER_PIN, 0, 1);
 	  sei();
 	  uint8_t currentIndex = 0;
 	  uint8_t blink = 0;
@@ -127,14 +125,15 @@
 				setCharlieplexingState(12+currentState);
 				currentIndex = 0;
 			}
+			
 			// Update the buzzer.
 			// The buzzer plays a melody which is tracked using "melodyIndex". Just temporarily for testing.
 			if (melodyPlaying){
-				setPinStates(BUZZER_PIN, (melodyTimeIndex % 2) == 0, 1);
-				melodyTimeIndex = !melodyTimeIndex;
+				melodyTimeIndex++;
 				if (melodyTimeIndex == 200){
 					melodyTimeIndex = 0;
 					melodyPlaying = 0;
+					setPinStates(4, 0, 0); // Set OCR0A to an input
 				}
 			}
 			else {
@@ -150,31 +149,33 @@
 					else {
 						melodyPauseIndex = 0;
 					}
+					setPinStates(4, 1, 0); // Set OCR0A to an output again
 				}
 			}
 			latestTimerTickAcknowledged = 1;
-		}
-		// Process any new ADC samples to detect button preses
-		if (!latestADCSampleChecked) {
-			// No need to use a local copy of latestADCSample here as the ISR only updates it
-			// when latestADCSampleChecked=1.
-		 uint8_t currentADCButton = getCurrentADCButton(latestADCSample);
-		updateButtonStates(buttonCounts,debouncedCounts, buttonDebounced,buttonTapped,buttonHeld, currentADCButton);
-		  // Visually show on my LEDs what button that was detected as pressed
-		  for (int i = 0; i < 5; i++) {
-			if (buttonHeld[i] || buttonTapped[i]) {
-			  buttonHeld[i] = 0;
-			  buttonTapped[i] = 0;
-			  currentTurnedOffLED = i;
-			  // Update the current state, for illustrative purposes
-				currentState++;
-				if (currentState == 3){
-					currentState = 0;
+			// Process any new ADC samples to detect button preses
+			if (!latestADCSampleChecked) {
+				// No need to use a local copy of latestADCSample here as the ISR only updates it
+				// when latestADCSampleChecked=1.
+			 uint8_t currentADCButton = getCurrentADCButton(latestADCSample);
+			updateButtonStates(buttonCounts,debouncedCounts, buttonDebounced,buttonTapped,buttonHeld, currentADCButton);
+			  // Visually show on my LEDs what button that was detected as pressed
+			  for (int i = 0; i < 5; i++) {
+				if (buttonHeld[i] || buttonTapped[i]) {
+				  buttonHeld[i] = 0;
+				  buttonTapped[i] = 0;
+				  currentTurnedOffLED = i;
+				  // Update the current state, for illustrative purposes
+					currentState++;
+					if (currentState == 2){
+						currentState = 0;
+					}
 				}
+			  }
+			  latestADCSampleChecked = 1;
 			}
-		  }
-		  latestADCSampleChecked = 1;
 		}
+		
 	  }
 	}
 #endif
