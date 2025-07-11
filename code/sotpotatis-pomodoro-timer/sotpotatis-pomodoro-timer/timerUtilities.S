@@ -6,17 +6,16 @@ Contains utilitiyy functions to interface with the Attiny84A timer as used with 
  #include "hardwareConst.h"
  #include <avr/io.h>
 
- .global setUpTimerInCTCMode
+ .global setUpTimerInCTCMode, setOutputComparePinA
 
  .text
  /*
- Utility function to set up the timer in CTC mode.
+ Utility function to set up the timer in CTC mode. Uses Output Compare Match A.
  Takes the following arguments:
  r25: Unused.
- r24: The value to count to, i.e. the value to set Output Compare Match A to. The timer will roll back to 0 after this value.
+ r24: 1,2 or 3 to enable the output compare pins (see datasheet Table 11-2). 0 to disable them.
  r23: Unused.
- r22: The settings to use for the output compare pins, i.e. COM0A[1:0] AND COM0B[1:0]. Hint: to disable the output compare pins,
- set this value to 0. NOTE: The pins must be set as´outputs in another part of the code in order to work.
+ r22: The value to count to, i.e. the value to set Output Compare Match A to. The timer will roll back to 0 after this value.
  r21: Unused.
  r20: The clock source to use as determined by the CS0[2:0]: Clock Select bits.
  r19: Unused.
@@ -24,22 +23,15 @@ Contains utilitiyy functions to interface with the Attiny84A timer as used with 
  */
  setUpTimerInCTCMode:
 	// Mask inputs
-	andi r22, 0xF
 	andi r20, 0x07
 	andi r18, 0x01
 	// Define value to count to in OCR0A.
-	out OCR0A, r24
-	// Start manipulating the TCCR0A values
-	in r24, TCCR0A
-	// Set WGM0[1:0] (bit 1:0 in TCCR0A) to 0b10 to enable CTC mode
-	andi r24, 0x0C // Clear WGM0[1:0] and the output compare pin (COM0A, COM0B) bits
-	ori r24, 0x02 // Set WGM[1:0]
-	// Set the output compare pin values. The thing is that these values are bit 7-4 of TCCR0A.
-	// So we swap the low and high nibble of the user input in r22 to get our desired result
-	swap r22
-	or r24, r22
-	writeNewTCCR0AValues:
-		out TCCR0A, r24
+	out OCR0A, r22
+	PUSH r20
+	PUSH r18
+	rcall setOutputComparePinA
+	POP r18
+	POP r20
 	// Set the clock source and prescaler 
 	// by writing what the user chose to configurate
 	// to TCCR0B bits 2:0.
@@ -62,4 +54,28 @@ Contains utilitiyy functions to interface with the Attiny84A timer as used with 
 	andi r24, 0xFD
 	writeNewTIMSKValue:
 	out TIMSK0, r24
+	ret
+/*
+Function to set output compare pin A to enabled or disabled.
+NOTE: This function will also enable CTC mode if not already enabled.
+NOTE: The pins must be set as outputs in another part of the code in order to work.
+r24: 1,2 or 3 to enable the output compare pins (see datasheet). 0 to disable them.
+r23: Unused
+*/
+setOutputComparePinA:
+	// Mask inputs
+	andi r24, 0x3
+	in r22, TCCR0A
+	// Set WGM0[1:0] (bit 1:0 in TCCR0A) to 0b10 to enable CTC mode
+	andi r22, 0x3C // Clear WGM0[1:0] and the output compare pin A bits (COM0A[1:0], bit 7-6 in TCCR0A)
+	ori r22, 0x02 // Set WGM[1:0]
+	cpi r24, 0
+	breq writeNewTCCR0AValues // If we get here, the user wants COM0A[1:0] to be cleared, but that would have already happened above
+	// COM0A[1:0] is bit 7-6 in TCCR0A, so prepare the value we will be OR:ing with.
+	swap r24
+	lsl r24
+	lsl r24
+	or r22, r24
+	writeNewTCCR0AValues:
+		out TCCR0A, r22
 	ret

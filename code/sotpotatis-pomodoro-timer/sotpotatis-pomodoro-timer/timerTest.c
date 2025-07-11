@@ -93,7 +93,7 @@
 		int main(){
 			// Set up ADC and timer, with timer interrupts every 1ms
 			setUpADC(BUTTON_ADC_PIN, 0, 1, 0, ADC_PRESCALER_VALUE);
-			setUpTimerInCTCMode(TICKS_PER_MS, 1, TIMER_PRESCALER_VALUE, 1);
+			setUpTimerInCTCMode(0, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
 			sei();
 			// Calculate how many seconds we should count to, based on the timer calibration factor.
 			// NOTE: The timer calibration method should be credited to user "avrcandies" on AVRFreaks forums. Many thanks!

@@ -108,7 +108,7 @@
 		resetAllCharlieplexingPins();
 		// Set up a timer in CTC mode, and generate interrupts
 		// every 1ms. Disable output compare pins.
-		setUpTimerInCTCMode(TICKS_PER_MS, 1, TIMER_PRESCALER_VALUE, 1);
+		setUpTimerInCTCMode(0, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
 		setCharlieplexingState(2); // Turn on LED to acknowledge bootup
 		sei();
 		// The code below runs forever:

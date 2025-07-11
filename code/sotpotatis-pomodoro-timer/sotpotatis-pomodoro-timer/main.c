@@ -93,7 +93,7 @@
 	  // Set up a timer in CTC mode, and generate interrupts
 	  // every 1ms. Enable output compare pin on OC0A pin (PB2)
 	  setPinStates(4, 1, 0);
-	  setUpTimerInCTCMode(TICKS_PER_MS, 4, TIMER_PRESCALER_VALUE, 1);
+	  setUpTimerInCTCMode(1, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
 	  // Ensure all pins used for LED Charlieplexing are inputs.
 	  resetAllCharlieplexingPins();
 	  sei();
@@ -133,11 +133,16 @@
 				if (melodyTimeIndex == 200){
 					melodyTimeIndex = 0;
 					melodyPlaying = 0;
-					setPinStates(4, 0, 0); // Set OCR0A to an input
+					// Disable OCR0A to stop buzzer from sounding. 
+					// Can be done in two ways - either by writing
+					// to the timer or by simply setting the pin to an input.
+					// The latter one is commented out.
+					//setPinStates(4, 0, 0); 
+					setOutputComparePinA(0);
 				}
 			}
 			else {
-				if ((melodyPauseIndex  == 3 && melodyTimeIndex < 999) || (melodyPauseIndex < 3 && melodyTimeIndex < 199)){
+				if ((melodyPauseIndex  == 3 && melodyTimeIndex < 999) || (melodyPauseIndex < 3 && melodyTimeIndex < 100)){
 					melodyTimeIndex++;
 				}
 				else {
@@ -149,7 +154,11 @@
 					else {
 						melodyPauseIndex = 0;
 					}
-					setPinStates(4, 1, 0); // Set OCR0A to an output again
+					// Reenable buzzer sound. Buzzer is connected to OCR0A pin.
+					// Previously I switched between setting it to an input or an output
+					// but nowadays I use timer register operations.
+					//setPinStates(4, 1, 0); // Set OCR0A to an output again
+					setOutputComparePinA(1);
 				}
 			}
 			latestTimerTickAcknowledged = 1;
