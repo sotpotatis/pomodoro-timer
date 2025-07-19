@@ -10,7 +10,7 @@ This is the topic that they helped me in: www.avrfreaks.net/s/topic/a5CV40000003
     // Defines, for each button/circuit state, an ADC reading that if exceeded (or exactly achieved) (>=) results in that
     // state being detected (instantaneously).
     // No button, button 1, button 2, button 3, button 4, button 5
-    ADC_STATES: .byte 232, 185, 129, 75, 27, 0
+    ADC_STATES: .byte 230, 180, 123, 70, 25, 0
 
     /*
     Used to update the current state of buttons (if they have been clicked,
