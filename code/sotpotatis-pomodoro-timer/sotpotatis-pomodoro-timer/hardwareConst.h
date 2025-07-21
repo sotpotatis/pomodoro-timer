@@ -10,7 +10,7 @@ Defines hardware-related constants.
 		// ====== ADC Pin to use for button multiplexing ======
 		// Note that ADC pins simply use the format defined by Microchip
 		// (0-7 depending on if you want to use pin PA0-7)
-		#define BUTTON_ADC_PIN 6
+		#define BUTTON_ADC_PIN 0
 		// For Pure I/O pins (not ADC-pins), each "_PIN" definition follows the following format:
 		// The Attiny24A has 12 GPIO pins. Starting from PA we define a 16 bit number:
 		// 0bPA7|PA6....PA0|constant 0000 PB3|...PB0 (for example: 0b0000 0011 0000 0000 refers to PA0 and PA1)
@@ -23,13 +23,11 @@ Defines hardware-related constants.
 		// Note that we use LED Charlieplexing, so that one
 		// pin controls 3 LEDs. The format of pin numbers is according to above,
 		// that is why we left shift by 8.
-		#define LED_CHARLIEPLEXING_PIN_1 0x100 // PA0
-		#define LED_CHARLIEPLEXING_PIN_2 0x200 // PA1
-		#define LED_CHARLIEPLEXING_PIN_3 0x400 // PA2
-		#define LED_CHARLIEPLEXING_PIN_4 0x800 // PA3
-		#define LED_CHARLIEPLEXING_PIN_5 0x1000// PA4
-		// ====== Buzzer pin ======
-		#define BUZZER_PIN 0x2000 // PA5/ Masks to use to separate PA/B pins corresponding to how they are defined in the format above.
+		#define LED_CHARLIEPLEXING_PIN_1 0x0001 // PB0
+		#define LED_CHARLIEPLEXING_PIN_2 0x0002 // PB1
+		#define LED_CHARLIEPLEXING_PIN_3 0x8000 // PA7
+		#define LED_CHARLIEPLEXING_PIN_4 0x4000 // PA6
+		#define LED_CHARLIEPLEXING_PIN_5 0x2000// PA5
 		// Operates only on 8 bit registers
 		#define PA_PIN_MASK 0xFF
 		#define PB_PIN_MASK 0x0F
