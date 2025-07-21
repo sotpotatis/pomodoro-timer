@@ -135,10 +135,11 @@
 					melodyPlaying = 0;
 					// Disable OCR0A to stop buzzer from sounding. 
 					// Can be done in two ways - either by writing
-					// to the timer or by simply setting the pin to an input.
-					// The latter one is commented out.
-					//setPinStates(4, 0, 0); 
-					setOutputComparePinA(0);
+					// to the timer register or by simply setting the pin to an input.
+					// NOTE: I commented out the timer register writing method.
+					// It caused a humming noise when the timer was not connected during my testing setup.
+					setPinStates(4, 0, 0); 
+					// setOutputComparePinA(0);
 				}
 			}
 			else {
@@ -155,10 +156,12 @@
 						melodyPauseIndex = 0;
 					}
 					// Reenable buzzer sound. Buzzer is connected to OCR0A pin.
-					// Previously I switched between setting it to an input or an output
-					// but nowadays I use timer register operations.
-					//setPinStates(4, 1, 0); // Set OCR0A to an output again
-					setOutputComparePinA(1);
+					// Can be done in two ways - either by writing
+					// to the timer register or by simply setting the pin to an output.
+					// NOTE: I commented out the timer register writing method.
+					// It caused a humming noise when the timer was not connected during my testing setup.
+					setPinStates(4, 1, 0); // Set OCR0A to an output again
+					// setOutputComparePinA(1);
 				}
 			}
 			latestTimerTickAcknowledged = 1;
