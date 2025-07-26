@@ -3,12 +3,14 @@
 	(generator "pcbnew")
 	(generator_version "9.0")
 	(general
-		(thickness 1.6)
+		(thickness 1.586)
 		(legacy_teardrops no)
 	)
 	(paper "A4")
 	(layers
 		(0 "F.Cu" signal)
+		(4 "In1.Cu" signal)
+		(6 "In2.Cu" signal)
 		(2 "B.Cu" signal)
 		(9 "F.Adhes" user "F.Adhesive")
 		(11 "B.Adhes" user "B.Adhesive")
@@ -37,12 +39,14 @@
 		(stackup
 			(layer "F.SilkS"
 				(type "Top Silk Screen")
+				(color "White")
 			)
 			(layer "F.Paste"
 				(type "Top Solder Paste")
 			)
 			(layer "F.Mask"
 				(type "Top Solder Mask")
+				(color "Black")
 				(thickness 0.01)
 			)
 			(layer "F.Cu"
@@ -50,8 +54,30 @@
 				(thickness 0.035)
 			)
 			(layer "dielectric 1"
+				(type "prepreg")
+				(thickness 0.203)
+				(material "FR4")
+				(epsilon_r 4.5)
+				(loss_tangent 0.02)
+			)
+			(layer "In1.Cu"
+				(type "copper")
+				(thickness 0.03)
+			)
+			(layer "dielectric 2"
 				(type "core")
-				(thickness 1.51)
+				(thickness 1.03)
+				(material "FR4")
+				(epsilon_r 4.5)
+				(loss_tangent 0.02)
+			)
+			(layer "In2.Cu"
+				(type "copper")
+				(thickness 0.03)
+			)
+			(layer "dielectric 3"
+				(type "prepreg")
+				(thickness 0.203)
 				(material "FR4")
 				(epsilon_r 4.5)
 				(loss_tangent 0.02)
@@ -62,6 +88,7 @@
 			)
 			(layer "B.Mask"
 				(type "Bottom Solder Mask")
+				(color "Black")
 				(thickness 0.01)
 			)
 			(layer "B.Paste"
@@ -69,6 +96,7 @@
 			)
 			(layer "B.SilkS"
 				(type "Bottom Silk Screen")
+				(color "White")
 			)
 			(copper_finish "None")
 			(dielectric_constraints no)
@@ -3305,7 +3333,7 @@
 		(property "Reference" "J1"
 			(at 1 -2.55 0)
 			(layer "F.SilkS")
-			(uuid "54246637-f639-484a-9453-c6aee927371b")
+			(uuid "e6cb74fb-6c62-4c4a-a755-44857e85e617")
 			(effects
 				(font
 					(size 1 1)
@@ -3316,7 +3344,7 @@
 		(property "Value" "GENERIC_PWR_IN"
 			(at 1 7.45 0)
 			(layer "F.Fab")
-			(uuid "ba7bc908-c351-4400-86ae-e15a8f5e54f9")
+			(uuid "28ee7321-9b04-4542-a1ad-259ebeea622f")
 			(effects
 				(font
 					(size 1 1)
@@ -3328,7 +3356,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "da5aa5d4-8976-43e6-9159-7ddf72eb37da")
+			(uuid "dbf0a5f2-7300-4df4-ac36-78684c2b1457")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3340,7 +3368,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "4f24d66f-783f-418e-8a2a-ca20867fa7a3")
+			(uuid "bad38627-4375-47d2-b38b-7023a59f4bf2")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11977,6 +12005,22 @@
 				(xyz 0 0 0)
 			)
 		)
+	)
+	(segment
+		(start 113.154 100.286)
+		(end 113.154 100.2)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 11)
+		(uuid "4b03ab5a-0752-4e2c-b247-f0fff5db70fc")
+	)
+	(segment
+		(start 113.154 100.2)
+		(end 113.03 100.076)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 11)
+		(uuid "e2c90f9a-aa60-4997-a153-c610300c728b")
 	)
 	(embedded_fonts no)
 )
