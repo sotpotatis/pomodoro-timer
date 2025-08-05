@@ -13688,6 +13688,18 @@
 			)
 		)
 	)
+	(gr_text "VARIANT 1"
+		(at 137.625 93.949 0)
+		(layer "F.SilkS")
+		(uuid "e59aa9d1-26f4-41e4-bda3-f58f798ae1e3")
+		(effects
+			(font
+				(size 5 5)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
 	(gr_text "2"
 		(at 126.549986 131.291 0)
 		(layer "F.SilkS")
