@@ -4,3 +4,7 @@ It also contains project files to so you can modify the images.
 # Regarding the icons underneath the buttons
 
 After loading the icons in the KiCads bitmap converter, set "Lock height/width ratio" to True and set "Width" to 12mm. This will give you the same sizing as is used on the board.
+
+# Regarding the square icons (e.g. `left-btn-icons`)
+
+After loading the icons in the KiCads bitmap converter, set "Lock height/width ratio" to True and set "Width" to 1.5mm if you want what is used in the actual board.

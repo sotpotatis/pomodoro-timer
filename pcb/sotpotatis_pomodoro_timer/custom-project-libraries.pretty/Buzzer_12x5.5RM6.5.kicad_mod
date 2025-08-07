@@ -1,4 +1,4 @@
-(footprint "Buzzer_12x5.5RM0.6"
+(footprint "Buzzer_12x5.5RM6.5"
 	(version 20241229)
 	(generator "pcbnew")
 	(generator_version "9.0")
@@ -16,7 +16,7 @@
 			)
 		)
 	)
-	(property "Value" "Buzzer_12x5.5RM5.0"
+	(property "Value" "Buzzer_12x5.5RM6.5"
 		(at 2.5 7.4 0)
 		(layer "F.Fab")
 		(uuid "be19cb79-6cc5-4f4e-87d6-ecbb644d54b1")
@@ -110,7 +110,7 @@
 		)
 	)
 	(pad "1" thru_hole rect
-		(at 0 0)
+		(at -0.75 0)
 		(size 2 2)
 		(drill 1)
 		(layers "*.Cu" "*.Mask")
@@ -118,7 +118,7 @@
 		(uuid "40601786-7347-4479-835c-3ca3f11a56a5")
 	)
 	(pad "2" thru_hole circle
-		(at 5 0)
+		(at 5.75 0)
 		(size 2 2)
 		(drill 1)
 		(layers "*.Cu" "*.Mask")
