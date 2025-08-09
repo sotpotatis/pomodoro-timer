@@ -5,6 +5,9 @@ It also contains project files to so you can modify the images.
 
 After loading the icons in the KiCads bitmap converter, set "Lock height/width ratio" to True and set "Width" to 12mm. This will give you the same sizing as is used on the board.
 
-# Regarding the square icons (e.g. `left-btn-icons`)
+# Regarding `bell_icon`
 
-After loading the icons in the KiCads bitmap converter, set "Lock height/width ratio" to True and set "Width" to 1.5mm if you want what is used in the actual board.
+After loading the icons in the KiCads bitmap converter, set "Lock height/width ratio" to True and set "Width" to 1.75mm. This will give you the same sizing as is used on the board.
+
+*The bell icon is from [Pictogrammers](https://github.com/Templarian/MaterialDesign) and released under an Apache 2.0 License.*
+See [https://github.com/Templarian/MaterialDesign/blob/master/LICENSE](here).
