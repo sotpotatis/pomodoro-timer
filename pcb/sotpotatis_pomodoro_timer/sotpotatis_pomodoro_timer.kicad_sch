@@ -3545,6 +3545,16 @@
 	)
 	(wire
 		(pts
+			(xy 31.75 83.82) (xy 31.75 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5045b6d-f932-48ae-a6a7-42154c265f7f")
+	)
+	(wire
+		(pts
 			(xy 43.18 34.29) (xy 53.34 34.29)
 		)
 		(stroke
@@ -4097,7 +4107,7 @@
 			)
 		)
 	)
-	(global_label "PA5"
+	(global_label "PA0"
 		(shape input)
 		(at 186.69 139.7 180)
 		(fields_autoplaced yes)
@@ -4141,7 +4151,7 @@
 			)
 		)
 	)
-	(global_label "PA0"
+	(global_label "PA5"
 		(shape input)
 		(at 99.06 105.41 0)
 		(fields_autoplaced yes)
@@ -6629,76 +6639,6 @@
 			(project ""
 				(path "/fd9fadc6-6513-48e8-84bb-1df0990bb3d5"
 					(reference "C2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 31.75 87.63 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "8dc153ad-e5fe-4775-8ad8-34a5a746322a")
-		(property "Reference" "R16"
-			(at 29.21 86.3599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1M"
-			(at 29.21 88.8999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 33.528 87.63 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 31.75 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 31.75 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0cdb0824-0639-4fd8-a541-281a13c925de")
-		)
-		(pin "2"
-			(uuid "ab36ecaa-03e9-438a-aa4f-c56610244531")
-		)
-		(instances
-			(project ""
-				(path "/fd9fadc6-6513-48e8-84bb-1df0990bb3d5"
-					(reference "R16")
 					(unit 1)
 				)
 			)
