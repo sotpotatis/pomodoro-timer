@@ -123,7 +123,7 @@
       },
       "rules": {
         "max_error": 0.0015,
-        "min_clearance": 0.3,
+        "min_clearance": 0.2,
         "min_connection": 0.1,
         "min_copper_edge_clearance": 1.0,
         "min_groove_width": 0.0,
@@ -476,7 +476,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.3,
+        "clearance": 0.2,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -493,14 +493,28 @@
         "wire_width": 6
       },
       {
-        "clearance": 0.3,
+        "clearance": 0.4,
         "diff_pair_gap": 0.25,
         "diff_pair_width": 0.2,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.15,
-        "name": "Power",
+        "name": "Microcontroller power",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.4,
+        "via_diameter": 0.7,
+        "via_drill": 0.3
+      },
+      {
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.15,
+        "name": "USB-C Power",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.4,
         "via_diameter": 0.7,
@@ -514,19 +528,19 @@
     "netclass_assignments": null,
     "netclass_patterns": [
       {
-        "netclass": "Power",
+        "netclass": "Microcontroller power",
         "pattern": "VCC"
       },
       {
-        "netclass": "Power",
+        "netclass": "USB-C Power",
         "pattern": "GND"
       },
       {
-        "netclass": "Power",
+        "netclass": "Microcontroller power",
         "pattern": "Net-(J1-Pin_2)"
       },
       {
-        "netclass": "Power",
+        "netclass": "USB-C Power",
         "pattern": "+5V"
       }
     ]
