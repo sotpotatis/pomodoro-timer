@@ -10,6 +10,8 @@
 	#include "ledHandlers.h"
 
 	#include "adcUtilities.h"
+	
+	#include "pinUtilities.h"
 
 	#include "timerUtilities.h"
 
@@ -179,7 +181,7 @@
 				  currentTurnedOffLED = i;
 				  // Update the current state, for illustrative purposes
 					currentState++;
-					if (currentState == 2){
+					if (currentState == 3){
 						currentState = 0;
 					}
 				}
