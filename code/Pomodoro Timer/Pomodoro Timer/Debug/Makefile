@@ -32,76 +32,94 @@ LIB_DEP:=
 LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
-SUBDIRS := 
+SUBDIRS :=  \
+../include \
+../include/hardware_related \
+../include/hardware_related/buttons \
+../include/hardware_related/leds \
+../include/hardware_related/adc \
+../include/hardware_related/eeprom \
+../include/hardware_related/pins \
+../include/hardware_related/timer \
+../include/application_related \
+../src \
+../src/hardware_related \
+../src/hardware_related/buttons \
+../src/hardware_related/leds \
+../src/hardware_related/adc \
+../src/hardware_related/eeprom \
+../src/hardware_related/timer \
+../src/hardware_related/pins \
+../src/application_related
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../main.cpp \
-../timerCalibration.c \
-../timerTest.c
+../src/application_related/main.cpp \
+../src/application_related/system.cpp \
+../src/timer_calibration.c \
+../src/timer_test.c
 
 
 PREPROCESSING_SRCS +=  \
-../adcUtilities.S \
-../buttonMultiplexing.S \
-../displayUpdaters.S \
-../eepromUtilities.S \
-../ledHandlers.S \
-../pinUtilities.S \
-../timerUtilities.S
+../src/hardware_related/adc/adc_utilities.S \
+../src/hardware_related/buttons/button_multiplexing.S \
+../src/hardware_related/eeprom/eeprom_utilities.S \
+../src/hardware_related/leds/led_handlers.S \
+../src/hardware_related/pins/pin_utilities.S \
+../src/hardware_related/timer/timer_utilities.S
 
 
 ASM_SRCS += 
 
 
 OBJS +=  \
-adcUtilities.o \
-buttonMultiplexing.o \
-displayUpdaters.o \
-eepromUtilities.o \
-ledHandlers.o \
-main.o \
-pinUtilities.o \
-timerCalibration.o \
-timerTest.o \
-timerUtilities.o
+src/application_related/main.o \
+src/application_related/system.o \
+src/hardware_related/adc/adc_utilities.o \
+src/hardware_related/buttons/button_multiplexing.o \
+src/hardware_related/eeprom/eeprom_utilities.o \
+src/hardware_related/leds/led_handlers.o \
+src/hardware_related/pins/pin_utilities.o \
+src/hardware_related/timer/timer_utilities.o \
+src/timer_calibration.o \
+src/timer_test.o
 
 OBJS_AS_ARGS +=  \
-adcUtilities.o \
-buttonMultiplexing.o \
-displayUpdaters.o \
-eepromUtilities.o \
-ledHandlers.o \
-main.o \
-pinUtilities.o \
-timerCalibration.o \
-timerTest.o \
-timerUtilities.o
+src/application_related/main.o \
+src/application_related/system.o \
+src/hardware_related/adc/adc_utilities.o \
+src/hardware_related/buttons/button_multiplexing.o \
+src/hardware_related/eeprom/eeprom_utilities.o \
+src/hardware_related/leds/led_handlers.o \
+src/hardware_related/pins/pin_utilities.o \
+src/hardware_related/timer/timer_utilities.o \
+src/timer_calibration.o \
+src/timer_test.o
 
 C_DEPS +=  \
-adcUtilities.d \
-buttonMultiplexing.d \
-displayUpdaters.d \
-eepromUtilities.d \
-ledHandlers.d \
-main.d \
-pinUtilities.d \
-timerCalibration.d \
-timerTest.d \
-timerUtilities.d
+src/application_related/main.d \
+src/application_related/system.d \
+src/hardware_related/adc/adc_utilities.d \
+src/hardware_related/buttons/button_multiplexing.d \
+src/hardware_related/eeprom/eeprom_utilities.d \
+src/hardware_related/leds/led_handlers.d \
+src/hardware_related/pins/pin_utilities.d \
+src/hardware_related/timer/timer_utilities.d \
+src/timer_calibration.d \
+src/timer_test.d
 
 C_DEPS_AS_ARGS +=  \
-adcUtilities.d \
-buttonMultiplexing.d \
-displayUpdaters.d \
-eepromUtilities.d \
-ledHandlers.d \
-main.d \
-pinUtilities.d \
-timerCalibration.d \
-timerTest.d \
-timerUtilities.d
+src/application_related/main.d \
+src/application_related/system.d \
+src/hardware_related/adc/adc_utilities.d \
+src/hardware_related/buttons/button_multiplexing.d \
+src/hardware_related/eeprom/eeprom_utilities.d \
+src/hardware_related/leds/led_handlers.d \
+src/hardware_related/pins/pin_utilities.d \
+src/hardware_related/timer/timer_utilities.d \
+src/timer_calibration.d \
+src/timer_test.d
 
 OUTPUT_FILE_PATH +=Pomodoro\ Timer.elf
 
@@ -117,21 +135,28 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-./main.o: .././main.cpp
+src/application_related/main.o: ../src/application_related/main.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./timerCalibration.o: .././timerCalibration.c
+src/application_related/system.o: ../src/application_related/system.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/timer_calibration.o: ../src/timer_calibration.c
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./timerTest.o: .././timerTest.c
+src/timer_test.o: ../src/timer_test.c
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -146,49 +171,42 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU Assembler
-./adcUtilities.o: .././adcUtilities.S
+src/hardware_related/adc/adc_utilities.o: ../src/hardware_related/adc/adc_utilities.S
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU Assembler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./buttonMultiplexing.o: .././buttonMultiplexing.S
+src/hardware_related/buttons/button_multiplexing.o: ../src/hardware_related/buttons/button_multiplexing.S
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU Assembler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./displayUpdaters.o: .././displayUpdaters.S
+src/hardware_related/eeprom/eeprom_utilities.o: ../src/hardware_related/eeprom/eeprom_utilities.S
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU Assembler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./eepromUtilities.o: .././eepromUtilities.S
+src/hardware_related/leds/led_handlers.o: ../src/hardware_related/leds/led_handlers.S
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU Assembler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./ledHandlers.o: .././ledHandlers.S
+src/hardware_related/pins/pin_utilities.o: ../src/hardware_related/pins/pin_utilities.S
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU Assembler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./pinUtilities.o: .././pinUtilities.S
-	@echo Building file: $<
-	@echo Invoking: AVR8/GNU Assembler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./timerUtilities.o: .././timerUtilities.S
+src/hardware_related/timer/timer_utilities.o: ../src/hardware_related/timer/timer_utilities.S
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU Assembler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 

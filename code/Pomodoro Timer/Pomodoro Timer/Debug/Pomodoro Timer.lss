@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 000000c8  00000000  00000000  00000640  2**3
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000b51  00000000  00000000  00000708  2**0
+  6 .debug_info   00000bb3  00000000  00000000  00000708  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 0000054e  00000000  00000000  00001259  2**0
+  7 .debug_abbrev 0000054e  00000000  00000000  000012bb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000c10  00000000  00000000  000017a7  2**0
+  8 .debug_line   00000de9  00000000  00000000  00001809  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000007c  00000000  00000000  000023b8  2**2
+  9 .debug_frame  0000007c  00000000  00000000  000025f4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000004e0  00000000  00000000  00002434  2**0
+ 10 .debug_str    0000050e  00000000  00000000  00002670  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000295  00000000  00000000  00002914  2**0
+ 11 .debug_loc    00000295  00000000  00000000  00002b7e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000018  00000000  00000000  00002ba9  2**0
+ 12 .debug_ranges 00000018  00000000  00000000  00002e13  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -91,11 +91,11 @@ Disassembly of section .text:
 00000058 <__bad_interrupt>:
   58:	d3 cf       	rjmp	.-90     	; 0x0 <__vectors>
 
-0000005a <setUpADC>:
+0000005a <set_up_adc>:
 	r16: The ADC prescaler selection value, i.e. controls the relationship between how often (in fractions of clock cycles) to read the ADC.
 	A 3-bit value- i.e. 111 for a 1/128 ADC prescaler division factor.
     */
-    setUpADC:
+    set_up_adc:
 		// Mask inputs
 		andi r24, 0x7
   5a:	87 70       	andi	r24, 0x07	; 7
@@ -218,8 +218,8 @@ Disassembly of section .text:
   9c:	60 e0       	ldi	r22, 0x00	; 0
 			ldi r20, 0
   9e:	40 e0       	ldi	r20, 0x00	; 0
-			rcall setPinStates
-  a0:	d9 d0       	rcall	.+434    	; 0x254 <setPinStates>
+			rcall set_pin_states
+  a0:	d9 d0       	rcall	.+434    	; 0x254 <set_pin_states>
 			POP r16
   a2:	0f 91       	pop	r16
 			POP r19
@@ -254,30 +254,30 @@ Disassembly of section .text:
 			ret
   b8:	08 95       	ret
 
-000000ba <clearADCInterrupts>:
+000000ba <clear_adc_interrupts>:
 
 	/* Clears any ADC interrupt, i.e. acknowledges the interrupt flag for ADC interrupts. */
-	clearADCInterrupts:
+	clear_adc_interrupts:
 		sbi ADCSRA, 4
   ba:	34 9a       	sbi	0x06, 4	; 6
 		ret
   bc:	08 95       	ret
 
-000000be <readCurrentADCValue>:
+000000be <read_current_adc_value>:
 
 	/* Reads the ADC ADCH data register and returns the read value in r24. 
 	NOTE: This function only works if ADLAR = 1, i.e. if the ADC result is set to be left adjusted.
 	If you have ADLAR = 0, then you need another function which reads ADCL before ADCH.*/
-	readCurrentADCValue:
+	read_current_adc_value:
 		in r24, ADCH
   be:	85 b1       	in	r24, 0x05	; 5
 		ret
   c0:	08 95       	ret
 
-000000c2 <waitForInterrupts>:
+000000c2 <wait_for_interrupts>:
 
   /* Waits for interrupts from the processor. */
-   waitForInterrupts:
+   wait_for_interrupts:
 		sleep
   c2:	88 95       	sleep
   c4:	08 95       	ret
@@ -287,11 +287,11 @@ Disassembly of section .text:
   c8:	7b 46       	sbci	r23, 0x6B	; 107
   ca:	19 00       	.word	0x0019	; ????
 
-000000cc <updateButtonStates>:
+000000cc <update_button_states>:
 	NOTE: This function was translated by hand from a C function, and will much likely be easier
 	to understand if you look at the C function that it was translated from. See
     */
-    updateButtonStates:
+    update_button_states:
         // Calling conventions
         PUSH r17
   cc:	1f 93       	push	r17
@@ -540,12 +540,12 @@ Disassembly of section .text:
         ret
  17a:	08 95       	ret
 
-0000017c <getCurrentADCButton>:
+0000017c <get_current_adc_button>:
     r25: Empty
 
     r24: The corresponding button number that was detected.
     */
-    getCurrentADCButton:
+    get_current_adc_button:
         ldi r23, 6 // Upper bound
  17c:	76 e0       	ldi	r23, 0x06	; 6
         ldi r22, 0 // Index counter
@@ -556,9 +556,9 @@ Disassembly of section .text:
         ldi ZL, lo8(ADC_STATES)
  182:	e6 ec       	ldi	r30, 0xC6	; 198
 
-00000184 <for_getCurrentADCButton>:
+00000184 <for_get_current_adc_button>:
         // Iterate from i=0 through i=5
-        for_getCurrentADCButton:
+        for_get_current_adc_button:
             // Load the ADC_STATES[i] value
             lpm r20, Z+
  184:	45 91       	lpm	r20, Z+
@@ -566,17 +566,17 @@ Disassembly of section .text:
             // If yes, return
             cp r24, r20
  186:	84 17       	cp	r24, r20
-            brsh return_getCurrentADCButton
- 188:	18 f4       	brcc	.+6      	; 0x190 <return_getCurrentADCButton>
+            brsh return_get_current_adc_button
+ 188:	18 f4       	brcc	.+6      	; 0x190 <return_get_current_adc_button>
             inc r22
  18a:	63 95       	inc	r22
             cp r22, r23
  18c:	67 17       	cp	r22, r23
-            brne for_getCurrentADCButton
- 18e:	d1 f7       	brne	.-12     	; 0x184 <for_getCurrentADCButton>
+            brne for_get_current_adc_button
+ 18e:	d1 f7       	brne	.-12     	; 0x184 <for_get_current_adc_button>
 
-00000190 <return_getCurrentADCButton>:
-        return_getCurrentADCButton:
+00000190 <return_get_current_adc_button>:
+        return_get_current_adc_button:
             ldi r25, 0
  190:	90 e0       	ldi	r25, 0x00	; 0
             mov r24, r22
@@ -665,7 +665,7 @@ Disassembly of section .text:
             ret
  1d2:	08 95       	ret
 
-000001d4 <resetAllCharlieplexingPins>:
+000001d4 <reset_all_charlieplexing_pins>:
         // r25-r24: pin masks from LED_CHARLIEPLEXING_STATE_1, LED_CHARLIEPLEXING_STATE_2 etc.
         // r20: =0, which means set pins to outputs/inputs
         // r22: =0, signalling setting pins to inputs
@@ -693,8 +693,8 @@ Disassembly of section .text:
  1de:	60 e0       	ldi	r22, 0x00	; 0
             ldi r20, 0
  1e0:	40 e0       	ldi	r20, 0x00	; 0
-            rcall setPinStates
- 1e2:	38 d0       	rcall	.+112    	; 0x254 <setPinStates>
+            rcall set_pin_states
+ 1e2:	38 d0       	rcall	.+112    	; 0x254 <set_pin_states>
 			// After setting the pins to inputs, ensure that their output value is reset to output low
 			// This is to eliminate any flickering if the input pins are later turned to output pins
 			// according to the calling conventions of setPinStates: 
@@ -710,8 +710,8 @@ Disassembly of section .text:
  1e8:	60 e0       	ldi	r22, 0x00	; 0
             ldi r20, 1
  1ea:	41 e0       	ldi	r20, 0x01	; 1
-			rcall setPinStates
- 1ec:	33 d0       	rcall	.+102    	; 0x254 <setPinStates>
+			rcall set_pin_states
+ 1ec:	33 d0       	rcall	.+102    	; 0x254 <set_pin_states>
             POP r24 // pop index counter from stack
  1ee:	8f 91       	pop	r24
             // until this loop has been run 4 times
@@ -722,11 +722,11 @@ Disassembly of section .text:
         ret
  1f4:	08 95       	ret
 
-000001f6 <setCharlieplexingState>:
+000001f6 <set_charlieplexing_state>:
     r25-r24: The pin to set to output as a number 0-14. For example, to controll LED0, input 0 to the function. To control LED3, input
     3 (base 10). Lower 4 bits in r24, rest unused.
     */
-    setCharlieplexingState:
+    set_charlieplexing_state:
         // Mask inputs
         andi r24, 0xf
  1f6:	8f 70       	andi	r24, 0x0F	; 15
@@ -747,8 +747,8 @@ Disassembly of section .text:
         // (1) set all pins to inputs
         PUSH r23
  202:	7f 93       	push	r23
-        rcall resetAllCharlieplexingPins
- 204:	e7 df       	rcall	.-50     	; 0x1d4 <resetAllCharlieplexingPins>
+        rcall reset_all_charlieplexing_pins
+ 204:	e7 df       	rcall	.-50     	; 0x1d4 <reset_all_charlieplexing_pins>
         POP r23
  206:	7f 91       	pop	r23
         // r19 = <pin number to set to output low>
@@ -810,15 +810,15 @@ Disassembly of section .text:
  22a:	6f 93       	push	r22
                 // Call functions needed to alter pin state
                 // First change the pin mode (set pin to output).
-                // This is done by calling setPinStates(r25-24=pin mask, r20=0 (set pin mode), r22=1 (set pins to output))
+                // This is done by calling set_pin_states(r25-24=pin mask, r20=0 (set pin mode), r22=1 (set pins to output))
                 ldi r20, 0
  22c:	40 e0       	ldi	r20, 0x00	; 0
                 ldi r22, 1
  22e:	61 e0       	ldi	r22, 0x01	; 1
                 rcall loadPinMask // Loads the pin mask of the Charlieplexing pin into r25-24
  230:	ba df       	rcall	.-140    	; 0x1a6 <loadPinMask>
-                rcall setPinStates // Sets pin to have the pin mode output
- 232:	10 d0       	rcall	.+32     	; 0x254 <setPinStates>
+                rcall set_pin_states // Sets pin to have the pin mode output
+ 232:	10 d0       	rcall	.+32     	; 0x254 <set_pin_states>
                 // Recover registers previsiouly pushed
 				POP r22
  234:	6f 91       	pop	r22
@@ -830,10 +830,10 @@ Disassembly of section .text:
  23a:	3f 91       	pop	r19
                 // loadPinMask uses r24 between 0-3 to load the appropriate pin mask to use for the
                 // Charlieplexing pins. Thankfully r24 is our index counter
-                // Call setPinStates again (it was already called above) with the exact same arguments as before, just a difference in r20.
+                // Call set_pin_states again (it was already called above) with the exact same arguments as before, just a difference in r20.
 				// This time, we want to set the actual pin values, as the pin mode was changed to output above.
                 // All other arguments when you're changing the pin mode vs. the pin value are the same.
-                ldi r20, 1 // See comment above, setPinStates with r20 = 1 says that we should change pin state
+                ldi r20, 1 // See comment above, set_pin_states with r20 = 1 says that we should change pin state
  23c:	41 e0       	ldi	r20, 0x01	; 1
 				// Save registers before calling function
 				PUSH r19
@@ -844,8 +844,8 @@ Disassembly of section .text:
  242:	8f 93       	push	r24
                 rcall loadPinMask // Loads the pin mask of the Charlieplexing pin into r25-24
  244:	b0 df       	rcall	.-160    	; 0x1a6 <loadPinMask>
-                rcall setPinStates  // Sets pin to have the correct output value
- 246:	06 d0       	rcall	.+12     	; 0x254 <setPinStates>
+                rcall set_pin_states  // Sets pin to have the correct output value
+ 246:	06 d0       	rcall	.+12     	; 0x254 <set_pin_states>
 				// Recover previopus pushed registers
 				POP r24
  248:	8f 91       	pop	r24
@@ -865,11 +865,11 @@ Disassembly of section .text:
         ret
  252:	08 95       	ret
 
-00000254 <setPinStates>:
+00000254 <set_pin_states>:
 	r22: If r20=0: 1 if setting to outputs, 0 if setting to inputs. If r20=1: The pin value to set the pins to. Either 1 for pin on or 0 for pin off.
 	r20: 1 if you are changing the pin value (the PORTA/B register), 0 if you are changing the pin type (the DDRA/B register)
 	*/
-	setPinStates:
+	set_pin_states:
 		// Ensure masking of input arguments
 		andi r24, PB_PIN_MASK
  254:	8f 70       	andi	r24, 0x0F	; 15
@@ -968,11 +968,11 @@ Disassembly of section .text:
 			ret
  28a:	08 95       	ret
 
-0000028c <setUpTimerInCTCMode>:
+0000028c <set_up_timer_in_ctc_mode>:
  r19: Unused.
  r18: Whether to enable interrupts from the timer or not. More specifically, output compare match A interrupts.
  */
- setUpTimerInCTCMode:
+ set_up_timer_in_ctc_mode:
 	// Mask inputs
 	andi r20, 0x07
  28c:	47 70       	andi	r20, 0x07	; 7
@@ -985,8 +985,8 @@ Disassembly of section .text:
  292:	4f 93       	push	r20
 	PUSH r18
  294:	2f 93       	push	r18
-	rcall setOutputComparePinA
- 296:	0e d0       	rcall	.+28     	; 0x2b4 <setOutputComparePinA>
+	rcall set_output_compare_pin_a
+ 296:	0e d0       	rcall	.+28     	; 0x2b4 <set_output_compare_pin_a>
 	POP r18
  298:	2f 91       	pop	r18
 	POP r20
@@ -1031,11 +1031,11 @@ Disassembly of section .text:
 	ret
  2b2:	08 95       	ret
 
-000002b4 <setOutputComparePinA>:
+000002b4 <set_output_compare_pin_a>:
 r24: 1,2 or 3 to enable the output compare pins (see datasheet). 0 to disable them.
 r23: Unused
 */
-setOutputComparePinA:
+set_output_compare_pin_a:
 	// Mask inputs
 	andi r24, 0x3
  2b4:	83 70       	andi	r24, 0x03	; 3
@@ -1067,7 +1067,7 @@ setOutputComparePinA:
  2ca:	08 95       	ret
 
 000002cc <__vector_9>:
-	volatile uint8_t latestTimerTickAcknowledged = 1; // Flag that main can use to ack timer ticks
+	volatile uint8_t latest_timer_tick_acknowledged = 1; // Flag that main can use to ack timer ticks
 
 	/*
 	Defines a custom ISR for ADC readings.
@@ -1102,9 +1102,9 @@ setOutputComparePinA:
  308:	90 93 7d 00 	sts	0x007D, r25	; 0x80007d <timestamp+0x1>
  30c:	a0 93 7e 00 	sts	0x007E, r26	; 0x80007e <timestamp+0x2>
  310:	b0 93 7f 00 	sts	0x007F, r27	; 0x80007f <timestamp+0x3>
-	  latestTimerTickAcknowledged = 0;
+	  latest_timer_tick_acknowledged = 0;
  314:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
-	  if (timestamp % ADC_SAMPLE_RATE == 0 && latestADCSampleChecked) {
+	  if (timestamp % ADC_SAMPLE_RATE == 0 && latest_adc_sample_checked) {
  318:	60 91 7c 00 	lds	r22, 0x007C	; 0x80007c <timestamp>
  31c:	70 91 7d 00 	lds	r23, 0x007D	; 0x80007d <timestamp+0x1>
  320:	80 91 7e 00 	lds	r24, 0x007E	; 0x80007e <timestamp+0x2>
@@ -1118,7 +1118,7 @@ setOutputComparePinA:
  334:	68 2b       	or	r22, r24
  336:	69 2b       	or	r22, r25
  338:	29 f4       	brne	.+10     	; 0x344 <__vector_9+0x78>
- 33a:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <latestADCSampleChecked>
+ 33a:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <latest_adc_sample_checked>
  33e:	81 11       	cpse	r24, r1
  340:	03 c0       	rjmp	.+6      	; 0x348 <__vector_9+0x7c>
  342:	03 c0       	rjmp	.+6      	; 0x34a <__vector_9+0x7e>
@@ -1127,13 +1127,13 @@ setOutputComparePinA:
  348:	81 e0       	ldi	r24, 0x01	; 1
  34a:	88 23       	and	r24, r24
  34c:	31 f0       	breq	.+12     	; 0x35a <__vector_9+0x8e>
-		clearADCInterrupts();
- 34e:	b5 de       	rcall	.-662    	; 0xba <clearADCInterrupts>
-		latestADCSample = readCurrentADCValue();
- 350:	b6 de       	rcall	.-660    	; 0xbe <readCurrentADCValue>
- 352:	80 93 7b 00 	sts	0x007B, r24	; 0x80007b <latestADCSample>
-		latestADCSampleChecked = 0;
- 356:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <latestADCSampleChecked>
+		clear_adc_interrupts();
+ 34e:	b5 de       	rcall	.-662    	; 0xba <clear_adc_interrupts>
+		latest_adc_sample = read_current_adc_value();
+ 350:	b6 de       	rcall	.-660    	; 0xbe <read_current_adc_value>
+ 352:	80 93 7b 00 	sts	0x007B, r24	; 0x80007b <latest_adc_sample>
+		latest_adc_sample_checked = 0;
+ 356:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <latest_adc_sample_checked>
 	  }
 	}
  35a:	ff 91       	pop	r31
@@ -1160,90 +1160,90 @@ setOutputComparePinA:
 	int main(void) {
 	  // Set up ADC on chosen pin, in Free Running Mode, with no Interrupts
 	  // and the chosen prescaler
-	  setUpADC(BUTTON_ADC_PIN, 0, 1, 0, ADC_PRESCALER_VALUE);
+	  set_up_adc(BUTTON_ADC_PIN, 0, 1, 0, ADC_PRESCALER_VALUE);
  37c:	07 e0       	ldi	r16, 0x07	; 7
  37e:	20 e0       	ldi	r18, 0x00	; 0
  380:	41 e0       	ldi	r20, 0x01	; 1
  382:	60 e0       	ldi	r22, 0x00	; 0
  384:	85 e0       	ldi	r24, 0x05	; 5
- 386:	69 de       	rcall	.-814    	; 0x5a <setUpADC>
+ 386:	69 de       	rcall	.-814    	; 0x5a <set_up_adc>
 	  // Set up a timer in CTC mode, and generate interrupts
 	  // every 1ms. Enable output compare pin on OC0A pin (PB2)
-	  setPinStates(4, 1, 0);
+	  set_pin_states(4, 1, 0);
  388:	40 e0       	ldi	r20, 0x00	; 0
  38a:	61 e0       	ldi	r22, 0x01	; 1
  38c:	84 e0       	ldi	r24, 0x04	; 4
  38e:	90 e0       	ldi	r25, 0x00	; 0
- 390:	61 df       	rcall	.-318    	; 0x254 <setPinStates>
-	  setUpTimerInCTCMode(1, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
+ 390:	61 df       	rcall	.-318    	; 0x254 <set_pin_states>
+	  set_up_timer_in_ctc_mode(1, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
  392:	21 e0       	ldi	r18, 0x01	; 1
  394:	43 e0       	ldi	r20, 0x03	; 3
  396:	6c e7       	ldi	r22, 0x7C	; 124
  398:	81 e0       	ldi	r24, 0x01	; 1
- 39a:	78 df       	rcall	.-272    	; 0x28c <setUpTimerInCTCMode>
+ 39a:	78 df       	rcall	.-272    	; 0x28c <set_up_timer_in_ctc_mode>
 	  // Ensure all pins used for LED Charlieplexing are inputs.
-	  resetAllCharlieplexingPins();
- 39c:	1b df       	rcall	.-458    	; 0x1d4 <resetAllCharlieplexingPins>
+	  reset_all_charlieplexing_pins();
+ 39c:	1b df       	rcall	.-458    	; 0x1d4 <reset_all_charlieplexing_pins>
 	  sei();
  39e:	78 94       	sei
 	  uint8_t blink = 0;
-	  uint8_t currentState = 0; // 0 = work, 1 = rest, 2 = repetitions
-	  int8_t currentTurnedOffLED = -1;
-	  uint16_t melodyTimeIndex = 0;
-	  uint8_t melodyPauseIndex = 0;
-	  uint8_t melodyPlaying = 1;
+	  uint8_t current_state = 0; // 0 = work, 1 = rest, 2 = repetitions
+	  int8_t current_turned_off_led = -1;
+	  uint16_t melody_time_index = 0;
+	  uint8_t melody_pause_index = 0;
+	  uint8_t melody_playing = 1;
  3a0:	bb 24       	eor	r11, r11
  3a2:	b3 94       	inc	r11
-	  uint8_t currentIndex = 0;
+	  uint8_t current_index = 0;
 	  uint8_t blink = 0;
-	  uint8_t currentState = 0; // 0 = work, 1 = rest, 2 = repetitions
-	  int8_t currentTurnedOffLED = -1;
-	  uint16_t melodyTimeIndex = 0;
-	  uint8_t melodyPauseIndex = 0;
+	  uint8_t current_state = 0; // 0 = work, 1 = rest, 2 = repetitions
+	  int8_t current_turned_off_led = -1;
+	  uint16_t melody_time_index = 0;
+	  uint8_t melody_pause_index = 0;
  3a4:	f1 2c       	mov	r15, r1
 	  sei();
-	  uint8_t currentIndex = 0;
+	  uint8_t current_index = 0;
 	  uint8_t blink = 0;
-	  uint8_t currentState = 0; // 0 = work, 1 = rest, 2 = repetitions
-	  int8_t currentTurnedOffLED = -1;
-	  uint16_t melodyTimeIndex = 0;
+	  uint8_t current_state = 0; // 0 = work, 1 = rest, 2 = repetitions
+	  int8_t current_turned_off_led = -1;
+	  uint16_t melody_time_index = 0;
  3a6:	c1 2c       	mov	r12, r1
  3a8:	d1 2c       	mov	r13, r1
-	  resetAllCharlieplexingPins();
+	  reset_all_charlieplexing_pins();
 	  sei();
-	  uint8_t currentIndex = 0;
+	  uint8_t current_index = 0;
 	  uint8_t blink = 0;
-	  uint8_t currentState = 0; // 0 = work, 1 = rest, 2 = repetitions
-	  int8_t currentTurnedOffLED = -1;
+	  uint8_t current_state = 0; // 0 = work, 1 = rest, 2 = repetitions
+	  int8_t current_turned_off_led = -1;
  3aa:	99 24       	eor	r9, r9
  3ac:	9a 94       	dec	r9
 	  // Ensure all pins used for LED Charlieplexing are inputs.
-	  resetAllCharlieplexingPins();
+	  reset_all_charlieplexing_pins();
 	  sei();
-	  uint8_t currentIndex = 0;
+	  uint8_t current_index = 0;
 	  uint8_t blink = 0;
-	  uint8_t currentState = 0; // 0 = work, 1 = rest, 2 = repetitions
+	  uint8_t current_state = 0; // 0 = work, 1 = rest, 2 = repetitions
  3ae:	c0 e0       	ldi	r28, 0x00	; 0
-	  setUpTimerInCTCMode(1, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
+	  set_up_timer_in_ctc_mode(1, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
 	  // Ensure all pins used for LED Charlieplexing are inputs.
-	  resetAllCharlieplexingPins();
+	  reset_all_charlieplexing_pins();
 	  sei();
-	  uint8_t currentIndex = 0;
+	  uint8_t current_index = 0;
 	  uint8_t blink = 0;
  3b0:	a1 2c       	mov	r10, r1
-	  setPinStates(4, 1, 0);
-	  setUpTimerInCTCMode(1, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
+	  set_pin_states(4, 1, 0);
+	  set_up_timer_in_ctc_mode(1, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
 	  // Ensure all pins used for LED Charlieplexing are inputs.
-	  resetAllCharlieplexingPins();
+	  reset_all_charlieplexing_pins();
 	  sei();
-	  uint8_t currentIndex = 0;
+	  uint8_t current_index = 0;
  3b2:	d0 e0       	ldi	r29, 0x00	; 0
 	  // lights up all 12 LEDs. If the user clicks the 5 button-panel,
 	  // they should see the LED which corresponds to the button index that they just clicked
 	  // turn off.
 	  while (1) {
 		// Set Charlieplexing LEDs to their current state.
-		if (!latestTimerTickAcknowledged) {
+		if (!latest_timer_tick_acknowledged) {
  3b4:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
  3b8:	81 11       	cpse	r24, r1
  3ba:	fc cf       	rjmp	.-8      	; 0x3b4 <main+0x38>
@@ -1270,10 +1270,10 @@ setOutputComparePinA:
 			}
 			// Turn on LEDs. Lower 12 are used for the ADC multiplexing demo. Upper 3 are used for the work / rest / repetition set
 			// screen
-			if (currentIndex < 12){
+			if (current_index < 12){
  3e6:	dc 30       	cpi	r29, 0x0C	; 12
  3e8:	88 f4       	brcc	.+34     	; 0x40c <__LOCK_REGION_LENGTH__+0xc>
-				if (currentTurnedOffLED != currentIndex && (currentIndex != 11 || !blink)){setCharlieplexingState(currentIndex);}
+				if (current_turned_off_led != current_index && (current_index != 11 || !blink)){set_charlieplexing_state(current_index);}
  3ea:	2d 2f       	mov	r18, r29
  3ec:	30 e0       	ldi	r19, 0x00	; 0
  3ee:	89 2d       	mov	r24, r9
@@ -1288,30 +1288,30 @@ setOutputComparePinA:
  400:	a1 10       	cpse	r10, r1
  402:	02 c0       	rjmp	.+4      	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
  404:	8d 2f       	mov	r24, r29
- 406:	f7 de       	rcall	.-530    	; 0x1f6 <setCharlieplexingState>
-				currentIndex++;
+ 406:	f7 de       	rcall	.-530    	; 0x1f6 <set_charlieplexing_state>
+				current_index++;
  408:	df 5f       	subi	r29, 0xFF	; 255
  40a:	04 c0       	rjmp	.+8      	; 0x414 <__LOCK_REGION_LENGTH__+0x14>
 			}
 			else  {
-				setCharlieplexingState(12+currentState);
+				set_charlieplexing_state(12+current_state);
  40c:	8c e0       	ldi	r24, 0x0C	; 12
  40e:	8c 0f       	add	r24, r28
- 410:	f2 de       	rcall	.-540    	; 0x1f6 <setCharlieplexingState>
-				currentIndex = 0;
+ 410:	f2 de       	rcall	.-540    	; 0x1f6 <set_charlieplexing_state>
+				current_index = 0;
  412:	d0 e0       	ldi	r29, 0x00	; 0
 			}
 			
 			// Update the buzzer.
-			// The buzzer plays a melody which is tracked using "melodyIndex". Just temporarily for testing.
-			if (melodyPlaying){
+			// The buzzer plays a melody which is tracked using "melody_index". Just temporarily for testing.
+			if (melody_playing){
  414:	bb 20       	and	r11, r11
  416:	81 f0       	breq	.+32     	; 0x438 <__LOCK_REGION_LENGTH__+0x38>
-				melodyTimeIndex++;
+				melody_time_index++;
  418:	8f ef       	ldi	r24, 0xFF	; 255
  41a:	c8 1a       	sub	r12, r24
  41c:	d8 0a       	sbc	r13, r24
-				if (melodyTimeIndex == 200){
+				if (melody_time_index == 200){
  41e:	88 ec       	ldi	r24, 0xC8	; 200
  420:	c8 16       	cp	r12, r24
  422:	d1 04       	cpc	r13, r1
@@ -1321,34 +1321,34 @@ setOutputComparePinA:
 					// to the timer register or by simply setting the pin to an input.
 					// NOTE: I commented out the timer register writing method.
 					// It caused a humming noise when the timer was not connected during my testing setup.
-					setPinStates(4, 0, 0); 
+					set_pin_states(4, 0, 0); 
  426:	40 e0       	ldi	r20, 0x00	; 0
  428:	60 e0       	ldi	r22, 0x00	; 0
  42a:	84 e0       	ldi	r24, 0x04	; 4
  42c:	90 e0       	ldi	r25, 0x00	; 0
- 42e:	12 df       	rcall	.-476    	; 0x254 <setPinStates>
-			// The buzzer plays a melody which is tracked using "melodyIndex". Just temporarily for testing.
-			if (melodyPlaying){
-				melodyTimeIndex++;
-				if (melodyTimeIndex == 200){
-					melodyTimeIndex = 0;
-					melodyPlaying = 0;
+ 42e:	12 df       	rcall	.-476    	; 0x254 <set_pin_states>
+			// The buzzer plays a melody which is tracked using "melody_index". Just temporarily for testing.
+			if (melody_playing){
+				melody_time_index++;
+				if (melody_time_index == 200){
+					melody_time_index = 0;
+					melody_playing = 0;
  430:	b1 2c       	mov	r11, r1
 			// Update the buzzer.
-			// The buzzer plays a melody which is tracked using "melodyIndex". Just temporarily for testing.
-			if (melodyPlaying){
-				melodyTimeIndex++;
-				if (melodyTimeIndex == 200){
-					melodyTimeIndex = 0;
+			// The buzzer plays a melody which is tracked using "melody_index". Just temporarily for testing.
+			if (melody_playing){
+				melody_time_index++;
+				if (melody_time_index == 200){
+					melody_time_index = 0;
  432:	c1 2c       	mov	r12, r1
  434:	d1 2c       	mov	r13, r1
  436:	22 c0       	rjmp	.+68     	; 0x47c <__LOCK_REGION_LENGTH__+0x7c>
-					setPinStates(4, 0, 0); 
-					// setOutputComparePinA(0);
+					set_pin_states(4, 0, 0); 
+					// set_output_compare_pin_a(0);
 				}
 			}
 			else {
-				if ((melodyPauseIndex  == 3 && melodyTimeIndex < 999) || (melodyPauseIndex < 3 && melodyTimeIndex < 100)){
+				if ((melody_pause_index  == 3 && melody_time_index < 999) || (melody_pause_index < 3 && melody_time_index < 100)){
  438:	83 e0       	ldi	r24, 0x03	; 3
  43a:	f8 12       	cpse	r15, r24
  43c:	05 c0       	rjmp	.+10     	; 0x448 <__LOCK_REGION_LENGTH__+0x48>
@@ -1364,72 +1364,72 @@ setOutputComparePinA:
  450:	c8 16       	cp	r12, r24
  452:	d1 04       	cpc	r13, r1
  454:	20 f4       	brcc	.+8      	; 0x45e <__LOCK_REGION_LENGTH__+0x5e>
-					melodyTimeIndex++;
+					melody_time_index++;
  456:	8f ef       	ldi	r24, 0xFF	; 255
  458:	c8 1a       	sub	r12, r24
  45a:	d8 0a       	sbc	r13, r24
  45c:	0f c0       	rjmp	.+30     	; 0x47c <__LOCK_REGION_LENGTH__+0x7c>
 				}
 				else {
-					melodyTimeIndex = 0;
-					melodyPlaying = 1;
-					if (melodyPauseIndex < 3){
+					melody_time_index = 0;
+					melody_playing = 1;
+					if (melody_pause_index < 3){
  45e:	82 e0       	ldi	r24, 0x02	; 2
  460:	8f 15       	cp	r24, r15
  462:	10 f0       	brcs	.+4      	; 0x468 <__LOCK_REGION_LENGTH__+0x68>
-						melodyPauseIndex++;
+						melody_pause_index++;
  464:	f3 94       	inc	r15
  466:	01 c0       	rjmp	.+2      	; 0x46a <__LOCK_REGION_LENGTH__+0x6a>
 					}
 					else {
-						melodyPauseIndex = 0;
+						melody_pause_index = 0;
  468:	f1 2c       	mov	r15, r1
 					// Reenable buzzer sound. Buzzer is connected to OCR0A pin.
 					// Can be done in two ways - either by writing
 					// to the timer register or by simply setting the pin to an output.
 					// NOTE: I commented out the timer register writing method.
 					// It caused a humming noise when the timer was not connected during my testing setup.
-					setPinStates(4, 1, 0); // Set OCR0A to an output again
+					set_pin_states(4, 1, 0); // Set OCR0A to an output again
  46a:	40 e0       	ldi	r20, 0x00	; 0
  46c:	61 e0       	ldi	r22, 0x01	; 1
  46e:	84 e0       	ldi	r24, 0x04	; 4
  470:	90 e0       	ldi	r25, 0x00	; 0
- 472:	f0 de       	rcall	.-544    	; 0x254 <setPinStates>
-				if ((melodyPauseIndex  == 3 && melodyTimeIndex < 999) || (melodyPauseIndex < 3 && melodyTimeIndex < 100)){
-					melodyTimeIndex++;
+ 472:	f0 de       	rcall	.-544    	; 0x254 <set_pin_states>
+				if ((melody_pause_index  == 3 && melody_time_index < 999) || (melody_pause_index < 3 && melody_time_index < 100)){
+					melody_time_index++;
 				}
 				else {
-					melodyTimeIndex = 0;
-					melodyPlaying = 1;
+					melody_time_index = 0;
+					melody_playing = 1;
  474:	bb 24       	eor	r11, r11
  476:	b3 94       	inc	r11
 			else {
-				if ((melodyPauseIndex  == 3 && melodyTimeIndex < 999) || (melodyPauseIndex < 3 && melodyTimeIndex < 100)){
-					melodyTimeIndex++;
+				if ((melody_pause_index  == 3 && melody_time_index < 999) || (melody_pause_index < 3 && melody_time_index < 100)){
+					melody_time_index++;
 				}
 				else {
-					melodyTimeIndex = 0;
+					melody_time_index = 0;
  478:	c1 2c       	mov	r12, r1
  47a:	d1 2c       	mov	r13, r1
 					// It caused a humming noise when the timer was not connected during my testing setup.
-					setPinStates(4, 1, 0); // Set OCR0A to an output again
-					// setOutputComparePinA(1);
+					set_pin_states(4, 1, 0); // Set OCR0A to an output again
+					// set_output_compare_pin_a(1);
 				}
 			}
-			latestTimerTickAcknowledged = 1;
+			latest_timer_tick_acknowledged = 1;
  47c:	81 e0       	ldi	r24, 0x01	; 1
  47e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 			// Process any new ADC samples to detect button preses
-			if (!latestADCSampleChecked) {
- 482:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <latestADCSampleChecked>
+			if (!latest_adc_sample_checked) {
+ 482:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <latest_adc_sample_checked>
  486:	81 11       	cpse	r24, r1
  488:	95 cf       	rjmp	.-214    	; 0x3b4 <main+0x38>
-				// No need to use a local copy of latestADCSample here as the ISR only updates it
-				// when latestADCSampleChecked=1.
-			 uint8_t currentADCButton = getCurrentADCButton(latestADCSample);
- 48a:	80 91 7b 00 	lds	r24, 0x007B	; 0x80007b <latestADCSample>
- 48e:	76 de       	rcall	.-788    	; 0x17c <getCurrentADCButton>
-			updateButtonStates(buttonCounts,debouncedCounts, buttonDebounced,buttonTapped,buttonHeld, currentADCButton);
+				// No need to use a local copy of latest_adc_sample here as the ISR only updates it
+				// when latest_adc_sample_checked=1.
+			 uint8_t current_adc_button = get_current_adc_button(latest_adc_sample);
+ 48a:	80 91 7b 00 	lds	r24, 0x007B	; 0x80007b <latest_adc_sample>
+ 48e:	76 de       	rcall	.-788    	; 0x17c <get_current_adc_button>
+			update_button_states(button_counts, debounced_counts, button_debounced, button_tapped, button_held, current_adc_button);
  490:	e8 2e       	mov	r14, r24
  492:	07 e6       	ldi	r16, 0x67	; 103
  494:	10 e0       	ldi	r17, 0x00	; 0
@@ -1441,7 +1441,7 @@ setOutputComparePinA:
  4a0:	70 e0       	ldi	r23, 0x00	; 0
  4a2:	86 e7       	ldi	r24, 0x76	; 118
  4a4:	90 e0       	ldi	r25, 0x00	; 0
- 4a6:	12 de       	rcall	.-988    	; 0xcc <updateButtonStates>
+ 4a6:	12 de       	rcall	.-988    	; 0xcc <update_button_states>
 			  // Visually show on my LEDs what button that was detected as pressed
 			  for (int i = 0; i < 5; i++) {
  4a8:	80 e0       	ldi	r24, 0x00	; 0
@@ -1449,7 +1449,7 @@ setOutputComparePinA:
  4ac:	85 30       	cpi	r24, 0x05	; 5
  4ae:	91 05       	cpc	r25, r1
  4b0:	dc f4       	brge	.+54     	; 0x4e8 <__LOCK_REGION_LENGTH__+0xe8>
-				if (buttonHeld[i] || buttonTapped[i]) {
+				if (button_held[i] || button_tapped[i]) {
  4b2:	fc 01       	movw	r30, r24
  4b4:	e9 59       	subi	r30, 0x99	; 153
  4b6:	ff 4f       	sbci	r31, 0xFF	; 255
@@ -1462,42 +1462,42 @@ setOutputComparePinA:
  4c4:	20 81       	ld	r18, Z
  4c6:	22 23       	and	r18, r18
  4c8:	69 f0       	breq	.+26     	; 0x4e4 <__LOCK_REGION_LENGTH__+0xe4>
-				  buttonHeld[i] = 0;
+				  button_held[i] = 0;
  4ca:	fc 01       	movw	r30, r24
  4cc:	e9 59       	subi	r30, 0x99	; 153
  4ce:	ff 4f       	sbci	r31, 0xFF	; 255
  4d0:	10 82       	st	Z, r1
-				  buttonTapped[i] = 0;
+				  button_tapped[i] = 0;
  4d2:	fc 01       	movw	r30, r24
  4d4:	ee 59       	subi	r30, 0x9E	; 158
  4d6:	ff 4f       	sbci	r31, 0xFF	; 255
  4d8:	10 82       	st	Z, r1
-				  currentTurnedOffLED = i;
+				  current_turned_off_led = i;
  4da:	98 2e       	mov	r9, r24
 				  // Update the current state, for illustrative purposes
-					currentState++;
+					current_state++;
  4dc:	cf 5f       	subi	r28, 0xFF	; 255
-					if (currentState == 3){
+					if (current_state == 3){
  4de:	c3 30       	cpi	r28, 0x03	; 3
  4e0:	09 f4       	brne	.+2      	; 0x4e4 <__LOCK_REGION_LENGTH__+0xe4>
-						currentState = 0;
+						current_state = 0;
  4e2:	c0 e0       	ldi	r28, 0x00	; 0
-				// No need to use a local copy of latestADCSample here as the ISR only updates it
-				// when latestADCSampleChecked=1.
-			 uint8_t currentADCButton = getCurrentADCButton(latestADCSample);
-			updateButtonStates(buttonCounts,debouncedCounts, buttonDebounced,buttonTapped,buttonHeld, currentADCButton);
+				// No need to use a local copy of latest_adc_sample here as the ISR only updates it
+				// when latest_adc_sample_checked=1.
+			 uint8_t current_adc_button = get_current_adc_button(latest_adc_sample);
+			update_button_states(button_counts, debounced_counts, button_debounced, button_tapped, button_held, current_adc_button);
 			  // Visually show on my LEDs what button that was detected as pressed
 			  for (int i = 0; i < 5; i++) {
  4e4:	01 96       	adiw	r24, 0x01	; 1
  4e6:	e2 cf       	rjmp	.-60     	; 0x4ac <__LOCK_REGION_LENGTH__+0xac>
-					if (currentState == 3){
-						currentState = 0;
+					if (current_state == 3){
+						current_state = 0;
 					}
 				}
 			  }
-			  latestADCSampleChecked = 1;
+			  latest_adc_sample_checked = 1;
  4e8:	81 e0       	ldi	r24, 0x01	; 1
- 4ea:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <latestADCSampleChecked>
+ 4ea:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <latest_adc_sample_checked>
  4ee:	62 cf       	rjmp	.-316    	; 0x3b4 <main+0x38>
 
 000004f0 <__udivmodsi4>:

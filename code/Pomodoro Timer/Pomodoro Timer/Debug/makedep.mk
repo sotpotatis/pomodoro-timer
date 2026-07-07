@@ -2,23 +2,23 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-adcUtilities.S
+src\application_related\main.cpp
 
-buttonMultiplexing.S
+src\application_related\system.cpp
 
-displayUpdaters.S
+src\hardware_related\adc\adc_utilities.S
 
-eepromUtilities.S
+src\hardware_related\buttons\button_multiplexing.S
 
-ledHandlers.S
+src\hardware_related\eeprom\eeprom_utilities.S
 
-main.cpp
+src\hardware_related\leds\led_handlers.S
 
-pinUtilities.S
+src\hardware_related\pins\pin_utilities.S
 
-timerCalibration.c
+src\hardware_related\timer\timer_utilities.S
 
-timerTest.c
+src\timer_calibration.c
 
-timerUtilities.S
+src\timer_test.c
 

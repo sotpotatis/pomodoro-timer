@@ -154,60 +154,86 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="adcUtilities.h">
+    <Compile Include="include\application_related\system.hpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="adcUtilities.S">
+    <Compile Include="include\hardware_constants.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="buttonMultiplexing.h">
+    <Compile Include="include\hardware_related\adc\adc_utilities.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="buttonMultiplexing.S">
+    <Compile Include="include\hardware_related\buttons\button_multiplexing.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="displayUpdaters.S">
+    <Compile Include="include\hardware_related\eeprom\eeprom_utilities.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="eepromUtilities.h">
+    <Compile Include="include\hardware_related\leds\led_controller.hpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="eepromUtilities.S">
+    <Compile Include="include\hardware_related\leds\led_handlers.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hardwareConst.h">
+    <Compile Include="include\hardware_related\pins\pin_utilities.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="ledHandlers.h">
+    <Compile Include="include\hardware_related\timer\timer_utilities.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="ledHandlers.S">
+    <Compile Include="include\software_constants.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="main.cpp">
+    <Compile Include="src\application_related\main.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="pinUtilities.h">
+    <Compile Include="src\application_related\system.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="pinUtilities.S">
+    <Compile Include="src\hardware_related\adc\adc_utilities.S">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="softwareConst.h">
+    <Compile Include="src\hardware_related\buttons\button_multiplexing.S">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timerCalibration.c">
+    <Compile Include="src\hardware_related\eeprom\eeprom_utilities.S">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timerTest.c">
+    <Compile Include="src\hardware_related\leds\led_handlers.S">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timerUtilities.h">
+    <Compile Include="src\hardware_related\pins\pin_utilities.S">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timerUtilities.S">
+    <Compile Include="src\hardware_related\timer\timer_utilities.S">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\timer_calibration.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\timer_test.c">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="include" />
+    <Folder Include="include\hardware_related" />
+    <Folder Include="include\hardware_related\buttons" />
+    <Folder Include="include\hardware_related\leds" />
+    <Folder Include="include\hardware_related\adc" />
+    <Folder Include="include\hardware_related\eeprom" />
+    <Folder Include="include\hardware_related\pins" />
+    <Folder Include="include\hardware_related\timer" />
+    <Folder Include="include\application_related" />
+    <Folder Include="src" />
+    <Folder Include="src\hardware_related" />
+    <Folder Include="src\hardware_related\buttons" />
+    <Folder Include="src\hardware_related\leds" />
+    <Folder Include="src\hardware_related\adc" />
+    <Folder Include="src\hardware_related\eeprom" />
+    <Folder Include="src\hardware_related\timer" />
+    <Folder Include="src\hardware_related\pins" />
+    <Folder Include="src\application_related" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
