@@ -1,0 +1,19 @@
+﻿pos_x,pos_y,rotation,side,designator,pack,footprint,value,mount_type
+131.911497,-51.079021,0.0,bottom,C1,805,Unpolarized_Capacitor_0805,100nF,smt
+139.654912,-66.338413,0.0,bottom,C2,805,Unpolarized_Capacitor_0805,100nF,smt
+114.2985,-54.484,180.0,bottom,C3,805,Unpolarized_Capacitor_0805,4.7uF,smt
+114.1975,-46.15,0.0,bottom,J2,16P USB-C,USB_C_Receptacle_HRO_TYPE-C-31-M-12,,smt
+124.54,-58.71,0.0,bottom,R1,805,Resistor_0805,10kΩ,smt
+138.525,-85.185,-90.0,bottom,R10,805,Resistor_0805,680Ω,smt
+125.525,-85.185,-90.0,bottom,R11,805,Resistor_0805,2.2kΩ,smt
+112.575,-85.185,-90.0,bottom,R12,805,Resistor_0805,5.1kΩ,smt
+106.92,-46.4,-90.0,bottom,R14,805,Resistor_0805,5.1kΩ,smt
+121.47,-46.4,-90.0,bottom,R15,805,Resistor_0805,5.1kΩ,smt
+124.54,-53.77,180.0,bottom,R2,805,Resistor_0805,150Ω,smt
+124.54,-56.06,180.0,bottom,R3,805,Resistor_0805,150Ω,smt
+124.54,-63.86,180.0,bottom,R4,805,Resistor_0805,150Ω,smt
+124.54,-66.43,180.0,bottom,R5,805,Resistor_0805,150Ω,smt
+139.64,-53.71,0.0,bottom,R6,805,Resistor_0805,150Ω,smt
+139.64,-64.1,180.0,bottom,R7,805,Resistor_0805,2.2kΩ,smt
+164.577,-85.222,90.0,bottom,R8,805,Resistor_0805,10Ω,smt
+151.525,-85.185,-90.0,bottom,R9,805,Resistor_0805,510Ω,smt

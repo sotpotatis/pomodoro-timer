@@ -1,0 +1,11 @@
+﻿Designator,Quantity,Value,Footprint,Package,MPN,Mount_Type,Description
+"C1, C2",2,100nF,Unpolarized_Capacitor_0805,805,CL21B104KCFNNNE,smt,Ceramic Capacitor 100nF 100V X7R 0805
+C3,1,4.7uF,Unpolarized_Capacitor_0805,805,CL21A475KAQNNNE,smt,Ceramic Capacitor 4.7uF 25V X5R 0805
+J2,1,,USB_C_Receptacle_HRO_TYPE-C-31-M-12,16P USB-C,Hroparts TYPE-C-31-M-12,smt,20V 5A 16P Right-Angle USB2.0 Type-C Female Receptacle connector
+R1,1,10kΩ,Resistor_0805,805,0805W8F1002T5E,smt,Resistor 150V 10kΩ ±1% 125mW 0805
+R10,1,680Ω,Resistor_0805,805,0805W8F6800T5E,smt,Resistor 150V 680Ω ±1% 125mW 0805
+"R11, R7",2,2.2kΩ,Resistor_0805,805,0805W8F2201T5E,smt,Resistor 150V 2.2kΩ ±1% 125mW 0805
+"R12, R14, R15",3,5.1kΩ,Resistor_0805,805,0805W8F5101T5E,smt,Resistor 150V 5.1kΩ ±1% 125mW 0805
+"R2, R3, R4, R5, R6",5,150Ω,Resistor_0805,805,0805W8F1500T5E,smt,Resistor 150V 150Ω ±1% 125mW 0805
+R8,1,10Ω,Resistor_0805,805,0805W8J0100T5E,smt,Resistor 150V 10Ω ±5% 125mW 0805
+R9,1,510Ω,Resistor_0805,805,0805W8F5100T5E,smt,Resistor 150V 510Ω ±1% 125mW 0805
