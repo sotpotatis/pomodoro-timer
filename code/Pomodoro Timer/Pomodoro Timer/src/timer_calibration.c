@@ -21,7 +21,7 @@
 	#include "../include/hardware_related/adc/adc_utilities.h"
 	#include "../include/hardware_related/buttons/button_multiplexing.h"
 	#include "../include/hardware_related/pins/pin_utilities.h"
-	#include "../include/hardware_related/leds/led_handlers.h"
+	#include "../include/hardware_related/leds/charlieplexing.h"
 	// Global variables
 	volatile uint32_t timestamp = 0;
 	volatile uint16_t elapsedSeconds = 0;
@@ -105,11 +105,11 @@
 		// and the chosen prescaler
 		set_up_adc(BUTTON_ADC_PIN, 0, 1, 0, ADC_PRESCALER_VALUE);
 		// Ensure all pins used for LED Charlieplexing are inputs.
-		reset_all_charlieplexing_pins();
+		turn_off_all_charlieplexed_leds();
 		// Set up a timer in CTC mode, and generate interrupts
 		// every 1ms. Disable output compare pins.
 		set_up_timer_in_ctc_mode(0, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
-		set_charlieplexing_state(2); // Turn on LED to acknowledge bootup
+		turn_on_charlieplexed_led(2); // Turn on LED to acknowledge bootup
 		sei();
 		// The code below runs forever:
 		// As long as calibration isn't finished (the user has pressed a button to start the calibration, then another one
@@ -126,11 +126,11 @@
 						  buttonHeld[i] = 0;
 						  if (calibrationState == 0){ // If calibration hasn't started yet - start it
 							  calibrationState = 1;
-							  set_charlieplexing_state(1); // Turn on LED to indicate start
+							  turn_on_charlieplexed_led(1); // Turn on LED to indicate start
 						  }
 						  else { // Stop calibration if it has already stated
 							calibrationState = 2;
-							set_charlieplexing_state(3); // Turn on new LED to indicate end
+							turn_on_charlieplexed_led(3); // Turn on new LED to indicate end
 							volatile uint16_t recordedValue = elapsedSeconds;
 							// NOTE: The timer calibration method should be credited to user "avrcandies" on AVRFreaks forums. Many thanks!
 							// See this topic where it was suggested: https://www.avrfreaks.net/s/topic/a5CV40000002wfpMAA/t399784 (post 11)
@@ -140,7 +140,7 @@
 							volatile uint8_t high8Bits = recordedValue >> 8;
 							volatile uint8_t low8Bits = recordedValue & 0xFF;
 							write_eeprom(TIMER_CALIBRATION_EEPROM_ADDRESS_H, high8Bits);
-							set_charlieplexing_state(4); // Turn on third LED
+							turn_on_charlieplexed_led(4); // Turn on third LED
 							write_eeprom(TIMER_CALIBRATION_EEPROM_ADDRESS_L, low8Bits);
 						  }
 					  }

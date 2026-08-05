@@ -99,62 +99,75 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGccCpp>
-        <avrgcc.common.Device>-mmcu=attiny84a -B "%24(PackRepoDir)\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a"</avrgcc.common.Device>
-        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
-        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
-        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
-        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
-        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
-        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
-        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
-        <avrgcc.compiler.symbols.DefSymbols>
-          <ListValues>
-            <Value>DEBUG</Value>
-          </ListValues>
-        </avrgcc.compiler.symbols.DefSymbols>
-        <avrgcc.compiler.directories.IncludePaths>
-          <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATtiny_DFP\1.10.348\include\</Value>
-          </ListValues>
-        </avrgcc.compiler.directories.IncludePaths>
-        <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
-        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
-        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
-        <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
-        <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
-        <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
-        <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
-        <avrgcccpp.compiler.symbols.DefSymbols>
-          <ListValues>
-            <Value>DEBUG</Value>
-          </ListValues>
-        </avrgcccpp.compiler.symbols.DefSymbols>
-        <avrgcccpp.compiler.directories.IncludePaths>
-          <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATtiny_DFP\1.10.348\include\</Value>
-          </ListValues>
-        </avrgcccpp.compiler.directories.IncludePaths>
-        <avrgcccpp.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcccpp.compiler.optimization.level>
-        <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
-        <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
-        <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
-        <avrgcccpp.compiler.warnings.AllWarnings>True</avrgcccpp.compiler.warnings.AllWarnings>
-        <avrgcccpp.linker.libraries.Libraries>
-          <ListValues>
-            <Value>libm</Value>
-          </ListValues>
-        </avrgcccpp.linker.libraries.Libraries>
-        <avrgcccpp.assembler.general.IncludePaths>
-          <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATtiny_DFP\1.10.348\include\</Value>
-          </ListValues>
-        </avrgcccpp.assembler.general.IncludePaths>
-        <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
-      </AvrGccCpp>
+  <avrgcc.common.Device>-mmcu=attiny84a -B "%24(PackRepoDir)\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATtiny_DFP\1.10.348\include\</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcccpp.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+    </ListValues>
+  </avrgcccpp.compiler.symbols.DefSymbols>
+  <avrgcccpp.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATtiny_DFP\1.10.348\include\</Value>
+    </ListValues>
+  </avrgcccpp.compiler.directories.IncludePaths>
+  <avrgcccpp.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcccpp.compiler.optimization.level>
+  <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+  <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+  <avrgcccpp.compiler.warnings.AllWarnings>True</avrgcccpp.compiler.warnings.AllWarnings>
+  <avrgcccpp.compiler.miscellaneous.OtherFlags>-std=c++11</avrgcccpp.compiler.miscellaneous.OtherFlags>
+  <avrgcccpp.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </avrgcccpp.linker.libraries.Libraries>
+  <avrgcccpp.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATtiny_DFP\1.10.348\include\</Value>
+    </ListValues>
+  </avrgcccpp.assembler.general.IncludePaths>
+  <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+</AvrGccCpp>
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="include\application_related\system.hpp">
+    <Compile Include="include\application_related\Screen.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\application_related\ScreenSwitcher.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\application_related\Screens.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\application_related\screens\StartupScreen.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\application_related\System.hpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\hardware_constants.h">
@@ -163,16 +176,22 @@
     <Compile Include="include\hardware_related\adc\adc_utilities.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\hardware_related\buttons\ButtonReader.hpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="include\hardware_related\buttons\button_multiplexing.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\hardware_related\eeprom\eeprom_utilities.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\hardware_related\leds\led_controller.hpp">
+    <Compile Include="include\hardware_related\eeprom\PresetStore.hpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\hardware_related\leds\led_handlers.h">
+    <Compile Include="include\hardware_related\leds\LEDController.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\hardware_related\leds\charlieplexing.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\hardware_related\pins\pin_utilities.h">
@@ -187,6 +206,18 @@
     <Compile Include="src\application_related\main.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\application_related\main.cpp.old">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\application_related\screens\StartupScreen.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\application_related\Screens.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\application_related\ScreenSwitcher.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\application_related\system.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -199,7 +230,10 @@
     <Compile Include="src\hardware_related\eeprom\eeprom_utilities.S">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\hardware_related\leds\led_handlers.S">
+    <Compile Include="src\hardware_related\leds\charlieplexing.S">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\hardware_related\leds\LEDController.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\hardware_related\pins\pin_utilities.S">
@@ -217,6 +251,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="include" />
+    <Folder Include="include\application_related\screens" />
     <Folder Include="include\hardware_related" />
     <Folder Include="include\hardware_related\buttons" />
     <Folder Include="include\hardware_related\leds" />
@@ -226,6 +261,7 @@
     <Folder Include="include\hardware_related\timer" />
     <Folder Include="include\application_related" />
     <Folder Include="src" />
+    <Folder Include="src\application_related\screens" />
     <Folder Include="src\hardware_related" />
     <Folder Include="src\hardware_related\buttons" />
     <Folder Include="src\hardware_related\leds" />

@@ -1,13 +1,13 @@
 Archive member included to satisfy reference by file (symbol)
 
-c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
-                              src/application_related/main.o (__udivmodsi4)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
+                              src/hardware_related/leds/LEDController.o (__divmodhi4)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o (exit)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
-                              src/application_related/main.o (__do_copy_data)
-c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
-                              src/application_related/main.o (__do_clear_bss)
+                              src/application_related/screens/StartupScreen.o (__do_copy_data)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
+                              c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o) (__udivmodhi4)
 
 Discarded input sections
 
@@ -16,20 +16,45 @@ Discarded input sections
  .text          0x00000000        0x0 src/application_related/main.o
  .data          0x00000000        0x0 src/application_related/main.o
  .bss           0x00000000        0x0 src/application_related/main.o
+ .group         0x00000000        0x8 src/application_related/screens/StartupScreen.o
+ .group         0x00000000        0x8 src/application_related/screens/StartupScreen.o
+ .text          0x00000000        0x0 src/application_related/screens/StartupScreen.o
+ .data          0x00000000        0x0 src/application_related/screens/StartupScreen.o
+ .bss           0x00000000        0x0 src/application_related/screens/StartupScreen.o
+ .rodata._ZTV6Screen
+                0x00000000        0x8 src/application_related/screens/StartupScreen.o
+ .text          0x00000000        0x0 src/application_related/Screens.o
+ .data          0x00000000        0x0 src/application_related/Screens.o
+ .bss           0x00000000        0x0 src/application_related/Screens.o
+ .text          0x00000000        0x0 src/application_related/ScreenSwitcher.o
+ .data          0x00000000        0x0 src/application_related/ScreenSwitcher.o
+ .bss           0x00000000        0x0 src/application_related/ScreenSwitcher.o
  .text          0x00000000        0x0 src/application_related/system.o
  .data          0x00000000        0x0 src/application_related/system.o
  .bss           0x00000000        0x0 src/application_related/system.o
- .debug_info    0x00000000       0x56 src/application_related/system.o
- .debug_abbrev  0x00000000       0x26 src/application_related/system.o
+ .debug_info    0x00000000       0x80 src/application_related/system.o
+ .debug_abbrev  0x00000000       0x49 src/application_related/system.o
  .debug_aranges
                 0x00000000       0x18 src/application_related/system.o
- .debug_line    0x00000000       0x1a src/application_related/system.o
- .debug_str     0x00000000      0x1d0 src/application_related/system.o
+ .debug_line    0x00000000       0xe6 src/application_related/system.o
+ .debug_str     0x00000000      0x210 src/application_related/system.o
  .comment       0x00000000       0x31 src/application_related/system.o
+ .text          0x00000000       0x6c src/hardware_related/adc/adc_utilities.o
  .data          0x00000000        0x0 src/hardware_related/adc/adc_utilities.o
  .bss           0x00000000        0x0 src/hardware_related/adc/adc_utilities.o
+ .debug_line    0x00000000      0x197 src/hardware_related/adc/adc_utilities.o
+ .debug_info    0x00000000       0xb8 src/hardware_related/adc/adc_utilities.o
+ .debug_abbrev  0x00000000       0x14 src/hardware_related/adc/adc_utilities.o
+ .debug_aranges
+                0x00000000       0x20 src/hardware_related/adc/adc_utilities.o
+ .text          0x00000000       0xd0 src/hardware_related/buttons/button_multiplexing.o
  .data          0x00000000        0x0 src/hardware_related/buttons/button_multiplexing.o
  .bss           0x00000000        0x0 src/hardware_related/buttons/button_multiplexing.o
+ .debug_line    0x00000000      0x2bb src/hardware_related/buttons/button_multiplexing.o
+ .debug_info    0x00000000       0xc2 src/hardware_related/buttons/button_multiplexing.o
+ .debug_abbrev  0x00000000       0x14 src/hardware_related/buttons/button_multiplexing.o
+ .debug_aranges
+                0x00000000       0x20 src/hardware_related/buttons/button_multiplexing.o
  .text          0x00000000       0x2a src/hardware_related/eeprom/eeprom_utilities.o
  .data          0x00000000        0x0 src/hardware_related/eeprom/eeprom_utilities.o
  .bss           0x00000000        0x0 src/hardware_related/eeprom/eeprom_utilities.o
@@ -38,12 +63,23 @@ Discarded input sections
  .debug_abbrev  0x00000000       0x14 src/hardware_related/eeprom/eeprom_utilities.o
  .debug_aranges
                 0x00000000       0x20 src/hardware_related/eeprom/eeprom_utilities.o
- .data          0x00000000        0x0 src/hardware_related/leds/led_handlers.o
- .bss           0x00000000        0x0 src/hardware_related/leds/led_handlers.o
+ .data          0x00000000        0x0 src/hardware_related/leds/charlieplexing.o
+ .bss           0x00000000        0x0 src/hardware_related/leds/charlieplexing.o
+ .text          0x00000000        0x0 src/hardware_related/leds/LEDController.o
+ .data          0x00000000        0x0 src/hardware_related/leds/LEDController.o
+ .bss           0x00000000        0x0 src/hardware_related/leds/LEDController.o
+ .text._ZN13LEDController12turn_off_ledEh
+                0x00000000       0x1e src/hardware_related/leds/LEDController.o
  .data          0x00000000        0x0 src/hardware_related/pins/pin_utilities.o
  .bss           0x00000000        0x0 src/hardware_related/pins/pin_utilities.o
+ .text          0x00000000       0x40 src/hardware_related/timer/timer_utilities.o
  .data          0x00000000        0x0 src/hardware_related/timer/timer_utilities.o
  .bss           0x00000000        0x0 src/hardware_related/timer/timer_utilities.o
+ .debug_line    0x00000000      0x117 src/hardware_related/timer/timer_utilities.o
+ .debug_info    0x00000000       0xbc src/hardware_related/timer/timer_utilities.o
+ .debug_abbrev  0x00000000       0x14 src/hardware_related/timer/timer_utilities.o
+ .debug_aranges
+                0x00000000       0x20 src/hardware_related/timer/timer_utilities.o
  .text          0x00000000        0x0 src/timer_calibration.o
  .data          0x00000000        0x0 src/timer_calibration.o
  .bss           0x00000000        0x0 src/timer_calibration.o
@@ -56,20 +92,20 @@ Discarded input sections
  .debug_line    0x00000000        0x0 src/timer_test.o
  .debug_str     0x00000000      0x126 src/timer_test.o
  .comment       0x00000000       0x31 src/timer_test.o
- .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
- .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
- .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
  .text.libgcc.mul
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
- .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
+ .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
  .text.libgcc.prologue
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
  .text.libgcc.builtins
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
  .text.libgcc.fmul
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
  .text.libgcc.fixed
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
@@ -102,22 +138,20 @@ Discarded input sections
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
- .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
- .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
- .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
  .text.libgcc.mul
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
- .text.libgcc.div
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
- .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
+ .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
  .text.libgcc.prologue
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
  .text.libgcc.builtins
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
  .text.libgcc.fmul
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
  .text.libgcc.fixed
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
 
 Memory Configuration
 
@@ -135,11 +169,15 @@ Linker script and memory map
 
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o
 LOAD src/application_related/main.o
+LOAD src/application_related/screens/StartupScreen.o
+LOAD src/application_related/Screens.o
+LOAD src/application_related/ScreenSwitcher.o
 LOAD src/application_related/system.o
 LOAD src/hardware_related/adc/adc_utilities.o
 LOAD src/hardware_related/buttons/button_multiplexing.o
 LOAD src/hardware_related/eeprom/eeprom_utilities.o
-LOAD src/hardware_related/leds/led_handlers.o
+LOAD src/hardware_related/leds/charlieplexing.o
+LOAD src/hardware_related/leds/LEDController.o
 LOAD src/hardware_related/pins/pin_utilities.o
 LOAD src/hardware_related/timer/timer_utilities.o
 LOAD src/timer_calibration.o
@@ -255,7 +293,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x538
+.text           0x00000000      0x2f6
  *(.vectors)
  .vectors       0x00000000       0x22 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o
                 0x00000000                __vector_default
@@ -298,8 +336,6 @@ END GROUP
  *(.init4)
  .init4         0x0000002e       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
                 0x0000002e                __do_copy_data
- .init4         0x00000044       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
-                0x00000044                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -310,57 +346,84 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x00000054        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o
+ .init9         0x00000044        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o
  *(.init9)
  *(.text)
- .text          0x00000058        0x2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o
-                0x00000058                __vector_1
-                0x00000058                __vector_12
-                0x00000058                __bad_interrupt
-                0x00000058                __vector_6
-                0x00000058                __vector_3
-                0x00000058                __vector_11
-                0x00000058                __vector_13
-                0x00000058                __vector_7
-                0x00000058                __vector_5
-                0x00000058                __vector_4
-                0x00000058                __vector_2
-                0x00000058                __vector_15
-                0x00000058                __vector_8
-                0x00000058                __vector_14
-                0x00000058                __vector_10
-                0x00000058                __vector_16
- .text          0x0000005a       0x6c src/hardware_related/adc/adc_utilities.o
-                0x0000005a                set_up_adc
-                0x000000ba                clear_adc_interrupts
-                0x000000be                read_current_adc_value
-                0x000000c2                wait_for_interrupts
- .text          0x000000c6       0xd0 src/hardware_related/buttons/button_multiplexing.o
-                0x000000cc                update_button_states
-                0x0000017c                get_current_adc_button
- .text          0x00000196       0xbe src/hardware_related/leds/led_handlers.o
-                0x000001d4                reset_all_charlieplexing_pins
-                0x000001f6                set_charlieplexing_state
- .text          0x00000254       0x38 src/hardware_related/pins/pin_utilities.o
-                0x00000254                set_pin_states
- .text          0x0000028c       0x40 src/hardware_related/timer/timer_utilities.o
-                0x0000028c                set_up_timer_in_ctc_mode
-                0x000002b4                set_output_compare_pin_a
-                0x000002cc                . = ALIGN (0x2)
+ .text          0x00000048        0x2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o
+                0x00000048                __vector_1
+                0x00000048                __vector_12
+                0x00000048                __bad_interrupt
+                0x00000048                __vector_6
+                0x00000048                __vector_3
+                0x00000048                __vector_11
+                0x00000048                __vector_13
+                0x00000048                __vector_7
+                0x00000048                __vector_5
+                0x00000048                __vector_4
+                0x00000048                __vector_2
+                0x00000048                __vector_15
+                0x00000048                __vector_8
+                0x00000048                __vector_14
+                0x00000048                __vector_10
+                0x00000048                __vector_16
+ .text          0x0000004a       0xbe src/hardware_related/leds/charlieplexing.o
+                0x00000088                turn_off_all_charlieplexed_leds
+                0x000000aa                turn_on_charlieplexed_led
+ .text          0x00000108       0x38 src/hardware_related/pins/pin_utilities.o
+                0x00000108                set_pin_states
+                0x00000140                . = ALIGN (0x2)
  *(.text.*)
  .text.__vector_9
-                0x000002cc       0xb0 src/application_related/main.o
-                0x000002cc                __vector_9
- .text.main     0x0000037c      0x174 src/application_related/main.o
-                0x0000037c                main
+                0x00000140       0x14 src/application_related/main.o
+                0x00000140                __vector_9
+ .text.main     0x00000154       0x54 src/application_related/main.o
+                0x00000154                main
+ .text._ZN13StartupScreen18on_transition_fromEv
+                0x000001a8        0x2 src/application_related/screens/StartupScreen.o
+                0x000001a8                _ZN13StartupScreen18on_transition_fromEv
+ .text._ZN13StartupScreen16on_transition_toEv
+                0x000001aa       0x1a src/application_related/screens/StartupScreen.o
+                0x000001aa                _ZN13StartupScreen16on_transition_toEv
+ .text._ZN13StartupScreenC2ER13LEDControllerR14ScreenSwitcherR7Screens
+                0x000001c4       0x18 src/application_related/screens/StartupScreen.o
+                0x000001c4                _ZN13StartupScreenC2ER13LEDControllerR14ScreenSwitcherR7Screens
+                0x000001c4                _ZN13StartupScreenC1ER13LEDControllerR14ScreenSwitcherR7Screens
+ .text._ZN7ScreensC2ER13LEDControllerR14ScreenSwitcher
+                0x000001dc        0x6 src/application_related/Screens.o
+                0x000001dc                _ZN7ScreensC1ER13LEDControllerR14ScreenSwitcher
+                0x000001dc                _ZN7ScreensC2ER13LEDControllerR14ScreenSwitcher
+ .text._ZN14ScreenSwitcherC2Ev
+                0x000001e2        0x8 src/application_related/ScreenSwitcher.o
+                0x000001e2                _ZN14ScreenSwitcherC2Ev
+                0x000001e2                _ZN14ScreenSwitcherC1Ev
+ .text._ZN14ScreenSwitcher13switch_screenER6Screen
+                0x000001ea       0x42 src/application_related/ScreenSwitcher.o
+                0x000001ea                _ZN14ScreenSwitcher13switch_screenER6Screen
+ .text._ZN13LEDControllerC2Ev
+                0x0000022c       0x20 src/hardware_related/leds/LEDController.o
+                0x0000022c                _ZN13LEDControllerC2Ev
+                0x0000022c                _ZN13LEDControllerC1Ev
+ .text._ZN13LEDController19led_number_is_validEh
+                0x0000024c        0xa src/hardware_related/leds/LEDController.o
+                0x0000024c                _ZN13LEDController19led_number_is_validEh
+ .text._ZN13LEDController11turn_on_ledEh
+                0x00000256       0x20 src/hardware_related/leds/LEDController.o
+                0x00000256                _ZN13LEDController11turn_on_ledEh
+ .text._ZN13LEDController43update_display_to_next_charlieplexing_frameEv
+                0x00000276       0x2e src/hardware_related/leds/LEDController.o
+                0x00000276                _ZN13LEDController43update_display_to_next_charlieplexing_frameEv
  .text.libgcc.div
-                0x000004f0       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodsi4.o)
-                0x000004f0                __udivmodsi4
-                0x00000534                . = ALIGN (0x2)
+                0x000002a4       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_divmodhi4.o)
+                0x000002a4                _div
+                0x000002a4                __divmodhi4
+ .text.libgcc.div
+                0x000002ca       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_udivmodhi4.o)
+                0x000002ca                __udivmodhi4
+                0x000002f2                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000534        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
-                0x00000534                _exit
-                0x00000534                exit
+ .fini9         0x000002f2        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
+                0x000002f2                _exit
+                0x000002f2                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -379,63 +442,39 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000534        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
+ .fini0         0x000002f2        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000538                _etext = .
+                0x000002f6                _etext = .
 
-.data           0x00800060        0x2 load address 0x00000538
+.data           0x00800060        0x8 load address 0x000002f6
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.latest_timer_tick_acknowledged
-                0x00800060        0x1 src/application_related/main.o
-                0x00800060                latest_timer_tick_acknowledged
- .data.latest_adc_sample_checked
-                0x00800061        0x1 src/application_related/main.o
-                0x00800061                latest_adc_sample_checked
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
+ .rodata._ZTV13StartupScreen
+                0x00800060        0x8 src/application_related/screens/StartupScreen.o
+                0x00800060                _ZTV13StartupScreen
  *(.gnu.linkonce.r*)
-                0x00800062                . = ALIGN (0x2)
-                0x00800062                _edata = .
-                0x00800062                PROVIDE (__data_end, .)
+                0x00800068                . = ALIGN (0x2)
+                0x00800068                _edata = .
+                0x00800068                PROVIDE (__data_end, .)
 
-.bss            0x00800062       0x1e
-                0x00800062                PROVIDE (__bss_start, .)
+.bss            0x00800068        0x0
+                [!provide]                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.button_tapped
-                0x00800062        0x5 src/application_related/main.o
-                0x00800062                button_tapped
- .bss.button_held
-                0x00800067        0x5 src/application_related/main.o
-                0x00800067                button_held
- .bss.button_debounced
-                0x0080006c        0x5 src/application_related/main.o
-                0x0080006c                button_debounced
- .bss.debounced_counts
-                0x00800071        0x5 src/application_related/main.o
-                0x00800071                debounced_counts
- .bss.button_counts
-                0x00800076        0x5 src/application_related/main.o
-                0x00800076                button_counts
- .bss.latest_adc_sample
-                0x0080007b        0x1 src/application_related/main.o
-                0x0080007b                latest_adc_sample
- .bss.timestamp
-                0x0080007c        0x4 src/application_related/main.o
-                0x0080007c                timestamp
  *(COMMON)
-                0x00800080                PROVIDE (__bss_end, .)
-                0x00000538                __data_load_start = LOADADDR (.data)
-                0x0000053a                __data_load_end = (__data_load_start + SIZEOF (.data))
+                [!provide]                PROVIDE (__bss_end, .)
+                0x000002f6                __data_load_start = LOADADDR (.data)
+                0x000002fe                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800080        0x0
+.noinit         0x00800068        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800080                _end = .
+                0x00800068                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -479,6 +518,10 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x30 src/application_related/main.o
                                  0x31 (size before relaxing)
+ .comment       0x00000030       0x31 src/application_related/screens/StartupScreen.o
+ .comment       0x00000030       0x31 src/application_related/Screens.o
+ .comment       0x00000030       0x31 src/application_related/ScreenSwitcher.o
+ .comment       0x00000030       0x31 src/hardware_related/leds/LEDController.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x3c
@@ -500,67 +543,88 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0xc8
+.debug_aranges  0x00000000      0x120
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x28 src/application_related/main.o
  .debug_aranges
-                0x00000028       0x20 src/hardware_related/adc/adc_utilities.o
+                0x00000028       0x30 src/application_related/screens/StartupScreen.o
  .debug_aranges
-                0x00000048       0x20 src/hardware_related/buttons/button_multiplexing.o
+                0x00000058       0x20 src/application_related/Screens.o
  .debug_aranges
-                0x00000068       0x20 src/hardware_related/leds/led_handlers.o
+                0x00000078       0x28 src/application_related/ScreenSwitcher.o
  .debug_aranges
-                0x00000088       0x20 src/hardware_related/pins/pin_utilities.o
+                0x000000a0       0x20 src/hardware_related/leds/charlieplexing.o
  .debug_aranges
-                0x000000a8       0x20 src/hardware_related/timer/timer_utilities.o
+                0x000000c0       0x40 src/hardware_related/leds/LEDController.o
+ .debug_aranges
+                0x00000100       0x20 src/hardware_related/pins/pin_utilities.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xbb3
+.debug_info     0x00000000     0x14e6
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x420 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o
- .debug_info    0x00000420      0x3ec src/application_related/main.o
- .debug_info    0x0000080c       0xb8 src/hardware_related/adc/adc_utilities.o
- .debug_info    0x000008c4       0xc2 src/hardware_related/buttons/button_multiplexing.o
- .debug_info    0x00000986       0xb8 src/hardware_related/leds/led_handlers.o
- .debug_info    0x00000a3e       0xb9 src/hardware_related/pins/pin_utilities.o
- .debug_info    0x00000af7       0xbc src/hardware_related/timer/timer_utilities.o
+ .debug_info    0x00000420      0x2fd src/application_related/main.o
+ .debug_info    0x0000071d      0x53f src/application_related/screens/StartupScreen.o
+ .debug_info    0x00000c5c      0x2db src/application_related/Screens.o
+ .debug_info    0x00000f37      0x132 src/application_related/ScreenSwitcher.o
+ .debug_info    0x00001069       0xba src/hardware_related/leds/charlieplexing.o
+ .debug_info    0x00001123      0x30a src/hardware_related/leds/LEDController.o
+ .debug_info    0x0000142d       0xb9 src/hardware_related/pins/pin_utilities.o
 
-.debug_abbrev   0x00000000      0x54e
+.debug_abbrev   0x00000000      0xc44
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x3e8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o
- .debug_abbrev  0x000003e8      0x102 src/application_related/main.o
- .debug_abbrev  0x000004ea       0x14 src/hardware_related/adc/adc_utilities.o
- .debug_abbrev  0x000004fe       0x14 src/hardware_related/buttons/button_multiplexing.o
- .debug_abbrev  0x00000512       0x14 src/hardware_related/leds/led_handlers.o
- .debug_abbrev  0x00000526       0x14 src/hardware_related/pins/pin_utilities.o
- .debug_abbrev  0x0000053a       0x14 src/hardware_related/timer/timer_utilities.o
+ .debug_abbrev  0x000003e8      0x160 src/application_related/main.o
+ .debug_abbrev  0x00000548      0x295 src/application_related/screens/StartupScreen.o
+ .debug_abbrev  0x000007dd      0x15d src/application_related/Screens.o
+ .debug_abbrev  0x0000093a      0x117 src/application_related/ScreenSwitcher.o
+ .debug_abbrev  0x00000a51       0x14 src/hardware_related/leds/charlieplexing.o
+ .debug_abbrev  0x00000a65      0x1cb src/hardware_related/leds/LEDController.o
+ .debug_abbrev  0x00000c30       0x14 src/hardware_related/pins/pin_utilities.o
 
-.debug_line     0x00000000      0xde9
+.debug_line     0x00000000      0xd97
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0xfd C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o
- .debug_line    0x000000fd      0x42a src/application_related/main.o
- .debug_line    0x00000527      0x197 src/hardware_related/adc/adc_utilities.o
- .debug_line    0x000006be      0x2bb src/hardware_related/buttons/button_multiplexing.o
- .debug_line    0x00000979      0x25d src/hardware_related/leds/led_handlers.o
- .debug_line    0x00000bd6       0xfc src/hardware_related/pins/pin_utilities.o
- .debug_line    0x00000cd2      0x117 src/hardware_related/timer/timer_utilities.o
+ .debug_line    0x000000fd      0x21d src/application_related/main.o
+ .debug_line    0x0000031a      0x26f src/application_related/screens/StartupScreen.o
+ .debug_line    0x00000589      0x1f2 src/application_related/Screens.o
+ .debug_line    0x0000077b       0xde src/application_related/ScreenSwitcher.o
+ .debug_line    0x00000859      0x25f src/hardware_related/leds/charlieplexing.o
+ .debug_line    0x00000ab8      0x1e3 src/hardware_related/leds/LEDController.o
+ .debug_line    0x00000c9b       0xfc src/hardware_related/pins/pin_utilities.o
 
-.debug_frame    0x00000000       0x7c
+.debug_frame    0x00000000      0x19c
  *(.debug_frame)
- .debug_frame   0x00000000       0x7c src/application_related/main.o
+ .debug_frame   0x00000000       0x50 src/application_related/main.o
+ .debug_frame   0x00000050       0x50 src/application_related/screens/StartupScreen.o
+ .debug_frame   0x000000a0       0x24 src/application_related/Screens.o
+ .debug_frame   0x000000c4       0x48 src/application_related/ScreenSwitcher.o
+ .debug_frame   0x0000010c       0x90 src/hardware_related/leds/LEDController.o
 
-.debug_str      0x00000000      0x50e
+.debug_str      0x00000000      0x8cf
  *(.debug_str)
  .debug_str     0x00000000      0x173 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny84a/avr25/crtattiny84a.o
- .debug_str     0x00000173      0x39b src/application_related/main.o
-                                0x3e9 (size before relaxing)
+ .debug_str     0x00000173      0x417 src/application_related/main.o
+                                0x469 (size before relaxing)
+ .debug_str     0x0000058a      0x212 src/application_related/screens/StartupScreen.o
+                                0x608 (size before relaxing)
+ .debug_str     0x0000079c       0x57 src/application_related/Screens.o
+                                0x489 (size before relaxing)
+ .debug_str     0x000007f3       0x51 src/application_related/ScreenSwitcher.o
+                                0x21d (size before relaxing)
+ .debug_str     0x00000844       0x8b src/hardware_related/leds/LEDController.o
+                                0x3d2 (size before relaxing)
 
-.debug_loc      0x00000000      0x295
+.debug_loc      0x00000000      0x415
  *(.debug_loc)
- .debug_loc     0x00000000      0x295 src/application_related/main.o
+ .debug_loc     0x00000000       0x76 src/application_related/main.o
+ .debug_loc     0x00000076       0x8d src/application_related/screens/StartupScreen.o
+ .debug_loc     0x00000103       0x72 src/application_related/Screens.o
+ .debug_loc     0x00000175       0xb5 src/application_related/ScreenSwitcher.o
+ .debug_loc     0x0000022a      0x1eb src/hardware_related/leds/LEDController.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -580,9 +644,13 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x18
+.debug_ranges   0x00000000       0x90
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x18 src/application_related/main.o
+ .debug_ranges  0x00000018       0x20 src/application_related/screens/StartupScreen.o
+ .debug_ranges  0x00000038       0x10 src/application_related/Screens.o
+ .debug_ranges  0x00000048       0x18 src/application_related/ScreenSwitcher.o
+ .debug_ranges  0x00000060       0x30 src/hardware_related/leds/LEDController.o
 
 .debug_macro
  *(.debug_macro)

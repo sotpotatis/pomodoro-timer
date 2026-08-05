@@ -34,6 +34,7 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../include \
+../include/application_related/screens \
 ../include/hardware_related \
 ../include/hardware_related/buttons \
 ../include/hardware_related/leds \
@@ -43,6 +44,7 @@ SUBDIRS :=  \
 ../include/hardware_related/timer \
 ../include/application_related \
 ../src \
+../src/application_related/screens \
 ../src/hardware_related \
 ../src/hardware_related/buttons \
 ../src/hardware_related/leds \
@@ -56,7 +58,11 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../src/application_related/main.cpp \
+../src/application_related/screens/StartupScreen.cpp \
+../src/application_related/Screens.cpp \
+../src/application_related/ScreenSwitcher.cpp \
 ../src/application_related/system.cpp \
+../src/hardware_related/leds/LEDController.cpp \
 ../src/timer_calibration.c \
 ../src/timer_test.c
 
@@ -65,7 +71,7 @@ PREPROCESSING_SRCS +=  \
 ../src/hardware_related/adc/adc_utilities.S \
 ../src/hardware_related/buttons/button_multiplexing.S \
 ../src/hardware_related/eeprom/eeprom_utilities.S \
-../src/hardware_related/leds/led_handlers.S \
+../src/hardware_related/leds/charlieplexing.S \
 ../src/hardware_related/pins/pin_utilities.S \
 ../src/hardware_related/timer/timer_utilities.S
 
@@ -75,11 +81,15 @@ ASM_SRCS +=
 
 OBJS +=  \
 src/application_related/main.o \
+src/application_related/screens/StartupScreen.o \
+src/application_related/Screens.o \
+src/application_related/ScreenSwitcher.o \
 src/application_related/system.o \
 src/hardware_related/adc/adc_utilities.o \
 src/hardware_related/buttons/button_multiplexing.o \
 src/hardware_related/eeprom/eeprom_utilities.o \
-src/hardware_related/leds/led_handlers.o \
+src/hardware_related/leds/charlieplexing.o \
+src/hardware_related/leds/LEDController.o \
 src/hardware_related/pins/pin_utilities.o \
 src/hardware_related/timer/timer_utilities.o \
 src/timer_calibration.o \
@@ -87,11 +97,15 @@ src/timer_test.o
 
 OBJS_AS_ARGS +=  \
 src/application_related/main.o \
+src/application_related/screens/StartupScreen.o \
+src/application_related/Screens.o \
+src/application_related/ScreenSwitcher.o \
 src/application_related/system.o \
 src/hardware_related/adc/adc_utilities.o \
 src/hardware_related/buttons/button_multiplexing.o \
 src/hardware_related/eeprom/eeprom_utilities.o \
-src/hardware_related/leds/led_handlers.o \
+src/hardware_related/leds/charlieplexing.o \
+src/hardware_related/leds/LEDController.o \
 src/hardware_related/pins/pin_utilities.o \
 src/hardware_related/timer/timer_utilities.o \
 src/timer_calibration.o \
@@ -99,11 +113,15 @@ src/timer_test.o
 
 C_DEPS +=  \
 src/application_related/main.d \
+src/application_related/screens/StartupScreen.d \
+src/application_related/Screens.d \
+src/application_related/ScreenSwitcher.d \
 src/application_related/system.d \
 src/hardware_related/adc/adc_utilities.d \
 src/hardware_related/buttons/button_multiplexing.d \
 src/hardware_related/eeprom/eeprom_utilities.d \
-src/hardware_related/leds/led_handlers.d \
+src/hardware_related/leds/charlieplexing.d \
+src/hardware_related/leds/LEDController.d \
 src/hardware_related/pins/pin_utilities.d \
 src/hardware_related/timer/timer_utilities.d \
 src/timer_calibration.d \
@@ -111,11 +129,15 @@ src/timer_test.d
 
 C_DEPS_AS_ARGS +=  \
 src/application_related/main.d \
+src/application_related/screens/StartupScreen.d \
+src/application_related/Screens.d \
+src/application_related/ScreenSwitcher.d \
 src/application_related/system.d \
 src/hardware_related/adc/adc_utilities.d \
 src/hardware_related/buttons/button_multiplexing.d \
 src/hardware_related/eeprom/eeprom_utilities.d \
-src/hardware_related/leds/led_handlers.d \
+src/hardware_related/leds/charlieplexing.d \
+src/hardware_related/leds/LEDController.d \
 src/hardware_related/pins/pin_utilities.d \
 src/hardware_related/timer/timer_utilities.d \
 src/timer_calibration.d \
@@ -138,14 +160,42 @@ LINKER_SCRIPT_DEP+=
 src/application_related/main.o: ../src/application_related/main.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -std=c++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/application_related/screens/StartupScreen.o: ../src/application_related/screens/StartupScreen.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -std=c++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/application_related/Screens.o: ../src/application_related/Screens.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -std=c++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/application_related/ScreenSwitcher.o: ../src/application_related/ScreenSwitcher.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -std=c++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 src/application_related/system.o: ../src/application_related/system.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -std=c++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/hardware_related/leds/LEDController.o: ../src/hardware_related/leds/LEDController.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -std=c++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
@@ -192,7 +242,7 @@ src/hardware_related/eeprom/eeprom_utilities.o: ../src/hardware_related/eeprom/e
 	@echo Finished building: $<
 	
 
-src/hardware_related/leds/led_handlers.o: ../src/hardware_related/leds/led_handlers.S
+src/hardware_related/leds/charlieplexing.o: ../src/hardware_related/leds/charlieplexing.S
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU Assembler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 

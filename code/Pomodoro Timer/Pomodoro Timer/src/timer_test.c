@@ -17,7 +17,7 @@
 	#include <stdint.h>
 	#include "../include/hardware_related/timer/timer_utilities.h"
 	#include "../include/hardware_constants.h"
-	#include "../include/hardware_related/leds/led_handlers.h"
+	#include "../include/hardware_related/leds/charlieplexing.h"
 	#include <math.h>
 	#include <avr/interrupt.h>
 	#include "../include/hardware_related/eeprom/eeprom_utilities.h"
@@ -113,7 +113,7 @@
 							button_tapped[i] = 0;
 							button_held[i] = 0;
 							timer_running = 1;
-							set_charlieplexing_state(0); // Turn on LED to acknowledge countdown start
+							turn_on_charlieplexed_led(0); // Turn on LED to acknowledge countdown start
 						}
 					}
 					latest_adc_sample_checked = 1;
@@ -122,7 +122,7 @@
 				if (elapsed_seconds >= seconds_to_count_to){
 					// On timeout, turn on all LEDs.
 					for (int i=0;i<15;i++){
-						set_charlieplexing_state(i);
+						turn_on_charlieplexed_led(i);
 					}
 				}
 			}

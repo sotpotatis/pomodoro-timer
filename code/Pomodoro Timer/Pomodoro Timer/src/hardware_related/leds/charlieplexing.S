@@ -1,11 +1,8 @@
-/* ledHandlers.S
-Handles the updating of the LED display to show a certain
-*/
 #include <avr/io.h>
 #include "../../../include/hardware_constants.h"
-.global set_charlieplexing_state, reset_all_charlieplexing_pins
+.global turn_on_charlieplexed_led, turn_off_all_charlieplexed_leds
 .text
-    // The states of the Charlieplexing pins. The first index in this sequence of bytes represent the pin state
+    // The first index in this sequence of bytes represent the pin state
     // if you want to address LED0, the second index LED1, and so on and so forth.
     // Each state is represented as 8 bits packed as: <4 unused bits>L1L0|H1H0 where H1H0 represents a binary number 0-3 of the pin
     // to set as output high. Similarly, L1L0 represents the pin to set as output low. As an example: 1101 means: pin 3 (11 base 2)
@@ -13,6 +10,8 @@ Handles the updating of the LED display to show a certain
     // The remaining pin for each states are set as outputs.
 	// Note that with 5 pins we can control 5*4=20 pins, but only states for 16 of them is defined here. That is because the project only
 	// uses 15 pins. The 16th one had to be added to avoid an out of range error when compiling.
+	// NOTE: Make sure to update NUMBER_OF_CHARLIEPLEXED_LEDS in the corresponding header file for this source if we increase the number
+	// of LEDs!
     CHARLIEPLEXING_PIN_STATES: .byte 0x10, 0x01, 0x20, 0x02, 0x30, 0x03, 0x21, 0x12, 0x31, 0x13, 0x32, 0x23, 0x43, 0x34, 0x42, 0x24
     /*
     Given Charlieplexing pin i (0-4), returns the pin mask of i.
@@ -56,7 +55,7 @@ Handles the updating of the LED display to show a certain
     Sets all Charlieplexing pins to inputs and resets their output state.
     Takes no input arguments.
     */
-    reset_all_charlieplexing_pins:
+    turn_off_all_charlieplexed_leds:
         // Our main strategy:
         // call set_pin_states
         // according to the calling conventions of set_pin_states: 
@@ -98,10 +97,11 @@ Handles the updating of the LED display to show a certain
         ret
     /*
     Sets the microcontroller pins to appropriately address a certain output pin via the method Charlieplexing.
-    r25-r24: The pin to set to output as a number 0-14. For example, to controll LED0, input 0 to the function. To control LED3, input
+    r25-r24: The pin to set to output as a number 0-NUMBER_OF_CHARLIEPLEXED_LEDS (see corresponding header file for def. of that constant). 
+	For example, to controll LED0, input 0 to the function. To control LED3, input
     3 (base 10). Lower 4 bits in r24, rest unused.
     */
-    set_charlieplexing_state:
+    turn_on_charlieplexed_led:
         // Mask inputs
         andi r24, 0xf
         // Calculate the address to load CHARLIEPLEXING_PIN_STATES, which is located in program memory,
@@ -115,7 +115,7 @@ Handles the updating of the LED display to show a certain
         lpm r23, Z // Load desired pin state into r23
         // (1) set all pins to inputs
         PUSH r23
-        rcall reset_all_charlieplexing_pins
+        rcall turn_off_all_charlieplexed_leds
         POP r23
         // r19 = <pin number to set to output low>
         mov r19, r23

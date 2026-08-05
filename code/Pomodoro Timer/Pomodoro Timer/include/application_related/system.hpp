@@ -1,13 +1,14 @@
 #pragma once
 
-#include "../hardware_related/leds/led_controller.hpp"
-
-class ScreenController {};
+#include "../hardware_related/leds/LEDController.hpp"
+#include "ScreenSwitcher.hpp"
 
 class System {
 private:
-  LEDController ledController;
-  ScreenController screenController;
+LEDController led_controller;
+ScreenSwitcher screen_controller;
 public:
-  System();
+System();
+LEDController& get_led_controller();
+ScreenSwitcher& get_screen_controller();
 };
