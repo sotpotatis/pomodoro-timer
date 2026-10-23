@@ -3,780 +3,1252 @@ Pomodoro Timer.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000002f6  00000000  00000000  00000074  2**1
+  0 .text         000005a8  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000008  00800060  000002f6  0000036a  2**0
+  1 .data         00000010  00800060  000005a8  0000063c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  00000372  2**0
+  2 .bss          0000003f  00800070  00800070  0000064c  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000064c  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000003a4  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000067c  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000120  00000000  00000000  000003e0  2**3
+  5 .debug_aranges 000001a8  00000000  00000000  000006b8  2**3
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000014e6  00000000  00000000  00000500  2**0
+  6 .debug_info   000023ae  00000000  00000000  00000860  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000c44  00000000  00000000  000019e6  2**0
+  7 .debug_abbrev 00000fbf  00000000  00000000  00002c0e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000d97  00000000  00000000  0000262a  2**0
+  8 .debug_line   0000132a  00000000  00000000  00003bcd  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  0000019c  00000000  00000000  000033c4  2**2
+  9 .debug_frame  00000328  00000000  00000000  00004ef8  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000008cf  00000000  00000000  00003560  2**0
+ 10 .debug_str    00000d96  00000000  00000000  00005220  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000415  00000000  00000000  00003e2f  2**0
+ 11 .debug_loc    000009ee  00000000  00000000  00005fb6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000090  00000000  00000000  00004244  2**0
+ 12 .debug_ranges 00000100  00000000  00000000  000069a4  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
-   0:	10 c0       	rjmp	.+32     	; 0x22 <__ctors_end>
-   2:	22 c0       	rjmp	.+68     	; 0x48 <__bad_interrupt>
-   4:	21 c0       	rjmp	.+66     	; 0x48 <__bad_interrupt>
-   6:	20 c0       	rjmp	.+64     	; 0x48 <__bad_interrupt>
-   8:	1f c0       	rjmp	.+62     	; 0x48 <__bad_interrupt>
-   a:	1e c0       	rjmp	.+60     	; 0x48 <__bad_interrupt>
-   c:	1d c0       	rjmp	.+58     	; 0x48 <__bad_interrupt>
-   e:	1c c0       	rjmp	.+56     	; 0x48 <__bad_interrupt>
-  10:	1b c0       	rjmp	.+54     	; 0x48 <__bad_interrupt>
-  12:	96 c0       	rjmp	.+300    	; 0x140 <__vector_9>
-  14:	19 c0       	rjmp	.+50     	; 0x48 <__bad_interrupt>
-  16:	18 c0       	rjmp	.+48     	; 0x48 <__bad_interrupt>
-  18:	17 c0       	rjmp	.+46     	; 0x48 <__bad_interrupt>
-  1a:	16 c0       	rjmp	.+44     	; 0x48 <__bad_interrupt>
-  1c:	15 c0       	rjmp	.+42     	; 0x48 <__bad_interrupt>
-  1e:	14 c0       	rjmp	.+40     	; 0x48 <__bad_interrupt>
-  20:	13 c0       	rjmp	.+38     	; 0x48 <__bad_interrupt>
+   0:	11 c0       	rjmp	.+34     	; 0x24 <__ctors_end>
+   2:	35 c0       	rjmp	.+106    	; 0x6e <__bad_interrupt>
+   4:	34 c0       	rjmp	.+104    	; 0x6e <__bad_interrupt>
+   6:	33 c0       	rjmp	.+102    	; 0x6e <__bad_interrupt>
+   8:	32 c0       	rjmp	.+100    	; 0x6e <__bad_interrupt>
+   a:	31 c0       	rjmp	.+98     	; 0x6e <__bad_interrupt>
+   c:	30 c0       	rjmp	.+96     	; 0x6e <__bad_interrupt>
+   e:	2f c0       	rjmp	.+94     	; 0x6e <__bad_interrupt>
+  10:	2e c0       	rjmp	.+92     	; 0x6e <__bad_interrupt>
+  12:	d2 c0       	rjmp	.+420    	; 0x1b8 <__vector_9>
+  14:	2c c0       	rjmp	.+88     	; 0x6e <__bad_interrupt>
+  16:	2b c0       	rjmp	.+86     	; 0x6e <__bad_interrupt>
+  18:	2a c0       	rjmp	.+84     	; 0x6e <__bad_interrupt>
+  1a:	29 c0       	rjmp	.+82     	; 0x6e <__bad_interrupt>
+  1c:	28 c0       	rjmp	.+80     	; 0x6e <__bad_interrupt>
+  1e:	27 c0       	rjmp	.+78     	; 0x6e <__bad_interrupt>
+  20:	26 c0       	rjmp	.+76     	; 0x6e <__bad_interrupt>
 
-00000022 <__ctors_end>:
-  22:	11 24       	eor	r1, r1
-  24:	1f be       	out	0x3f, r1	; 63
-  26:	cf e5       	ldi	r28, 0x5F	; 95
-  28:	d2 e0       	ldi	r29, 0x02	; 2
-  2a:	de bf       	out	0x3e, r29	; 62
-  2c:	cd bf       	out	0x3d, r28	; 61
+00000022 <__ctors_start>:
+  22:	29 01       	movw	r4, r18
 
-0000002e <__do_copy_data>:
-  2e:	10 e0       	ldi	r17, 0x00	; 0
-  30:	a0 e6       	ldi	r26, 0x60	; 96
-  32:	b0 e0       	ldi	r27, 0x00	; 0
-  34:	e6 ef       	ldi	r30, 0xF6	; 246
-  36:	f2 e0       	ldi	r31, 0x02	; 2
-  38:	02 c0       	rjmp	.+4      	; 0x3e <__SP_H__>
-  3a:	05 90       	lpm	r0, Z+
-  3c:	0d 92       	st	X+, r0
-  3e:	a8 36       	cpi	r26, 0x68	; 104
-  40:	b1 07       	cpc	r27, r17
-  42:	d9 f7       	brne	.-10     	; 0x3a <__do_copy_data+0xc>
-  44:	87 d0       	rcall	.+270    	; 0x154 <main>
-  46:	55 c1       	rjmp	.+682    	; 0x2f2 <_exit>
+00000024 <__ctors_end>:
+  24:	11 24       	eor	r1, r1
+  26:	1f be       	out	0x3f, r1	; 63
+  28:	cf e5       	ldi	r28, 0x5F	; 95
+  2a:	d2 e0       	ldi	r29, 0x02	; 2
+  2c:	de bf       	out	0x3e, r29	; 62
+  2e:	cd bf       	out	0x3d, r28	; 61
 
-00000048 <__bad_interrupt>:
-  48:	db cf       	rjmp	.-74     	; 0x0 <__vectors>
+00000030 <__do_copy_data>:
+  30:	10 e0       	ldi	r17, 0x00	; 0
+  32:	a0 e6       	ldi	r26, 0x60	; 96
+  34:	b0 e0       	ldi	r27, 0x00	; 0
+  36:	e8 ea       	ldi	r30, 0xA8	; 168
+  38:	f5 e0       	ldi	r31, 0x05	; 5
+  3a:	02 c0       	rjmp	.+4      	; 0x40 <__SREG__+0x1>
+  3c:	05 90       	lpm	r0, Z+
+  3e:	0d 92       	st	X+, r0
+  40:	a0 37       	cpi	r26, 0x70	; 112
+  42:	b1 07       	cpc	r27, r17
+  44:	d9 f7       	brne	.-10     	; 0x3c <__do_copy_data+0xc>
 
-0000004a <CHARLIEPLEXING_PIN_STATES>:
-  4a:	10 01       	movw	r2, r0
-  4c:	20 02       	muls	r18, r16
-  4e:	30 03       	mulsu	r19, r16
-  50:	21 12       	cpse	r2, r17
-  52:	31 13       	cpse	r19, r17
-  54:	32 23       	and	r19, r18
-  56:	43 34       	cpi	r20, 0x43	; 67
-  58:	42 24       	eor	r4, r2
+00000046 <__do_clear_bss>:
+  46:	20 e0       	ldi	r18, 0x00	; 0
+  48:	a0 e7       	ldi	r26, 0x70	; 112
+  4a:	b0 e0       	ldi	r27, 0x00	; 0
+  4c:	01 c0       	rjmp	.+2      	; 0x50 <.do_clear_bss_start>
 
-0000005a <loadPinMask>:
+0000004e <.do_clear_bss_loop>:
+  4e:	1d 92       	st	X+, r1
+
+00000050 <.do_clear_bss_start>:
+  50:	af 3a       	cpi	r26, 0xAF	; 175
+  52:	b2 07       	cpc	r27, r18
+  54:	e1 f7       	brne	.-8      	; 0x4e <.do_clear_bss_loop>
+
+00000056 <__do_global_ctors>:
+  56:	10 e0       	ldi	r17, 0x00	; 0
+  58:	c2 e1       	ldi	r28, 0x12	; 18
+  5a:	d0 e0       	ldi	r29, 0x00	; 0
+  5c:	03 c0       	rjmp	.+6      	; 0x64 <__do_global_ctors+0xe>
+  5e:	21 97       	sbiw	r28, 0x01	; 1
+  60:	fe 01       	movw	r30, r28
+  62:	9a d2       	rcall	.+1332   	; 0x598 <__tablejump2__>
+  64:	c1 31       	cpi	r28, 0x11	; 17
+  66:	d1 07       	cpc	r29, r17
+  68:	d1 f7       	brne	.-12     	; 0x5e <__do_global_ctors+0x8>
+  6a:	cb d0       	rcall	.+406    	; 0x202 <main>
+  6c:	9b c2       	rjmp	.+1334   	; 0x5a4 <_exit>
+
+0000006e <__bad_interrupt>:
+  6e:	c8 cf       	rjmp	.-112    	; 0x0 <__vectors>
+
+00000070 <CHARLIEPLEXING_PIN_STATES>:
+  70:	10 01       	movw	r2, r0
+  72:	20 02       	muls	r18, r16
+  74:	30 03       	mulsu	r19, r16
+  76:	21 12       	cpse	r2, r17
+  78:	31 13       	cpse	r19, r17
+  7a:	32 23       	and	r19, r18
+  7c:	43 34       	cpi	r20, 0x43	; 67
+  7e:	42 24       	eor	r4, r2
+
+00000080 <loadPinMask>:
     r25: Unused.
     r24: The pin number of the Charliplexing pin. 0-4.
     Returned pin mask is stored in r25-r24. (MSb's in r25, LSb's in r24)
     */
     loadPinMask:
         cpi r24, 1
-  5a:	81 30       	cpi	r24, 0x01	; 1
+  80:	81 30       	cpi	r24, 0x01	; 1
         breq pin1
-  5c:	49 f0       	breq	.+18     	; 0x70 <pin1>
+  82:	49 f0       	breq	.+18     	; 0x96 <pin1>
         cpi r24, 2
-  5e:	82 30       	cpi	r24, 0x02	; 2
+  84:	82 30       	cpi	r24, 0x02	; 2
         breq pin2
-  60:	51 f0       	breq	.+20     	; 0x76 <pin2>
+  86:	51 f0       	breq	.+20     	; 0x9c <pin2>
         cpi r24, 3
-  62:	83 30       	cpi	r24, 0x03	; 3
+  88:	83 30       	cpi	r24, 0x03	; 3
         breq pin3
-  64:	59 f0       	breq	.+22     	; 0x7c <pin3>
+  8a:	59 f0       	breq	.+22     	; 0xa2 <pin3>
 		cpi r24, 4
-  66:	84 30       	cpi	r24, 0x04	; 4
+  8c:	84 30       	cpi	r24, 0x04	; 4
         breq pin4
-  68:	61 f0       	breq	.+24     	; 0x82 <pin4>
+  8e:	61 f0       	breq	.+24     	; 0xa8 <pin4>
 
-0000006a <pin0>:
+00000090 <pin0>:
         pin0:
             ldi r25, hi8(LED_CHARLIEPLEXING_PIN_1)
-  6a:	90 e0       	ldi	r25, 0x00	; 0
+  90:	90 e0       	ldi	r25, 0x00	; 0
             ldi r24, lo8(LED_CHARLIEPLEXING_PIN_1)
-  6c:	81 e0       	ldi	r24, 0x01	; 1
+  92:	81 e0       	ldi	r24, 0x01	; 1
             rjmp return
-  6e:	0b c0       	rjmp	.+22     	; 0x86 <return>
+  94:	0b c0       	rjmp	.+22     	; 0xac <return>
 
-00000070 <pin1>:
+00000096 <pin1>:
         pin1:
             ldi r25, hi8(LED_CHARLIEPLEXING_PIN_2)
-  70:	90 e0       	ldi	r25, 0x00	; 0
+  96:	90 e0       	ldi	r25, 0x00	; 0
             ldi r24, lo8(LED_CHARLIEPLEXING_PIN_2)
-  72:	82 e0       	ldi	r24, 0x02	; 2
+  98:	82 e0       	ldi	r24, 0x02	; 2
             rjmp return
-  74:	08 c0       	rjmp	.+16     	; 0x86 <return>
+  9a:	08 c0       	rjmp	.+16     	; 0xac <return>
 
-00000076 <pin2>:
+0000009c <pin2>:
         pin2:
             ldi r25, hi8(LED_CHARLIEPLEXING_PIN_3)
-  76:	90 e8       	ldi	r25, 0x80	; 128
+  9c:	90 e8       	ldi	r25, 0x80	; 128
             ldi r24, lo8(LED_CHARLIEPLEXING_PIN_3)
-  78:	80 e0       	ldi	r24, 0x00	; 0
+  9e:	80 e0       	ldi	r24, 0x00	; 0
             rjmp return
-  7a:	05 c0       	rjmp	.+10     	; 0x86 <return>
+  a0:	05 c0       	rjmp	.+10     	; 0xac <return>
 
-0000007c <pin3>:
+000000a2 <pin3>:
         pin3:
             ldi r25, hi8(LED_CHARLIEPLEXING_PIN_4)
-  7c:	90 e4       	ldi	r25, 0x40	; 64
+  a2:	90 e4       	ldi	r25, 0x40	; 64
             ldi r24, lo8(LED_CHARLIEPLEXING_PIN_4)
-  7e:	80 e0       	ldi	r24, 0x00	; 0
+  a4:	80 e0       	ldi	r24, 0x00	; 0
 			rjmp return
-  80:	02 c0       	rjmp	.+4      	; 0x86 <return>
+  a6:	02 c0       	rjmp	.+4      	; 0xac <return>
 
-00000082 <pin4>:
+000000a8 <pin4>:
 		pin4:
 			ldi r25, hi8(LED_CHARLIEPLEXING_PIN_5)
-  82:	91 e0       	ldi	r25, 0x01	; 1
+  a8:	91 e0       	ldi	r25, 0x01	; 1
             ldi r24, lo8(LED_CHARLIEPLEXING_PIN_5)
-  84:	80 e0       	ldi	r24, 0x00	; 0
+  aa:	80 e0       	ldi	r24, 0x00	; 0
 
-00000086 <return>:
+000000ac <return>:
         return:
             ret
-  86:	08 95       	ret
+  ac:	08 95       	ret
 
-00000088 <turn_off_all_charlieplexed_leds>:
+000000ae <turn_off_all_charlieplexed_leds>:
         // r25-r24: pin masks from LED_CHARLIEPLEXING_STATE_1, LED_CHARLIEPLEXING_STATE_2 etc.
         // r20: =0, which means set pins to outputs/inputs
         // r22: =0, signalling setting pins to inputs
         //
         // for each pin number
         ldi r24, 4
-  88:	84 e0       	ldi	r24, 0x04	; 4
+  ae:	84 e0       	ldi	r24, 0x04	; 4
 
-0000008a <for_resetAllCharlieplexingPins>:
+000000b0 <for_resetAllCharlieplexingPins>:
         for_resetAllCharlieplexingPins:
             // Load different values (pin masks) into r24 and r25 depending on pin number
             PUSH r24 // push index counter to stack
-  8a:	8f 93       	push	r24
+  b0:	8f 93       	push	r24
             rcall loadPinMask // loadPinMask will fill out r24 and r25 with our wanted pin mask;
-  8c:	e6 df       	rcall	.-52     	; 0x5a <loadPinMask>
+  b2:	e6 df       	rcall	.-52     	; 0x80 <loadPinMask>
 			// Save the pin mask on the stack
 			PUSH r24
-  8e:	8f 93       	push	r24
+  b4:	8f 93       	push	r24
 			PUSH r25
-  90:	9f 93       	push	r25
+  b6:	9f 93       	push	r25
 			// see the "Our main strategy comment above"
             // Load constant values that are needed to call the function
             // See the comment above
             ldi r22, 0
-  92:	60 e0       	ldi	r22, 0x00	; 0
+  b8:	60 e0       	ldi	r22, 0x00	; 0
             ldi r20, 0
-  94:	40 e0       	ldi	r20, 0x00	; 0
+  ba:	40 e0       	ldi	r20, 0x00	; 0
             rcall set_pin_states
-  96:	38 d0       	rcall	.+112    	; 0x108 <set_pin_states>
+  bc:	38 d0       	rcall	.+112    	; 0x12e <set_pin_states>
 			// After setting the pins to inputs, ensure that their output value is reset to output low
 			// This is to eliminate any flickering if the input pins are later turned to output pins
 			// according to the calling conventions of setPinStates: 
 			// r25-r24: pin masks from LED_CHARLIEPLEXING_STATE_1, LED_CHARLIEPLEXING_STATE_2 etc.
 			// (pushed to stack earlier)
 			POP r25
-  98:	9f 91       	pop	r25
+  be:	9f 91       	pop	r25
 			POP r24
-  9a:	8f 91       	pop	r24
+  c0:	8f 91       	pop	r24
 			// r20: =1, which means set pins logic level
 			// r22: =0, signalling setting pins to logic level low
 			ldi r22, 0
-  9c:	60 e0       	ldi	r22, 0x00	; 0
+  c2:	60 e0       	ldi	r22, 0x00	; 0
             ldi r20, 1
-  9e:	41 e0       	ldi	r20, 0x01	; 1
+  c4:	41 e0       	ldi	r20, 0x01	; 1
 			rcall set_pin_states
-  a0:	33 d0       	rcall	.+102    	; 0x108 <set_pin_states>
+  c6:	33 d0       	rcall	.+102    	; 0x12e <set_pin_states>
             POP r24 // pop index counter from stack
-  a2:	8f 91       	pop	r24
+  c8:	8f 91       	pop	r24
             // until this loop has been run 4 times
             dec r24
-  a4:	8a 95       	dec	r24
+  ca:	8a 95       	dec	r24
             brge for_resetAllCharlieplexingPins
-  a6:	8c f7       	brge	.-30     	; 0x8a <for_resetAllCharlieplexingPins>
+  cc:	8c f7       	brge	.-30     	; 0xb0 <for_resetAllCharlieplexingPins>
         ret
-  a8:	08 95       	ret
+  ce:	08 95       	ret
 
-000000aa <turn_on_charlieplexed_led>:
+000000d0 <turn_on_charlieplexed_led>:
 	For example, to controll LED0, input 0 to the function. To control LED3, input
     3 (base 10). Lower 4 bits in r24, rest unused.
     */
     turn_on_charlieplexed_led:
         // Mask inputs
         andi r24, 0xf
-  aa:	8f 70       	andi	r24, 0x0F	; 15
+  d0:	8f 70       	andi	r24, 0x0F	; 15
         // Calculate the address to load CHARLIEPLEXING_PIN_STATES, which is located in program memory,
         // from.
         // The byte offset to load from is the value of r25-r24 (the input args to our funtion). For instance, to load byte 0 in the sequence of
         // CHARLIEPLEXING_PIN_STATES, 0 is provided as input to the function.
         ldi ZL, lo8(CHARLIEPLEXING_PIN_STATES)
-  ac:	ea e4       	ldi	r30, 0x4A	; 74
+  d2:	e0 e7       	ldi	r30, 0x70	; 112
         ldi ZH, hi8(CHARLIEPLEXING_PIN_STATES)
-  ae:	f0 e0       	ldi	r31, 0x00	; 0
+  d4:	f0 e0       	ldi	r31, 0x00	; 0
         add ZL, r24
-  b0:	e8 0f       	add	r30, r24
+  d6:	e8 0f       	add	r30, r24
         adc ZH, r1 // Add any carry from ZL + r24 into ZH
-  b2:	f1 1d       	adc	r31, r1
+  d8:	f1 1d       	adc	r31, r1
         lpm r23, Z // Load desired pin state into r23
-  b4:	74 91       	lpm	r23, Z
+  da:	74 91       	lpm	r23, Z
         // (1) set all pins to inputs
         PUSH r23
-  b6:	7f 93       	push	r23
+  dc:	7f 93       	push	r23
         rcall turn_off_all_charlieplexed_leds
-  b8:	e7 df       	rcall	.-50     	; 0x88 <turn_off_all_charlieplexed_leds>
+  de:	e7 df       	rcall	.-50     	; 0xae <turn_off_all_charlieplexed_leds>
         POP r23
-  ba:	7f 91       	pop	r23
+  e0:	7f 91       	pop	r23
         // r19 = <pin number to set to output low>
         mov r19, r23
-  bc:	37 2f       	mov	r19, r23
+  e2:	37 2f       	mov	r19, r23
         andi r19, 0xf0
-  be:	30 7f       	andi	r19, 0xF0	; 240
+  e4:	30 7f       	andi	r19, 0xF0	; 240
         swap r19 // swaps the high and low nibble of r19,
-  c0:	32 95       	swap	r19
+  e6:	32 95       	swap	r19
         // so that r19 is 0x02 and not 0x20, as an example
         // r18 = <pin number to set to output high>
         mov r18, r23
-  c2:	27 2f       	mov	r18, r23
+  e8:	27 2f       	mov	r18, r23
         andi r18, 0x0f
-  c4:	2f 70       	andi	r18, 0x0F	; 15
+  ea:	2f 70       	andi	r18, 0x0F	; 15
         // Set the desired state for each of the 5 Charliplexing pins
         ldi r24, 4
-  c6:	84 e0       	ldi	r24, 0x04	; 4
+  ec:	84 e0       	ldi	r24, 0x04	; 4
 
-000000c8 <for_setCharlieplexingState>:
+000000ee <for_setCharlieplexingState>:
         for_setCharlieplexingState: // For all pins 0 - 4
             cp r24, r19
-  c8:	83 17       	cp	r24, r19
+  ee:	83 17       	cp	r24, r19
             breq pinIsOutputLow
-  ca:	29 f0       	breq	.+10     	; 0xd6 <pinIsOutputLow>
+  f0:	29 f0       	breq	.+10     	; 0xfc <pinIsOutputLow>
             cp r24, r18
-  cc:	82 17       	cp	r24, r18
+  f2:	82 17       	cp	r24, r18
             breq pinIsOutputHigh
-  ce:	09 f0       	breq	.+2      	; 0xd2 <pinIsOutputHigh>
+  f4:	09 f0       	breq	.+2      	; 0xf8 <pinIsOutputHigh>
             rjmp next // If pin is not an output pin
-  d0:	18 c0       	rjmp	.+48     	; 0x102 <next>
+  f6:	18 c0       	rjmp	.+48     	; 0x128 <next>
 
-000000d2 <pinIsOutputHigh>:
+000000f8 <pinIsOutputHigh>:
             // according to the calling conventions of setPinStates: 
             // r25-r24: pin masks from LED_CHARLIEPLEXING_STATE_1, LED_CHARLIEPLEXING_STATE_2 etc.
             // r20: =1, which means set pin state
             // r22: =1/0, the value to set the pin to
             pinIsOutputHigh:
                 ldi r22, 1 // See comment above, setPinStates with r22 = 1 sets pin to output high
-  d2:	61 e0       	ldi	r22, 0x01	; 1
+  f8:	61 e0       	ldi	r22, 0x01	; 1
                 rjmp callFunctionsToSetPins
-  d4:	01 c0       	rjmp	.+2      	; 0xd8 <callFunctionsToSetPins>
+  fa:	01 c0       	rjmp	.+2      	; 0xfe <callFunctionsToSetPins>
 
-000000d6 <pinIsOutputLow>:
+000000fc <pinIsOutputLow>:
             pinIsOutputLow:
                 ldi r22, 0 // See comment above, setPinStates with r22 = 0 sets pin to output low
-  d6:	60 e0       	ldi	r22, 0x00	; 0
+  fc:	60 e0       	ldi	r22, 0x00	; 0
 
-000000d8 <callFunctionsToSetPins>:
+000000fe <callFunctionsToSetPins>:
             callFunctionsToSetPins:
                 // Save states of: pin number to set to low, pin number to set to high, index counter.
                 PUSH r19
-  d8:	3f 93       	push	r19
+  fe:	3f 93       	push	r19
                 PUSH r18
-  da:	2f 93       	push	r18
+ 100:	2f 93       	push	r18
                 PUSH r24
-  dc:	8f 93       	push	r24
+ 102:	8f 93       	push	r24
                 PUSH r22 // r22 needs to be temporarily overriden since we are calling setPinStates to get the pin mode first
-  de:	6f 93       	push	r22
+ 104:	6f 93       	push	r22
                 // Call functions needed to alter pin state
                 // First change the pin mode (set pin to output).
                 // This is done by calling set_pin_states(r25-24=pin mask, r20=0 (set pin mode), r22=1 (set pins to output))
                 ldi r20, 0
-  e0:	40 e0       	ldi	r20, 0x00	; 0
+ 106:	40 e0       	ldi	r20, 0x00	; 0
                 ldi r22, 1
-  e2:	61 e0       	ldi	r22, 0x01	; 1
+ 108:	61 e0       	ldi	r22, 0x01	; 1
                 rcall loadPinMask // Loads the pin mask of the Charlieplexing pin into r25-24
-  e4:	ba df       	rcall	.-140    	; 0x5a <loadPinMask>
+ 10a:	ba df       	rcall	.-140    	; 0x80 <loadPinMask>
                 rcall set_pin_states // Sets pin to have the pin mode output
-  e6:	10 d0       	rcall	.+32     	; 0x108 <set_pin_states>
+ 10c:	10 d0       	rcall	.+32     	; 0x12e <set_pin_states>
                 // Recover registers previsiouly pushed
 				POP r22
-  e8:	6f 91       	pop	r22
+ 10e:	6f 91       	pop	r22
                 POP r24
-  ea:	8f 91       	pop	r24
+ 110:	8f 91       	pop	r24
                 POP r18
-  ec:	2f 91       	pop	r18
+ 112:	2f 91       	pop	r18
                 POP r19
-  ee:	3f 91       	pop	r19
+ 114:	3f 91       	pop	r19
                 // loadPinMask uses r24 between 0-3 to load the appropriate pin mask to use for the
                 // Charlieplexing pins. Thankfully r24 is our index counter
                 // Call set_pin_states again (it was already called above) with the exact same arguments as before, just a difference in r20.
 				// This time, we want to set the actual pin values, as the pin mode was changed to output above.
                 // All other arguments when you're changing the pin mode vs. the pin value are the same.
                 ldi r20, 1 // See comment above, set_pin_states with r20 = 1 says that we should change pin state
-  f0:	41 e0       	ldi	r20, 0x01	; 1
+ 116:	41 e0       	ldi	r20, 0x01	; 1
 				// Save registers before calling function
 				PUSH r19
-  f2:	3f 93       	push	r19
+ 118:	3f 93       	push	r19
                 PUSH r18
-  f4:	2f 93       	push	r18
+ 11a:	2f 93       	push	r18
                 PUSH r24
-  f6:	8f 93       	push	r24
+ 11c:	8f 93       	push	r24
                 rcall loadPinMask // Loads the pin mask of the Charlieplexing pin into r25-24
-  f8:	b0 df       	rcall	.-160    	; 0x5a <loadPinMask>
+ 11e:	b0 df       	rcall	.-160    	; 0x80 <loadPinMask>
                 rcall set_pin_states  // Sets pin to have the correct output value
-  fa:	06 d0       	rcall	.+12     	; 0x108 <set_pin_states>
+ 120:	06 d0       	rcall	.+12     	; 0x12e <set_pin_states>
 				// Recover previopus pushed registers
 				POP r24
-  fc:	8f 91       	pop	r24
+ 122:	8f 91       	pop	r24
                 POP r18
-  fe:	2f 91       	pop	r18
+ 124:	2f 91       	pop	r18
                 POP r19    
- 100:	3f 91       	pop	r19
+ 126:	3f 91       	pop	r19
 
-00000102 <next>:
+00000128 <next>:
 
                 
             next: // Proceed to next iteration
                 dec r24
- 102:	8a 95       	dec	r24
+ 128:	8a 95       	dec	r24
                 brge for_setCharlieplexingState
- 104:	0c f7       	brge	.-62     	; 0xc8 <for_setCharlieplexingState>
+ 12a:	0c f7       	brge	.-62     	; 0xee <for_setCharlieplexingState>
         ret
- 106:	08 95       	ret
+ 12c:	08 95       	ret
 
-00000108 <set_pin_states>:
+0000012e <set_pin_states>:
 	r22: If r20=0: 1 if setting to outputs, 0 if setting to inputs. If r20=1: The pin value to set the pins to. Either 1 for pin on or 0 for pin off.
 	r20: 1 if you are changing the pin value (the PORTA/B register), 0 if you are changing the pin type (the DDRA/B register)
 	*/
 	set_pin_states:
 		// Ensure masking of input arguments
 		andi r24, PB_PIN_MASK
- 108:	8f 70       	andi	r24, 0x0F	; 15
+ 12e:	8f 70       	andi	r24, 0x0F	; 15
 		andi r25, PA_PIN_MASK
- 10a:	9f 7f       	andi	r25, 0xFF	; 255
+ 130:	9f 7f       	andi	r25, 0xFF	; 255
 		andi r22, 1
- 10c:	61 70       	andi	r22, 0x01	; 1
+ 132:	61 70       	andi	r22, 0x01	; 1
 		andi r20, 1
- 10e:	41 70       	andi	r20, 0x01	; 1
+ 134:	41 70       	andi	r20, 0x01	; 1
 		// Depending on the selection of the r20 value we operate on different registers. Please see above for details.
 		cpi r20, 1
- 110:	41 30       	cpi	r20, 0x01	; 1
+ 136:	41 30       	cpi	r20, 0x01	; 1
 		breq pinregisters_load
- 112:	19 f0       	breq	.+6      	; 0x11a <pinregisters_load>
+ 138:	19 f0       	breq	.+6      	; 0x140 <pinregisters_load>
 
-00000114 <ddrregisters_load>:
+0000013a <ddrregisters_load>:
 		ddrregisters_load:
 			// Load current DDR values
 			in r19, DDRA
- 114:	3a b3       	in	r19, 0x1a	; 26
+ 13a:	3a b3       	in	r19, 0x1a	; 26
 			in r18, DDRB
- 116:	27 b3       	in	r18, 0x17	; 23
+ 13c:	27 b3       	in	r18, 0x17	; 23
 			rjmp update_registers
- 118:	02 c0       	rjmp	.+4      	; 0x11e <update_registers>
+ 13e:	02 c0       	rjmp	.+4      	; 0x144 <update_registers>
 
-0000011a <pinregisters_load>:
+00000140 <pinregisters_load>:
 		pinregisters_load:
 			// Load current PIN values
 			in r19, PORTA
- 11a:	3b b3       	in	r19, 0x1b	; 27
+ 140:	3b b3       	in	r19, 0x1b	; 27
 			in r18, PORTB
- 11c:	28 b3       	in	r18, 0x18	; 24
+ 142:	28 b3       	in	r18, 0x18	; 24
 
-0000011e <update_registers>:
+00000144 <update_registers>:
 		// If we are setting the pins to inputs or setting output values to 0, we want to clear the bits that
 		// the mask specifies. Example: For instance, to set PB0 to input, the function
 		// will be called with r24=0b0...1, r22=0, r20=0.
 		// Following the mentioned example: At this point of the function we will have r24 = 1 and r22=0.
 		// But what we want is that we want to do DDRB & 0. So we invert r24 if needed
 		cpi r22, 1
- 11e:	61 30       	cpi	r22, 0x01	; 1
+ 144:	61 30       	cpi	r22, 0x01	; 1
 		breq or_with_register
- 120:	29 f0       	breq	.+10     	; 0x12c <or_with_register>
+ 146:	29 f0       	breq	.+10     	; 0x152 <or_with_register>
 		// Invert the bits if we get here. Why is decribed above.
 		com r25
- 122:	90 95       	com	r25
+ 148:	90 95       	com	r25
 		com r24
- 124:	80 95       	com	r24
+ 14a:	80 95       	com	r24
 
-00000126 <and_with_register>:
+0000014c <and_with_register>:
 		and_with_register: // and needs to be done to set pins to inputs. Described why above
 			and r18, r24 // "B" register && !B Pin mask 
- 126:	28 23       	and	r18, r24
+ 14c:	28 23       	and	r18, r24
 			and r19, r25 // "A" register && !A Pin mask 
- 128:	39 23       	and	r19, r25
+ 14e:	39 23       	and	r19, r25
 			rjmp write
- 12a:	02 c0       	rjmp	.+4      	; 0x130 <write>
+ 150:	02 c0       	rjmp	.+4      	; 0x156 <write>
 
-0000012c <or_with_register>:
+00000152 <or_with_register>:
 		or_with_register: // or needs to be done to set pins to inputs. Described why above
 			or r18, r24 // "B" register | B Pin mask 
- 12c:	28 2b       	or	r18, r24
+ 152:	28 2b       	or	r18, r24
 			or r19, r25 // "A" register | A Pin mask 
- 12e:	39 2b       	or	r19, r25
+ 154:	39 2b       	or	r19, r25
 
-00000130 <write>:
+00000156 <write>:
 		write:
 			// Depending on the selection of the r20 value we operate on different registers. Please see above for details.
 			cpi r20, 1
- 130:	41 30       	cpi	r20, 0x01	; 1
+ 156:	41 30       	cpi	r20, 0x01	; 1
 			breq pinregisters_write
- 132:	19 f0       	breq	.+6      	; 0x13a <pinregisters_write>
+ 158:	19 f0       	breq	.+6      	; 0x160 <pinregisters_write>
 
-00000134 <ddrregisters_write>:
+0000015a <ddrregisters_write>:
 			ddrregisters_write:
 				// First, handle PA pins.
 				out DDRA, r19
- 134:	3a bb       	out	0x1a, r19	; 26
+ 15a:	3a bb       	out	0x1a, r19	; 26
 				// Then, handle PB pins.
 				out DDRB, r18
- 136:	27 bb       	out	0x17, r18	; 23
+ 15c:	27 bb       	out	0x17, r18	; 23
 				rjmp return
- 138:	02 c0       	rjmp	.+4      	; 0x13e <return>
+ 15e:	02 c0       	rjmp	.+4      	; 0x164 <return>
 
-0000013a <pinregisters_write>:
+00000160 <pinregisters_write>:
 			pinregisters_write:
 				// First, handle PA pins.
 				out PORTA, r19
- 13a:	3b bb       	out	0x1b, r19	; 27
+ 160:	3b bb       	out	0x1b, r19	; 27
 				// Then, handle PB pins.
 				out PORTB, r18
- 13c:	28 bb       	out	0x18, r18	; 24
+ 162:	28 bb       	out	0x18, r18	; 24
 
-0000013e <return>:
+00000164 <return>:
 		return:
 			ret
- 13e:	08 95       	ret
+ 164:	08 95       	ret
 
-00000140 <__vector_9>:
-#include <avr/interrupt.h>
+00000166 <set_up_timer_in_ctc_mode>:
+ r19: Unused.
+ r18: Whether to enable interrupts from the timer or not. More specifically, output compare match A interrupts.
+ */
+ set_up_timer_in_ctc_mode:
+	// Mask inputs
+	andi r20, 0x07
+ 166:	47 70       	andi	r20, 0x07	; 7
+	andi r18, 0x01
+ 168:	21 70       	andi	r18, 0x01	; 1
+	// Define value to count to in OCR0A.
+	out OCR0A, r22
+ 16a:	66 bf       	out	0x36, r22	; 54
+	PUSH r20
+ 16c:	4f 93       	push	r20
+	PUSH r18
+ 16e:	2f 93       	push	r18
+	rcall set_output_compare_pin_a
+ 170:	0e d0       	rcall	.+28     	; 0x18e <set_output_compare_pin_a>
+	POP r18
+ 172:	2f 91       	pop	r18
+	POP r20
+ 174:	4f 91       	pop	r20
+	// Set the clock source and prescaler 
+	// by writing what the user chose to configurate
+	// to TCCR0B bits 2:0.
+	// Also, clear bit 3 while we're at it - Bit 3 is WGM02 which should be set to 0
+	// when we are using the CTC mode
+	in r24, TCCR0B
+ 176:	83 b7       	in	r24, 0x33	; 51
+	andi r24, 0xF0
+ 178:	80 7f       	andi	r24, 0xF0	; 240
+	// Do an or operation to get the user's defined clock selection arguments
+	// in there
+	or r24, r20
+ 17a:	84 2b       	or	r24, r20
+	out TCCR0B, r24
+ 17c:	83 bf       	out	0x33, r24	; 51
+	// Set OCIE0A (bit 1 in the TIMSK0 register) to enable timer output compare match interrupts.
+	// If the user has selected that they want to do so
+	in r24, TIMSK0
+ 17e:	89 b7       	in	r24, 0x39	; 57
+	cpi r18, 1
+ 180:	21 30       	cpi	r18, 0x01	; 1
+	brne noInterrupts
+ 182:	11 f4       	brne	.+4      	; 0x188 <noInterrupts>
+	ori r24, 0x02
+ 184:	82 60       	ori	r24, 0x02	; 2
+	rjmp writeNewTIMSKValue
+ 186:	01 c0       	rjmp	.+2      	; 0x18a <writeNewTIMSKValue>
+
+00000188 <noInterrupts>:
+	noInterrupts:
+	andi r24, 0xFD
+ 188:	8d 7f       	andi	r24, 0xFD	; 253
+
+0000018a <writeNewTIMSKValue>:
+	writeNewTIMSKValue:
+	out TIMSK0, r24
+ 18a:	89 bf       	out	0x39, r24	; 57
+	ret
+ 18c:	08 95       	ret
+
+0000018e <set_output_compare_pin_a>:
+r24: 1,2 or 3 to enable the output compare pins (see datasheet). 0 to disable them.
+r23: Unused
+*/
+set_output_compare_pin_a:
+	// Mask inputs
+	andi r24, 0x3
+ 18e:	83 70       	andi	r24, 0x03	; 3
+	in r22, TCCR0A
+ 190:	60 b7       	in	r22, 0x30	; 48
+	// Set WGM0[1:0] (bit 1:0 in TCCR0A) to 0b10 to enable CTC mode
+	andi r22, 0x3C // Clear WGM0[1:0] and the output compare pin A bits (COM0A[1:0], bit 7-6 in TCCR0A)
+ 192:	6c 73       	andi	r22, 0x3C	; 60
+	ori r22, 0x02 // Set WGM[1:0]
+ 194:	62 60       	ori	r22, 0x02	; 2
+	cpi r24, 0
+ 196:	80 30       	cpi	r24, 0x00	; 0
+	breq writeNewTCCR0AValues // If we get here, the user wants COM0A[1:0] to be cleared, but that would have already happened above
+ 198:	21 f0       	breq	.+8      	; 0x1a2 <writeNewTCCR0AValues>
+	// COM0A[1:0] is bit 7-6 in TCCR0A, so prepare the value we will be OR:ing with.
+	swap r24
+ 19a:	82 95       	swap	r24
+	lsl r24
+ 19c:	88 0f       	add	r24, r24
+	lsl r24
+ 19e:	88 0f       	add	r24, r24
+	or r22, r24
+ 1a0:	68 2b       	or	r22, r24
+
+000001a2 <writeNewTCCR0AValues>:
+	writeNewTCCR0AValues:
+		out TCCR0A, r22
+ 1a2:	60 bf       	out	0x30, r22	; 48
+ 1a4:	08 95       	ret
+
+000001a6 <_Z41__static_initialization_and_destruction_0ii>:
+	timer.initialize_hardware();
+	screen_switcher.switch_screen(screens.startup_screen);
+	while (true){
+		timer.handle_new_events();
+	}
+}
+ 1a6:	01 97       	sbiw	r24, 0x01	; 1
+ 1a8:	31 f4       	brne	.+12     	; 0x1b6 <_Z41__static_initialization_and_destruction_0ii+0x10>
+ 1aa:	6f 3f       	cpi	r22, 0xFF	; 255
+ 1ac:	7f 4f       	sbci	r23, 0xFF	; 255
+ 1ae:	19 f4       	brne	.+6      	; 0x1b6 <_Z41__static_initialization_and_destruction_0ii+0x10>
 #include "../../include/application_related/Screens.hpp"
 #include "../../include/application_related/ScreenSwitcher.hpp"
 #include "../../include/hardware_related/leds/LEDController.hpp"
 
-ISR(TIM0_COMPA_vect) {
- 140:	1f 92       	push	r1
- 142:	0f 92       	push	r0
- 144:	0f b6       	in	r0, 0x3f	; 63
- 146:	0f 92       	push	r0
- 148:	11 24       	eor	r1, r1
-// TODO
-}
- 14a:	0f 90       	pop	r0
- 14c:	0f be       	out	0x3f, r0	; 63
- 14e:	0f 90       	pop	r0
- 150:	1f 90       	pop	r1
- 152:	18 95       	reti
 
-00000154 <main>:
+Timer timer;
+ 1b0:	80 e7       	ldi	r24, 0x70	; 112
+ 1b2:	90 e0       	ldi	r25, 0x00	; 0
+ 1b4:	ea d0       	rcall	.+468    	; 0x38a <_ZN5TimerC1Ev>
+ 1b6:	08 95       	ret
+
+000001b8 <__vector_9>:
+	
+ISR(TIM0_COMPA_vect) {
+ 1b8:	1f 92       	push	r1
+ 1ba:	0f 92       	push	r0
+ 1bc:	0f b6       	in	r0, 0x3f	; 63
+ 1be:	0f 92       	push	r0
+ 1c0:	11 24       	eor	r1, r1
+ 1c2:	2f 93       	push	r18
+ 1c4:	3f 93       	push	r19
+ 1c6:	4f 93       	push	r20
+ 1c8:	5f 93       	push	r21
+ 1ca:	6f 93       	push	r22
+ 1cc:	7f 93       	push	r23
+ 1ce:	8f 93       	push	r24
+ 1d0:	9f 93       	push	r25
+ 1d2:	af 93       	push	r26
+ 1d4:	bf 93       	push	r27
+ 1d6:	ef 93       	push	r30
+ 1d8:	ff 93       	push	r31
+	timer.tick();
+ 1da:	80 e7       	ldi	r24, 0x70	; 112
+ 1dc:	90 e0       	ldi	r25, 0x00	; 0
+ 1de:	ea d0       	rcall	.+468    	; 0x3b4 <_ZN5Timer4tickEv>
+}
+ 1e0:	ff 91       	pop	r31
+ 1e2:	ef 91       	pop	r30
+ 1e4:	bf 91       	pop	r27
+ 1e6:	af 91       	pop	r26
+ 1e8:	9f 91       	pop	r25
+ 1ea:	8f 91       	pop	r24
+ 1ec:	7f 91       	pop	r23
+ 1ee:	6f 91       	pop	r22
+ 1f0:	5f 91       	pop	r21
+ 1f2:	4f 91       	pop	r20
+ 1f4:	3f 91       	pop	r19
+ 1f6:	2f 91       	pop	r18
+ 1f8:	0f 90       	pop	r0
+ 1fa:	0f be       	out	0x3f, r0	; 63
+ 1fc:	0f 90       	pop	r0
+ 1fe:	1f 90       	pop	r1
+ 200:	18 95       	reti
+
+00000202 <main>:
 
 int main(){
- 154:	cf 93       	push	r28
- 156:	df 93       	push	r29
- 158:	cd b7       	in	r28, 0x3d	; 61
- 15a:	de b7       	in	r29, 0x3e	; 62
- 15c:	6b 97       	sbiw	r28, 0x1b	; 27
- 15e:	0f b6       	in	r0, 0x3f	; 63
- 160:	f8 94       	cli
- 162:	de bf       	out	0x3e, r29	; 62
- 164:	0f be       	out	0x3f, r0	; 63
- 166:	cd bf       	out	0x3d, r28	; 61
+ 202:	cf 93       	push	r28
+ 204:	df 93       	push	r29
+ 206:	cd b7       	in	r28, 0x3d	; 61
+ 208:	de b7       	in	r29, 0x3e	; 62
+ 20a:	6f 97       	sbiw	r28, 0x1f	; 31
+ 20c:	0f b6       	in	r0, 0x3f	; 63
+ 20e:	f8 94       	cli
+ 210:	de bf       	out	0x3e, r29	; 62
+ 212:	0f be       	out	0x3f, r0	; 63
+ 214:	cd bf       	out	0x3d, r28	; 61
 	LEDController led_controller;
- 168:	ce 01       	movw	r24, r28
- 16a:	01 96       	adiw	r24, 0x01	; 1
- 16c:	5f d0       	rcall	.+190    	; 0x22c <_ZN13LEDControllerC1Ev>
+ 216:	ce 01       	movw	r24, r28
+ 218:	01 96       	adiw	r24, 0x01	; 1
+ 21a:	7b d0       	rcall	.+246    	; 0x312 <_ZN13LEDControllerC1Ev>
 	ScreenSwitcher screen_switcher;
- 16e:	ce 01       	movw	r24, r28
- 170:	42 96       	adiw	r24, 0x12	; 18
- 172:	37 d0       	rcall	.+110    	; 0x1e2 <_ZN14ScreenSwitcherC1Ev>
-	Screens screens {led_controller, screen_switcher};
- 174:	ae 01       	movw	r20, r28
- 176:	4e 5e       	subi	r20, 0xEE	; 238
- 178:	5f 4f       	sbci	r21, 0xFF	; 255
- 17a:	be 01       	movw	r22, r28
- 17c:	6f 5f       	subi	r22, 0xFF	; 255
- 17e:	7f 4f       	sbci	r23, 0xFF	; 255
- 180:	ce 01       	movw	r24, r28
- 182:	44 96       	adiw	r24, 0x14	; 20
- 184:	2b d0       	rcall	.+86     	; 0x1dc <_ZN7ScreensC1ER13LEDControllerR14ScreenSwitcher>
+ 21c:	ce 01       	movw	r24, r28
+ 21e:	42 96       	adiw	r24, 0x12	; 18
+ 220:	53 d0       	rcall	.+166    	; 0x2c8 <_ZN14ScreenSwitcherC1Ev>
+	Screens screens {led_controller, screen_switcher, timer};
+ 222:	20 e7       	ldi	r18, 0x70	; 112
+ 224:	30 e0       	ldi	r19, 0x00	; 0
+ 226:	ae 01       	movw	r20, r28
+ 228:	4e 5e       	subi	r20, 0xEE	; 238
+ 22a:	5f 4f       	sbci	r21, 0xFF	; 255
+ 22c:	be 01       	movw	r22, r28
+ 22e:	6f 5f       	subi	r22, 0xFF	; 255
+ 230:	7f 4f       	sbci	r23, 0xFF	; 255
+ 232:	ce 01       	movw	r24, r28
+ 234:	44 96       	adiw	r24, 0x14	; 20
+ 236:	41 d0       	rcall	.+130    	; 0x2ba <_ZN7ScreensC1ER13LEDControllerR14ScreenSwitcherR5Timer>
+	timer.initialize_hardware();
+ 238:	80 e7       	ldi	r24, 0x70	; 112
+ 23a:	90 e0       	ldi	r25, 0x00	; 0
+ 23c:	80 d1       	rcall	.+768    	; 0x53e <_ZN5Timer19initialize_hardwareEv>
 	screen_switcher.switch_screen(screens.startup_screen);
- 186:	be 01       	movw	r22, r28
- 188:	6c 5e       	subi	r22, 0xEC	; 236
- 18a:	7f 4f       	sbci	r23, 0xFF	; 255
- 18c:	ce 01       	movw	r24, r28
- 18e:	42 96       	adiw	r24, 0x12	; 18
- 190:	2c d0       	rcall	.+88     	; 0x1ea <_ZN14ScreenSwitcher13switch_screenER6Screen>
-}
- 192:	80 e0       	ldi	r24, 0x00	; 0
- 194:	90 e0       	ldi	r25, 0x00	; 0
- 196:	6b 96       	adiw	r28, 0x1b	; 27
- 198:	0f b6       	in	r0, 0x3f	; 63
- 19a:	f8 94       	cli
- 19c:	de bf       	out	0x3e, r29	; 62
- 19e:	0f be       	out	0x3f, r0	; 63
- 1a0:	cd bf       	out	0x3d, r28	; 61
- 1a2:	df 91       	pop	r29
- 1a4:	cf 91       	pop	r28
- 1a6:	08 95       	ret
+ 23e:	be 01       	movw	r22, r28
+ 240:	6c 5e       	subi	r22, 0xEC	; 236
+ 242:	7f 4f       	sbci	r23, 0xFF	; 255
+ 244:	ce 01       	movw	r24, r28
+ 246:	42 96       	adiw	r24, 0x12	; 18
+ 248:	43 d0       	rcall	.+134    	; 0x2d0 <_ZN14ScreenSwitcher13switch_screenER6Screen>
+	while (true){
+		timer.handle_new_events();
+ 24a:	80 e7       	ldi	r24, 0x70	; 112
+ 24c:	90 e0       	ldi	r25, 0x00	; 0
+ 24e:	b6 d0       	rcall	.+364    	; 0x3bc <_ZN5Timer17handle_new_eventsEv>
+ 250:	fc cf       	rjmp	.-8      	; 0x24a <main+0x48>
 
-000001a8 <_ZN13StartupScreen18on_transition_fromEv>:
-void StartupScreen::on_transition_to(){
+00000252 <_GLOBAL__sub_I_timer>:
+	}
+}
+ 252:	6f ef       	ldi	r22, 0xFF	; 255
+ 254:	7f ef       	ldi	r23, 0xFF	; 255
+ 256:	81 e0       	ldi	r24, 0x01	; 1
+ 258:	90 e0       	ldi	r25, 0x00	; 0
+ 25a:	a5 df       	rcall	.-182    	; 0x1a6 <_Z41__static_initialization_and_destruction_0ii>
+ 25c:	08 95       	ret
+
+0000025e <_ZN13StartupScreen18on_transition_fromEv>:
   this->led_controller.turn_on_led(0);
   this->led_controller.update_display_to_next_charlieplexing_frame();
+  this->timer.subscribe_to_periodic_callbacks(*this, 1000);
 }
 
 void StartupScreen::on_transition_from(){
- 1a8:	08 95       	ret
+ 25e:	08 95       	ret
 
-000001aa <_ZN13StartupScreen16on_transition_toEv>:
+00000260 <_ZN13StartupScreen20notify_about_timeoutEv>:
+  // TODO
+}
+
+void StartupScreen::notify_about_timeout(){
+ 260:	08 95       	ret
+
+00000262 <_ZThn2_N13StartupScreen20notify_about_timeoutEv>:
+ 262:	08 95       	ret
+
+00000264 <_ZN13StartupScreen16on_transition_toEv>:
 #include "../../../include/application_related/screens/StartupScreen.hpp"
 
-StartupScreen::StartupScreen(LEDController& led_controller, ScreenSwitcher& screen_switcher, Screens& screens) : led_controller(led_controller), screen_switcher(screen_switcher), screens(screens) {};
+StartupScreen::StartupScreen(LEDController& led_controller, ScreenSwitcher& screen_switcher, Timer& timer, Screens& screens) : led_controller(led_controller), screen_switcher(screen_switcher), timer(timer), screens(screens) {};
 
 void StartupScreen::on_transition_to(){
- 1aa:	cf 93       	push	r28
- 1ac:	df 93       	push	r29
- 1ae:	ec 01       	movw	r28, r24
+ 264:	cf 93       	push	r28
+ 266:	df 93       	push	r29
+ 268:	ec 01       	movw	r28, r24
   this->led_controller.turn_on_led(0);
- 1b0:	60 e0       	ldi	r22, 0x00	; 0
- 1b2:	8a 81       	ldd	r24, Y+2	; 0x02
- 1b4:	9b 81       	ldd	r25, Y+3	; 0x03
- 1b6:	4f d0       	rcall	.+158    	; 0x256 <_ZN13LEDController11turn_on_ledEh>
+ 26a:	60 e0       	ldi	r22, 0x00	; 0
+ 26c:	8c 81       	ldd	r24, Y+4	; 0x04
+ 26e:	9d 81       	ldd	r25, Y+5	; 0x05
+ 270:	65 d0       	rcall	.+202    	; 0x33c <_ZN13LEDController11turn_on_ledEh>
   this->led_controller.update_display_to_next_charlieplexing_frame();
- 1b8:	8a 81       	ldd	r24, Y+2	; 0x02
- 1ba:	9b 81       	ldd	r25, Y+3	; 0x03
- 1bc:	5c d0       	rcall	.+184    	; 0x276 <_ZN13LEDController43update_display_to_next_charlieplexing_frameEv>
+ 272:	8c 81       	ldd	r24, Y+4	; 0x04
+ 274:	9d 81       	ldd	r25, Y+5	; 0x05
+ 276:	72 d0       	rcall	.+228    	; 0x35c <_ZN13LEDController43update_display_to_next_charlieplexing_frameEv>
+  this->timer.subscribe_to_periodic_callbacks(*this, 1000);
+ 278:	be 01       	movw	r22, r28
+ 27a:	6e 5f       	subi	r22, 0xFE	; 254
+ 27c:	7f 4f       	sbci	r23, 0xFF	; 255
+ 27e:	48 ee       	ldi	r20, 0xE8	; 232
+ 280:	53 e0       	ldi	r21, 0x03	; 3
+ 282:	88 85       	ldd	r24, Y+8	; 0x08
+ 284:	99 85       	ldd	r25, Y+9	; 0x09
+ 286:	11 d1       	rcall	.+546    	; 0x4aa <_ZN5Timer31subscribe_to_periodic_callbacksER15TimerNotifiablej>
 }
- 1be:	df 91       	pop	r29
- 1c0:	cf 91       	pop	r28
- 1c2:	08 95       	ret
+ 288:	df 91       	pop	r29
+ 28a:	cf 91       	pop	r28
+ 28c:	08 95       	ret
 
-000001c4 <_ZN13StartupScreenC1ER13LEDControllerR14ScreenSwitcherR7Screens>:
+0000028e <_ZN13StartupScreenC1ER13LEDControllerR14ScreenSwitcherR5TimerR7Screens>:
 #include "../../../include/application_related/screens/StartupScreen.hpp"
 
-StartupScreen::StartupScreen(LEDController& led_controller, ScreenSwitcher& screen_switcher, Screens& screens) : led_controller(led_controller), screen_switcher(screen_switcher), screens(screens) {};
- 1c4:	fc 01       	movw	r30, r24
- 1c6:	84 e6       	ldi	r24, 0x64	; 100
- 1c8:	90 e0       	ldi	r25, 0x00	; 0
- 1ca:	91 83       	std	Z+1, r25	; 0x01
- 1cc:	80 83       	st	Z, r24
- 1ce:	73 83       	std	Z+3, r23	; 0x03
- 1d0:	62 83       	std	Z+2, r22	; 0x02
- 1d2:	55 83       	std	Z+5, r21	; 0x05
- 1d4:	44 83       	std	Z+4, r20	; 0x04
- 1d6:	37 83       	std	Z+7, r19	; 0x07
- 1d8:	26 83       	std	Z+6, r18	; 0x06
- 1da:	08 95       	ret
+StartupScreen::StartupScreen(LEDController& led_controller, ScreenSwitcher& screen_switcher, Timer& timer, Screens& screens) : led_controller(led_controller), screen_switcher(screen_switcher), timer(timer), screens(screens) {};
+ 28e:	0f 93       	push	r16
+ 290:	1f 93       	push	r17
+ 292:	fc 01       	movw	r30, r24
+ 294:	84 e6       	ldi	r24, 0x64	; 100
+ 296:	90 e0       	ldi	r25, 0x00	; 0
+ 298:	91 83       	std	Z+1, r25	; 0x01
+ 29a:	80 83       	st	Z, r24
+ 29c:	8e e6       	ldi	r24, 0x6E	; 110
+ 29e:	90 e0       	ldi	r25, 0x00	; 0
+ 2a0:	93 83       	std	Z+3, r25	; 0x03
+ 2a2:	82 83       	std	Z+2, r24	; 0x02
+ 2a4:	75 83       	std	Z+5, r23	; 0x05
+ 2a6:	64 83       	std	Z+4, r22	; 0x04
+ 2a8:	57 83       	std	Z+7, r21	; 0x07
+ 2aa:	46 83       	std	Z+6, r20	; 0x06
+ 2ac:	31 87       	std	Z+9, r19	; 0x09
+ 2ae:	20 87       	std	Z+8, r18	; 0x08
+ 2b0:	13 87       	std	Z+11, r17	; 0x0b
+ 2b2:	02 87       	std	Z+10, r16	; 0x0a
+ 2b4:	1f 91       	pop	r17
+ 2b6:	0f 91       	pop	r16
+ 2b8:	08 95       	ret
 
-000001dc <_ZN7ScreensC1ER13LEDControllerR14ScreenSwitcher>:
+000002ba <_ZN7ScreensC1ER13LEDControllerR14ScreenSwitcherR5Timer>:
 #include "../../include/application_related/Screens.hpp"
 
-Screens::Screens(LEDController& led_controller, ScreenSwitcher& screen_switcher): startup_screen(led_controller, screen_switcher, *this) {}
- 1dc:	9c 01       	movw	r18, r24
- 1de:	f2 df       	rcall	.-28     	; 0x1c4 <_ZN13StartupScreenC1ER13LEDControllerR14ScreenSwitcherR7Screens>
- 1e0:	08 95       	ret
+Screens::Screens(LEDController& led_controller, ScreenSwitcher& screen_switcher, Timer& timer): startup_screen(led_controller, screen_switcher, timer, *this) {}
+ 2ba:	0f 93       	push	r16
+ 2bc:	1f 93       	push	r17
+ 2be:	8c 01       	movw	r16, r24
+ 2c0:	e6 df       	rcall	.-52     	; 0x28e <_ZN13StartupScreenC1ER13LEDControllerR14ScreenSwitcherR5TimerR7Screens>
+ 2c2:	1f 91       	pop	r17
+ 2c4:	0f 91       	pop	r16
+ 2c6:	08 95       	ret
 
-000001e2 <_ZN14ScreenSwitcherC1Ev>:
+000002c8 <_ZN14ScreenSwitcherC1Ev>:
 #include "../../include/application_related/ScreenSwitcher.hpp"
 
 ScreenSwitcher::ScreenSwitcher(): current_screen(nullptr) {};
- 1e2:	fc 01       	movw	r30, r24
- 1e4:	11 82       	std	Z+1, r1	; 0x01
- 1e6:	10 82       	st	Z, r1
- 1e8:	08 95       	ret
+ 2c8:	fc 01       	movw	r30, r24
+ 2ca:	11 82       	std	Z+1, r1	; 0x01
+ 2cc:	10 82       	st	Z, r1
+ 2ce:	08 95       	ret
 
-000001ea <_ZN14ScreenSwitcher13switch_screenER6Screen>:
+000002d0 <_ZN14ScreenSwitcher13switch_screenER6Screen>:
 
 void ScreenSwitcher::switch_screen(Screen& new_screen){
- 1ea:	0f 93       	push	r16
- 1ec:	1f 93       	push	r17
- 1ee:	cf 93       	push	r28
- 1f0:	df 93       	push	r29
- 1f2:	8c 01       	movw	r16, r24
- 1f4:	eb 01       	movw	r28, r22
+ 2d0:	0f 93       	push	r16
+ 2d2:	1f 93       	push	r17
+ 2d4:	cf 93       	push	r28
+ 2d6:	df 93       	push	r29
+ 2d8:	8c 01       	movw	r16, r24
+ 2da:	eb 01       	movw	r28, r22
 	if (this->current_screen != nullptr){
- 1f6:	dc 01       	movw	r26, r24
- 1f8:	8d 91       	ld	r24, X+
- 1fa:	9c 91       	ld	r25, X
- 1fc:	00 97       	sbiw	r24, 0x00	; 0
- 1fe:	39 f0       	breq	.+14     	; 0x20e <__DATA_REGION_LENGTH__+0xe>
+ 2dc:	dc 01       	movw	r26, r24
+ 2de:	8d 91       	ld	r24, X+
+ 2e0:	9c 91       	ld	r25, X
+ 2e2:	00 97       	sbiw	r24, 0x00	; 0
+ 2e4:	39 f0       	breq	.+14     	; 0x2f4 <_ZN14ScreenSwitcher13switch_screenER6Screen+0x24>
 		this->current_screen->on_transition_from();
- 200:	dc 01       	movw	r26, r24
- 202:	ed 91       	ld	r30, X+
- 204:	fc 91       	ld	r31, X
- 206:	02 80       	ldd	r0, Z+2	; 0x02
- 208:	f3 81       	ldd	r31, Z+3	; 0x03
- 20a:	e0 2d       	mov	r30, r0
- 20c:	09 95       	icall
+ 2e6:	dc 01       	movw	r26, r24
+ 2e8:	ed 91       	ld	r30, X+
+ 2ea:	fc 91       	ld	r31, X
+ 2ec:	02 80       	ldd	r0, Z+2	; 0x02
+ 2ee:	f3 81       	ldd	r31, Z+3	; 0x03
+ 2f0:	e0 2d       	mov	r30, r0
+ 2f2:	09 95       	icall
 	}
 	new_screen.on_transition_to();
- 20e:	e8 81       	ld	r30, Y
- 210:	f9 81       	ldd	r31, Y+1	; 0x01
- 212:	01 90       	ld	r0, Z+
- 214:	f0 81       	ld	r31, Z
- 216:	e0 2d       	mov	r30, r0
- 218:	ce 01       	movw	r24, r28
- 21a:	09 95       	icall
+ 2f4:	e8 81       	ld	r30, Y
+ 2f6:	f9 81       	ldd	r31, Y+1	; 0x01
+ 2f8:	01 90       	ld	r0, Z+
+ 2fa:	f0 81       	ld	r31, Z
+ 2fc:	e0 2d       	mov	r30, r0
+ 2fe:	ce 01       	movw	r24, r28
+ 300:	09 95       	icall
 	this->current_screen = &new_screen;
- 21c:	f8 01       	movw	r30, r16
- 21e:	d1 83       	std	Z+1, r29	; 0x01
- 220:	c0 83       	st	Z, r28
+ 302:	f8 01       	movw	r30, r16
+ 304:	d1 83       	std	Z+1, r29	; 0x01
+ 306:	c0 83       	st	Z, r28
 }
- 222:	df 91       	pop	r29
- 224:	cf 91       	pop	r28
- 226:	1f 91       	pop	r17
- 228:	0f 91       	pop	r16
- 22a:	08 95       	ret
+ 308:	df 91       	pop	r29
+ 30a:	cf 91       	pop	r28
+ 30c:	1f 91       	pop	r17
+ 30e:	0f 91       	pop	r16
+ 310:	08 95       	ret
 
-0000022c <_ZN13LEDControllerC1Ev>:
+00000312 <_ZN13LEDControllerC1Ev>:
 
 void LEDController::turn_off_led(uint8_t led_number){
   if (this->led_number_is_valid(led_number)){
 	led_is_turned_on[led_number] = false;
   }
 }
- 22c:	fc 01       	movw	r30, r24
- 22e:	10 8a       	std	Z+16, r1	; 0x10
- 230:	17 86       	std	Z+15, r1	; 0x0f
- 232:	20 e0       	ldi	r18, 0x00	; 0
- 234:	30 e0       	ldi	r19, 0x00	; 0
- 236:	2f 30       	cpi	r18, 0x0F	; 15
- 238:	31 05       	cpc	r19, r1
- 23a:	3c f4       	brge	.+14     	; 0x24a <_ZN13LEDControllerC1Ev+0x1e>
- 23c:	fc 01       	movw	r30, r24
- 23e:	e2 0f       	add	r30, r18
- 240:	f3 1f       	adc	r31, r19
- 242:	10 82       	st	Z, r1
- 244:	2f 5f       	subi	r18, 0xFF	; 255
- 246:	3f 4f       	sbci	r19, 0xFF	; 255
- 248:	f6 cf       	rjmp	.-20     	; 0x236 <_ZN13LEDControllerC1Ev+0xa>
- 24a:	08 95       	ret
+ 312:	fc 01       	movw	r30, r24
+ 314:	10 8a       	std	Z+16, r1	; 0x10
+ 316:	17 86       	std	Z+15, r1	; 0x0f
+ 318:	20 e0       	ldi	r18, 0x00	; 0
+ 31a:	30 e0       	ldi	r19, 0x00	; 0
+ 31c:	2f 30       	cpi	r18, 0x0F	; 15
+ 31e:	31 05       	cpc	r19, r1
+ 320:	3c f4       	brge	.+14     	; 0x330 <_ZN13LEDControllerC1Ev+0x1e>
+ 322:	fc 01       	movw	r30, r24
+ 324:	e2 0f       	add	r30, r18
+ 326:	f3 1f       	adc	r31, r19
+ 328:	10 82       	st	Z, r1
+ 32a:	2f 5f       	subi	r18, 0xFF	; 255
+ 32c:	3f 4f       	sbci	r19, 0xFF	; 255
+ 32e:	f6 cf       	rjmp	.-20     	; 0x31c <_ZN13LEDControllerC1Ev+0xa>
+ 330:	08 95       	ret
 
-0000024c <_ZN13LEDController19led_number_is_validEh>:
- 24c:	81 e0       	ldi	r24, 0x01	; 1
- 24e:	6f 30       	cpi	r22, 0x0F	; 15
- 250:	08 f0       	brcs	.+2      	; 0x254 <_ZN13LEDController19led_number_is_validEh+0x8>
- 252:	80 e0       	ldi	r24, 0x00	; 0
- 254:	08 95       	ret
+00000332 <_ZN13LEDController19led_number_is_validEh>:
+ 332:	81 e0       	ldi	r24, 0x01	; 1
+ 334:	6f 30       	cpi	r22, 0x0F	; 15
+ 336:	08 f0       	brcs	.+2      	; 0x33a <_ZN13LEDController19led_number_is_validEh+0x8>
+ 338:	80 e0       	ldi	r24, 0x00	; 0
+ 33a:	08 95       	ret
 
-00000256 <_ZN13LEDController11turn_on_ledEh>:
- 256:	1f 93       	push	r17
- 258:	cf 93       	push	r28
- 25a:	df 93       	push	r29
- 25c:	ec 01       	movw	r28, r24
- 25e:	16 2f       	mov	r17, r22
- 260:	f5 df       	rcall	.-22     	; 0x24c <_ZN13LEDController19led_number_is_validEh>
- 262:	88 23       	and	r24, r24
- 264:	21 f0       	breq	.+8      	; 0x26e <__stack+0xf>
- 266:	c1 0f       	add	r28, r17
- 268:	d1 1d       	adc	r29, r1
- 26a:	81 e0       	ldi	r24, 0x01	; 1
- 26c:	88 83       	st	Y, r24
- 26e:	df 91       	pop	r29
- 270:	cf 91       	pop	r28
- 272:	1f 91       	pop	r17
- 274:	08 95       	ret
+0000033c <_ZN13LEDController11turn_on_ledEh>:
+ 33c:	1f 93       	push	r17
+ 33e:	cf 93       	push	r28
+ 340:	df 93       	push	r29
+ 342:	ec 01       	movw	r28, r24
+ 344:	16 2f       	mov	r17, r22
+ 346:	f5 df       	rcall	.-22     	; 0x332 <_ZN13LEDController19led_number_is_validEh>
+ 348:	88 23       	and	r24, r24
+ 34a:	21 f0       	breq	.+8      	; 0x354 <_ZN13LEDController11turn_on_ledEh+0x18>
+ 34c:	c1 0f       	add	r28, r17
+ 34e:	d1 1d       	adc	r29, r1
+ 350:	81 e0       	ldi	r24, 0x01	; 1
+ 352:	88 83       	st	Y, r24
+ 354:	df 91       	pop	r29
+ 356:	cf 91       	pop	r28
+ 358:	1f 91       	pop	r17
+ 35a:	08 95       	ret
 
-00000276 <_ZN13LEDController43update_display_to_next_charlieplexing_frameEv>:
+0000035c <_ZN13LEDController43update_display_to_next_charlieplexing_frameEv>:
 
 
 void LEDController::update_display_to_next_charlieplexing_frame(){	
- 276:	cf 93       	push	r28
- 278:	df 93       	push	r29
- 27a:	ec 01       	movw	r28, r24
+ 35c:	cf 93       	push	r28
+ 35e:	df 93       	push	r29
+ 360:	ec 01       	movw	r28, r24
 	turn_off_all_charlieplexed_leds();
- 27c:	05 df       	rcall	.-502    	; 0x88 <turn_off_all_charlieplexed_leds>
+ 362:	a5 de       	rcall	.-694    	; 0xae <turn_off_all_charlieplexed_leds>
         if (led_is_turned_on[current_led_being_shown]){
- 27e:	8f 85       	ldd	r24, Y+15	; 0x0f
- 280:	98 89       	ldd	r25, Y+16	; 0x10
- 282:	fe 01       	movw	r30, r28
- 284:	e8 0f       	add	r30, r24
- 286:	f9 1f       	adc	r31, r25
- 288:	20 81       	ld	r18, Z
- 28a:	21 11       	cpse	r18, r1
+ 364:	8f 85       	ldd	r24, Y+15	; 0x0f
+ 366:	98 89       	ldd	r25, Y+16	; 0x10
+ 368:	fe 01       	movw	r30, r28
+ 36a:	e8 0f       	add	r30, r24
+ 36c:	f9 1f       	adc	r31, r25
+ 36e:	20 81       	ld	r18, Z
+ 370:	21 11       	cpse	r18, r1
 		turn_on_charlieplexed_led(current_led_being_shown);
- 28c:	0e df       	rcall	.-484    	; 0xaa <turn_on_charlieplexed_led>
+ 372:	ae de       	rcall	.-676    	; 0xd0 <turn_on_charlieplexed_led>
 	}
 	current_led_being_shown = (current_led_being_shown+1) % NUMBER_OF_CHARLIEPLEXED_LEDS;
- 28e:	8f 85       	ldd	r24, Y+15	; 0x0f
- 290:	98 89       	ldd	r25, Y+16	; 0x10
- 292:	01 96       	adiw	r24, 0x01	; 1
- 294:	6f e0       	ldi	r22, 0x0F	; 15
- 296:	70 e0       	ldi	r23, 0x00	; 0
- 298:	05 d0       	rcall	.+10     	; 0x2a4 <__divmodhi4>
- 29a:	98 8b       	std	Y+16, r25	; 0x10
- 29c:	8f 87       	std	Y+15, r24	; 0x0f
+ 374:	8f 85       	ldd	r24, Y+15	; 0x0f
+ 376:	98 89       	ldd	r25, Y+16	; 0x10
+ 378:	01 96       	adiw	r24, 0x01	; 1
+ 37a:	6f e0       	ldi	r22, 0x0F	; 15
+ 37c:	70 e0       	ldi	r23, 0x00	; 0
+ 37e:	e5 d0       	rcall	.+458    	; 0x54a <__divmodhi4>
+ 380:	98 8b       	std	Y+16, r25	; 0x10
+ 382:	8f 87       	std	Y+15, r24	; 0x0f
 }
- 29e:	df 91       	pop	r29
- 2a0:	cf 91       	pop	r28
- 2a2:	08 95       	ret
+ 384:	df 91       	pop	r29
+ 386:	cf 91       	pop	r28
+ 388:	08 95       	ret
 
-000002a4 <__divmodhi4>:
- 2a4:	97 fb       	bst	r25, 7
- 2a6:	07 2e       	mov	r0, r23
- 2a8:	16 f4       	brtc	.+4      	; 0x2ae <__divmodhi4+0xa>
- 2aa:	00 94       	com	r0
- 2ac:	06 d0       	rcall	.+12     	; 0x2ba <__divmodhi4_neg1>
- 2ae:	77 fd       	sbrc	r23, 7
- 2b0:	08 d0       	rcall	.+16     	; 0x2c2 <__divmodhi4_neg2>
- 2b2:	0b d0       	rcall	.+22     	; 0x2ca <__udivmodhi4>
- 2b4:	07 fc       	sbrc	r0, 7
- 2b6:	05 d0       	rcall	.+10     	; 0x2c2 <__divmodhi4_neg2>
- 2b8:	3e f4       	brtc	.+14     	; 0x2c8 <__divmodhi4_exit>
+0000038a <_ZN5TimerC1Ev>:
+			this->timer_subscriptions[i-1] = this->timer_subscriptions[i];	
+		};
+		this->timer_subscriptions[number_of_timer_subscriptions-1] = TimerSubscription();
+		this->number_of_timer_subscriptions--;
+	};
+};
+ 38a:	fc 01       	movw	r30, r24
+ 38c:	11 82       	std	Z+1, r1	; 0x01
+ 38e:	10 82       	st	Z, r1
+ 390:	12 82       	std	Z+2, r1	; 0x02
+ 392:	33 96       	adiw	r30, 0x03	; 3
+ 394:	89 e0       	ldi	r24, 0x09	; 9
+ 396:	90 e0       	ldi	r25, 0x00	; 0
+ 398:	8f 3f       	cpi	r24, 0xFF	; 255
+ 39a:	2f ef       	ldi	r18, 0xFF	; 255
+ 39c:	92 07       	cpc	r25, r18
+ 39e:	49 f0       	breq	.+18     	; 0x3b2 <_ZN5TimerC1Ev+0x28>
+ 3a0:	11 82       	std	Z+1, r1	; 0x01
+ 3a2:	10 82       	st	Z, r1
+ 3a4:	13 82       	std	Z+3, r1	; 0x03
+ 3a6:	12 82       	std	Z+2, r1	; 0x02
+ 3a8:	15 82       	std	Z+5, r1	; 0x05
+ 3aa:	14 82       	std	Z+4, r1	; 0x04
+ 3ac:	36 96       	adiw	r30, 0x06	; 6
+ 3ae:	01 97       	sbiw	r24, 0x01	; 1
+ 3b0:	f3 cf       	rjmp	.-26     	; 0x398 <_ZN5TimerC1Ev+0xe>
+ 3b2:	08 95       	ret
 
-000002ba <__divmodhi4_neg1>:
- 2ba:	90 95       	com	r25
- 2bc:	81 95       	neg	r24
- 2be:	9f 4f       	sbci	r25, 0xFF	; 255
- 2c0:	08 95       	ret
+000003b4 <_ZN5Timer4tickEv>:
+ 3b4:	21 e0       	ldi	r18, 0x01	; 1
+ 3b6:	fc 01       	movw	r30, r24
+ 3b8:	22 83       	std	Z+2, r18	; 0x02
+ 3ba:	08 95       	ret
 
-000002c2 <__divmodhi4_neg2>:
- 2c2:	70 95       	com	r23
- 2c4:	61 95       	neg	r22
- 2c6:	7f 4f       	sbci	r23, 0xFF	; 255
+000003bc <_ZN5Timer17handle_new_eventsEv>:
+ 3bc:	ef 92       	push	r14
+ 3be:	ff 92       	push	r15
+ 3c0:	0f 93       	push	r16
+ 3c2:	1f 93       	push	r17
+ 3c4:	cf 93       	push	r28
+ 3c6:	df 93       	push	r29
+ 3c8:	dc 01       	movw	r26, r24
+ 3ca:	12 96       	adiw	r26, 0x02	; 2
+ 3cc:	2c 91       	ld	r18, X
+ 3ce:	22 23       	and	r18, r18
+ 3d0:	09 f4       	brne	.+2      	; 0x3d4 <_ZN5Timer17handle_new_eventsEv+0x18>
+ 3d2:	44 c0       	rjmp	.+136    	; 0x45c <__LOCK_REGION_LENGTH__+0x5c>
+ 3d4:	8c 01       	movw	r16, r24
+ 3d6:	fc 01       	movw	r30, r24
+ 3d8:	12 82       	std	Z+2, r1	; 0x02
+ 3da:	c0 e0       	ldi	r28, 0x00	; 0
+ 3dc:	d0 e0       	ldi	r29, 0x00	; 0
+ 3de:	d8 01       	movw	r26, r16
+ 3e0:	8d 91       	ld	r24, X+
+ 3e2:	9c 91       	ld	r25, X
+ 3e4:	c8 17       	cp	r28, r24
+ 3e6:	d9 07       	cpc	r29, r25
+ 3e8:	cc f5       	brge	.+114    	; 0x45c <__LOCK_REGION_LENGTH__+0x5c>
+ 3ea:	fe 01       	movw	r30, r28
+ 3ec:	ee 0f       	add	r30, r30
+ 3ee:	ff 1f       	adc	r31, r31
+ 3f0:	ec 0f       	add	r30, r28
+ 3f2:	fd 1f       	adc	r31, r29
+ 3f4:	ee 0f       	add	r30, r30
+ 3f6:	ff 1f       	adc	r31, r31
+ 3f8:	e0 0f       	add	r30, r16
+ 3fa:	f1 1f       	adc	r31, r17
+ 3fc:	85 81       	ldd	r24, Z+5	; 0x05
+ 3fe:	96 81       	ldd	r25, Z+6	; 0x06
+ 400:	89 2b       	or	r24, r25
+ 402:	71 f0       	breq	.+28     	; 0x420 <__LOCK_REGION_LENGTH__+0x20>
+ 404:	fe 01       	movw	r30, r28
+ 406:	ee 0f       	add	r30, r30
+ 408:	ff 1f       	adc	r31, r31
+ 40a:	ec 0f       	add	r30, r28
+ 40c:	fd 1f       	adc	r31, r29
+ 40e:	ee 0f       	add	r30, r30
+ 410:	ff 1f       	adc	r31, r31
+ 412:	e0 0f       	add	r30, r16
+ 414:	f1 1f       	adc	r31, r17
+ 416:	87 81       	ldd	r24, Z+7	; 0x07
+ 418:	90 85       	ldd	r25, Z+8	; 0x08
+ 41a:	01 97       	sbiw	r24, 0x01	; 1
+ 41c:	90 87       	std	Z+8, r25	; 0x08
+ 41e:	87 83       	std	Z+7, r24	; 0x07
+ 420:	fe 01       	movw	r30, r28
+ 422:	ee 0f       	add	r30, r30
+ 424:	ff 1f       	adc	r31, r31
+ 426:	ec 0f       	add	r30, r28
+ 428:	fd 1f       	adc	r31, r29
+ 42a:	ee 0f       	add	r30, r30
+ 42c:	ff 1f       	adc	r31, r31
+ 42e:	e0 0f       	add	r30, r16
+ 430:	f1 1f       	adc	r31, r17
+ 432:	87 81       	ldd	r24, Z+7	; 0x07
+ 434:	90 85       	ldd	r25, Z+8	; 0x08
+ 436:	89 2b       	or	r24, r25
+ 438:	79 f4       	brne	.+30     	; 0x458 <__LOCK_REGION_LENGTH__+0x58>
+ 43a:	7f 01       	movw	r14, r30
+ 43c:	83 81       	ldd	r24, Z+3	; 0x03
+ 43e:	94 81       	ldd	r25, Z+4	; 0x04
+ 440:	dc 01       	movw	r26, r24
+ 442:	ed 91       	ld	r30, X+
+ 444:	fc 91       	ld	r31, X
+ 446:	01 90       	ld	r0, Z+
+ 448:	f0 81       	ld	r31, Z
+ 44a:	e0 2d       	mov	r30, r0
+ 44c:	09 95       	icall
+ 44e:	f7 01       	movw	r30, r14
+ 450:	85 81       	ldd	r24, Z+5	; 0x05
+ 452:	96 81       	ldd	r25, Z+6	; 0x06
+ 454:	90 87       	std	Z+8, r25	; 0x08
+ 456:	87 83       	std	Z+7, r24	; 0x07
+ 458:	21 96       	adiw	r28, 0x01	; 1
+ 45a:	c1 cf       	rjmp	.-126    	; 0x3de <_ZN5Timer17handle_new_eventsEv+0x22>
+ 45c:	df 91       	pop	r29
+ 45e:	cf 91       	pop	r28
+ 460:	1f 91       	pop	r17
+ 462:	0f 91       	pop	r16
+ 464:	ff 90       	pop	r15
+ 466:	ef 90       	pop	r14
+ 468:	08 95       	ret
 
-000002c8 <__divmodhi4_exit>:
- 2c8:	08 95       	ret
+0000046a <_ZN5Timer27find_subscription_index_forERK15TimerNotifiable>:
+ 46a:	dc 01       	movw	r26, r24
+ 46c:	20 e0       	ldi	r18, 0x00	; 0
+ 46e:	30 e0       	ldi	r19, 0x00	; 0
+ 470:	8d 91       	ld	r24, X+
+ 472:	9c 91       	ld	r25, X
+ 474:	11 97       	sbiw	r26, 0x01	; 1
+ 476:	28 17       	cp	r18, r24
+ 478:	39 07       	cpc	r19, r25
+ 47a:	8c f4       	brge	.+34     	; 0x49e <_ZN5Timer27find_subscription_index_forERK15TimerNotifiable+0x34>
+ 47c:	f9 01       	movw	r30, r18
+ 47e:	ee 0f       	add	r30, r30
+ 480:	ff 1f       	adc	r31, r31
+ 482:	e2 0f       	add	r30, r18
+ 484:	f3 1f       	adc	r31, r19
+ 486:	ee 0f       	add	r30, r30
+ 488:	ff 1f       	adc	r31, r31
+ 48a:	ea 0f       	add	r30, r26
+ 48c:	fb 1f       	adc	r31, r27
+ 48e:	83 81       	ldd	r24, Z+3	; 0x03
+ 490:	94 81       	ldd	r25, Z+4	; 0x04
+ 492:	86 17       	cp	r24, r22
+ 494:	97 07       	cpc	r25, r23
+ 496:	31 f0       	breq	.+12     	; 0x4a4 <_ZN5Timer27find_subscription_index_forERK15TimerNotifiable+0x3a>
+ 498:	2f 5f       	subi	r18, 0xFF	; 255
+ 49a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 49c:	e9 cf       	rjmp	.-46     	; 0x470 <_ZN5Timer27find_subscription_index_forERK15TimerNotifiable+0x6>
+ 49e:	8f ef       	ldi	r24, 0xFF	; 255
+ 4a0:	9f ef       	ldi	r25, 0xFF	; 255
+ 4a2:	08 95       	ret
+ 4a4:	82 2f       	mov	r24, r18
+ 4a6:	93 2f       	mov	r25, r19
+ 4a8:	08 95       	ret
 
-000002ca <__udivmodhi4>:
- 2ca:	aa 1b       	sub	r26, r26
- 2cc:	bb 1b       	sub	r27, r27
- 2ce:	51 e1       	ldi	r21, 0x11	; 17
- 2d0:	07 c0       	rjmp	.+14     	; 0x2e0 <__udivmodhi4_ep>
+000004aa <_ZN5Timer31subscribe_to_periodic_callbacksER15TimerNotifiablej>:
+ 4aa:	af 92       	push	r10
+ 4ac:	bf 92       	push	r11
+ 4ae:	cf 92       	push	r12
+ 4b0:	df 92       	push	r13
+ 4b2:	ef 92       	push	r14
+ 4b4:	ff 92       	push	r15
+ 4b6:	0f 93       	push	r16
+ 4b8:	1f 93       	push	r17
+ 4ba:	cf 93       	push	r28
+ 4bc:	df 93       	push	r29
+ 4be:	00 d0       	rcall	.+0      	; 0x4c0 <_ZN5Timer31subscribe_to_periodic_callbacksER15TimerNotifiablej+0x16>
+ 4c0:	00 d0       	rcall	.+0      	; 0x4c2 <_ZN5Timer31subscribe_to_periodic_callbacksER15TimerNotifiablej+0x18>
+ 4c2:	00 d0       	rcall	.+0      	; 0x4c4 <_ZN5Timer31subscribe_to_periodic_callbacksER15TimerNotifiablej+0x1a>
+ 4c4:	cd b7       	in	r28, 0x3d	; 61
+ 4c6:	de b7       	in	r29, 0x3e	; 62
+ 4c8:	fc 01       	movw	r30, r24
+ 4ca:	e0 80       	ld	r14, Z
+ 4cc:	f1 80       	ldd	r15, Z+1	; 0x01
+ 4ce:	fa e0       	ldi	r31, 0x0A	; 10
+ 4d0:	ef 16       	cp	r14, r31
+ 4d2:	f1 04       	cpc	r15, r1
+ 4d4:	1c f5       	brge	.+70     	; 0x51c <_ZN5Timer31subscribe_to_periodic_callbacksER15TimerNotifiablej+0x72>
+ 4d6:	6a 01       	movw	r12, r20
+ 4d8:	5b 01       	movw	r10, r22
+ 4da:	8c 01       	movw	r16, r24
+ 4dc:	c6 df       	rcall	.-116    	; 0x46a <_ZN5Timer27find_subscription_index_forERK15TimerNotifiable>
+ 4de:	01 96       	adiw	r24, 0x01	; 1
+ 4e0:	e9 f4       	brne	.+58     	; 0x51c <_ZN5Timer31subscribe_to_periodic_callbacksER15TimerNotifiablej+0x72>
+ 4e2:	ba 82       	std	Y+2, r11	; 0x02
+ 4e4:	a9 82       	std	Y+1, r10	; 0x01
+ 4e6:	dc 82       	std	Y+4, r13	; 0x04
+ 4e8:	cb 82       	std	Y+3, r12	; 0x03
+ 4ea:	de 82       	std	Y+6, r13	; 0x06
+ 4ec:	cd 82       	std	Y+5, r12	; 0x05
+ 4ee:	d7 01       	movw	r26, r14
+ 4f0:	aa 0f       	add	r26, r26
+ 4f2:	bb 1f       	adc	r27, r27
+ 4f4:	ae 0d       	add	r26, r14
+ 4f6:	bf 1d       	adc	r27, r15
+ 4f8:	aa 0f       	add	r26, r26
+ 4fa:	bb 1f       	adc	r27, r27
+ 4fc:	a0 0f       	add	r26, r16
+ 4fe:	b1 1f       	adc	r27, r17
+ 500:	13 96       	adiw	r26, 0x03	; 3
+ 502:	86 e0       	ldi	r24, 0x06	; 6
+ 504:	fe 01       	movw	r30, r28
+ 506:	31 96       	adiw	r30, 0x01	; 1
+ 508:	01 90       	ld	r0, Z+
+ 50a:	0d 92       	st	X+, r0
+ 50c:	8a 95       	dec	r24
+ 50e:	e1 f7       	brne	.-8      	; 0x508 <_ZN5Timer31subscribe_to_periodic_callbacksER15TimerNotifiablej+0x5e>
+ 510:	97 01       	movw	r18, r14
+ 512:	2f 5f       	subi	r18, 0xFF	; 255
+ 514:	3f 4f       	sbci	r19, 0xFF	; 255
+ 516:	f8 01       	movw	r30, r16
+ 518:	31 83       	std	Z+1, r19	; 0x01
+ 51a:	20 83       	st	Z, r18
+ 51c:	26 96       	adiw	r28, 0x06	; 6
+ 51e:	0f b6       	in	r0, 0x3f	; 63
+ 520:	f8 94       	cli
+ 522:	de bf       	out	0x3e, r29	; 62
+ 524:	0f be       	out	0x3f, r0	; 63
+ 526:	cd bf       	out	0x3d, r28	; 61
+ 528:	df 91       	pop	r29
+ 52a:	cf 91       	pop	r28
+ 52c:	1f 91       	pop	r17
+ 52e:	0f 91       	pop	r16
+ 530:	ff 90       	pop	r15
+ 532:	ef 90       	pop	r14
+ 534:	df 90       	pop	r13
+ 536:	cf 90       	pop	r12
+ 538:	bf 90       	pop	r11
+ 53a:	af 90       	pop	r10
+ 53c:	08 95       	ret
 
-000002d2 <__udivmodhi4_loop>:
- 2d2:	aa 1f       	adc	r26, r26
- 2d4:	bb 1f       	adc	r27, r27
- 2d6:	a6 17       	cp	r26, r22
- 2d8:	b7 07       	cpc	r27, r23
- 2da:	10 f0       	brcs	.+4      	; 0x2e0 <__udivmodhi4_ep>
- 2dc:	a6 1b       	sub	r26, r22
- 2de:	b7 0b       	sbc	r27, r23
+0000053e <_ZN5Timer19initialize_hardwareEv>:
 
-000002e0 <__udivmodhi4_ep>:
- 2e0:	88 1f       	adc	r24, r24
- 2e2:	99 1f       	adc	r25, r25
- 2e4:	5a 95       	dec	r21
- 2e6:	a9 f7       	brne	.-22     	; 0x2d2 <__udivmodhi4_loop>
- 2e8:	80 95       	com	r24
- 2ea:	90 95       	com	r25
- 2ec:	bc 01       	movw	r22, r24
- 2ee:	cd 01       	movw	r24, r26
- 2f0:	08 95       	ret
 
-000002f2 <_exit>:
- 2f2:	f8 94       	cli
+void Timer::initialize_hardware(){
+	set_up_timer_in_ctc_mode(1, TICKS_PER_MS, TIMER_PRESCALER_VALUE, 1);
+ 53e:	21 e0       	ldi	r18, 0x01	; 1
+ 540:	43 e0       	ldi	r20, 0x03	; 3
+ 542:	61 e0       	ldi	r22, 0x01	; 1
+ 544:	81 e0       	ldi	r24, 0x01	; 1
+ 546:	0f de       	rcall	.-994    	; 0x166 <set_up_timer_in_ctc_mode>
+ 548:	08 95       	ret
 
-000002f4 <__stop_program>:
- 2f4:	ff cf       	rjmp	.-2      	; 0x2f4 <__stop_program>
+0000054a <__divmodhi4>:
+ 54a:	97 fb       	bst	r25, 7
+ 54c:	07 2e       	mov	r0, r23
+ 54e:	16 f4       	brtc	.+4      	; 0x554 <__divmodhi4+0xa>
+ 550:	00 94       	com	r0
+ 552:	06 d0       	rcall	.+12     	; 0x560 <__divmodhi4_neg1>
+ 554:	77 fd       	sbrc	r23, 7
+ 556:	08 d0       	rcall	.+16     	; 0x568 <__divmodhi4_neg2>
+ 558:	0b d0       	rcall	.+22     	; 0x570 <__udivmodhi4>
+ 55a:	07 fc       	sbrc	r0, 7
+ 55c:	05 d0       	rcall	.+10     	; 0x568 <__divmodhi4_neg2>
+ 55e:	3e f4       	brtc	.+14     	; 0x56e <__divmodhi4_exit>
+
+00000560 <__divmodhi4_neg1>:
+ 560:	90 95       	com	r25
+ 562:	81 95       	neg	r24
+ 564:	9f 4f       	sbci	r25, 0xFF	; 255
+ 566:	08 95       	ret
+
+00000568 <__divmodhi4_neg2>:
+ 568:	70 95       	com	r23
+ 56a:	61 95       	neg	r22
+ 56c:	7f 4f       	sbci	r23, 0xFF	; 255
+
+0000056e <__divmodhi4_exit>:
+ 56e:	08 95       	ret
+
+00000570 <__udivmodhi4>:
+ 570:	aa 1b       	sub	r26, r26
+ 572:	bb 1b       	sub	r27, r27
+ 574:	51 e1       	ldi	r21, 0x11	; 17
+ 576:	07 c0       	rjmp	.+14     	; 0x586 <__udivmodhi4_ep>
+
+00000578 <__udivmodhi4_loop>:
+ 578:	aa 1f       	adc	r26, r26
+ 57a:	bb 1f       	adc	r27, r27
+ 57c:	a6 17       	cp	r26, r22
+ 57e:	b7 07       	cpc	r27, r23
+ 580:	10 f0       	brcs	.+4      	; 0x586 <__udivmodhi4_ep>
+ 582:	a6 1b       	sub	r26, r22
+ 584:	b7 0b       	sbc	r27, r23
+
+00000586 <__udivmodhi4_ep>:
+ 586:	88 1f       	adc	r24, r24
+ 588:	99 1f       	adc	r25, r25
+ 58a:	5a 95       	dec	r21
+ 58c:	a9 f7       	brne	.-22     	; 0x578 <__udivmodhi4_loop>
+ 58e:	80 95       	com	r24
+ 590:	90 95       	com	r25
+ 592:	bc 01       	movw	r22, r24
+ 594:	cd 01       	movw	r24, r26
+ 596:	08 95       	ret
+
+00000598 <__tablejump2__>:
+ 598:	ee 0f       	add	r30, r30
+ 59a:	ff 1f       	adc	r31, r31
+ 59c:	05 90       	lpm	r0, Z+
+ 59e:	f4 91       	lpm	r31, Z
+ 5a0:	e0 2d       	mov	r30, r0
+ 5a2:	09 94       	ijmp
+
+000005a4 <_exit>:
+ 5a4:	f8 94       	cli
+
+000005a6 <__stop_program>:
+ 5a6:	ff cf       	rjmp	.-2      	; 0x5a6 <__stop_program>

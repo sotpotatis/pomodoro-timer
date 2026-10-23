@@ -24,6 +24,8 @@ src\hardware_related\leds\LEDController.cpp
 
 src\hardware_related\pins\pin_utilities.S
 
+src\hardware_related\timer\Timer.cpp
+
 src\hardware_related\timer\timer_utilities.S
 
 src\timer_calibration.c

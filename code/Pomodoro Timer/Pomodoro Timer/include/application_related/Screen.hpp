@@ -9,7 +9,6 @@ class Screen {
 	public:
 		virtual void on_transition_to() = 0;
 		virtual void on_transition_from() = 0;
-		
 	
 		// Note: This will also disable moving (see C++ Primer by Lippman et al., 5th ed,
 		// p. 624)

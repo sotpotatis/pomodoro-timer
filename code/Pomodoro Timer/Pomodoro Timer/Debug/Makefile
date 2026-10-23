@@ -63,6 +63,7 @@ C_SRCS +=  \
 ../src/application_related/ScreenSwitcher.cpp \
 ../src/application_related/system.cpp \
 ../src/hardware_related/leds/LEDController.cpp \
+../src/hardware_related/timer/Timer.cpp \
 ../src/timer_calibration.c \
 ../src/timer_test.c
 
@@ -91,6 +92,7 @@ src/hardware_related/eeprom/eeprom_utilities.o \
 src/hardware_related/leds/charlieplexing.o \
 src/hardware_related/leds/LEDController.o \
 src/hardware_related/pins/pin_utilities.o \
+src/hardware_related/timer/Timer.o \
 src/hardware_related/timer/timer_utilities.o \
 src/timer_calibration.o \
 src/timer_test.o
@@ -107,6 +109,7 @@ src/hardware_related/eeprom/eeprom_utilities.o \
 src/hardware_related/leds/charlieplexing.o \
 src/hardware_related/leds/LEDController.o \
 src/hardware_related/pins/pin_utilities.o \
+src/hardware_related/timer/Timer.o \
 src/hardware_related/timer/timer_utilities.o \
 src/timer_calibration.o \
 src/timer_test.o
@@ -123,6 +126,7 @@ src/hardware_related/eeprom/eeprom_utilities.d \
 src/hardware_related/leds/charlieplexing.d \
 src/hardware_related/leds/LEDController.d \
 src/hardware_related/pins/pin_utilities.d \
+src/hardware_related/timer/Timer.d \
 src/hardware_related/timer/timer_utilities.d \
 src/timer_calibration.d \
 src/timer_test.d
@@ -139,6 +143,7 @@ src/hardware_related/eeprom/eeprom_utilities.d \
 src/hardware_related/leds/charlieplexing.d \
 src/hardware_related/leds/LEDController.d \
 src/hardware_related/pins/pin_utilities.d \
+src/hardware_related/timer/Timer.d \
 src/hardware_related/timer/timer_utilities.d \
 src/timer_calibration.d \
 src/timer_test.d
@@ -193,6 +198,13 @@ src/application_related/system.o: ../src/application_related/system.cpp
 	
 
 src/hardware_related/leds/LEDController.o: ../src/hardware_related/leds/LEDController.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -std=c++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/hardware_related/timer/Timer.o: ../src/hardware_related/timer/Timer.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny84a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny84a" -c -std=c++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
